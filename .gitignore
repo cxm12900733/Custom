@@ -1,0 +1,10 @@
+/Domain/obj
+/Infrastructure/obj
+/Infrastructure/bin
+/Repository/obj
+/Repository/bin
+/TestResults
+/UnitTest/bin
+/UnitTest/obj
+/Website/obj
+/Website/bin
