@@ -1,0 +1,190 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="/Content/css/customIcons.css">
+        <link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/jquery.jnotify/css/jNotify.jquery.css" />
+		
+	    <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/jquery.min.js"></script>
+	    <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="/Content/JS/Plugins/easyui.tabs.extend.js"></script>
+        <script type="text/javascript" src="/Content/JS/Plugins/jquery.jnotify/jNotify.jquery.js"></script>
+        <script type="text/javascript" src="/Content/JS/Custom/Utils.js"></script>
+		<style>
+		</style>
+	</head>
+    <body class="easyui-layout">
+		<div data-options="region:'north'" style="height:60px;"></div>   
+		<div data-options="region:'south'" style="height:20px;"></div>   
+		<div data-options="region:'west',title:'导航菜单',split:true" style="width:150px;">
+			<div id="IndexMenu"></div>  
+		</div>   
+		<div data-options="region:'center',border:false">
+			<div id="tabs" class="easyui-tabs" style="width:100%;height:100%">    
+			</div> 
+		</div> 
+	</body>
+<script type="text/javascript">
+    $(function () {
+        var menus = '{"Menu": [{"id": 1,"text": "开发者功能","pId":0,"iconCls":"icon-drive_user"},{"id": 2,"text": "系统设置","pId":0,"iconCls":"icon-accept"},{"id": 3,"text": "菜单管理","pId":1,"iconCls":"icon-application_side_tree","Url":"/menu/index"},{"id": 4,"text": "2-菜单","pId":2,"iconCls":"icon-chart_bar"},{"id": 5,"text": "3-菜单","pId":2}]}';
+        wrapper.model = null;
+        wrapper.model = JSON.parse(menus);
+        var treeMenus = utils.toTreeData(wrapper.model.Menu, "id", "pId", "children");
+        var IndexMenu = $('#IndexMenu').accordion({ animate: true, fit: true, border: false });
+
+        $.each(treeMenus, function (i, n) {
+            var t_id = 'tree_' + n.id
+            IndexMenu.accordion('add', {
+                title: n.text,
+                content: '<ul id="' + t_id + '" ></ul>',
+                border: false,
+                iconCls: n.iconCls
+            });
+
+            $('#' + t_id + '').tree({
+                data: n.children,
+                lines: true,
+                onClick: function (node) {
+                    //console.log(node);
+                    if (node.Url != "") {
+                        wrapper.addTab(node.text, node.id, node.Url, node.iconCls);
+                    }
+
+                }
+            });
+        });
+
+    });
+
+    /*----------------------------TabsExtStart---------------------------------*/
+    var wrapper = {};
+
+    //首页设置对象
+    wrapper.settings = {
+        homeTabTitle: '我的桌面',
+        homeTabUrl: '/Home/Portal',
+        navigation: $('#hd_navigation').val(),
+        maxTabCount: 10
+    };
+
+    wrapper.model = null;
+    wrapper.maintabs = $('#tabs');
+
+    //新增tab选项卡页面 【使用jeasyui.tabs.extend.js扩展】
+    /*
+	参数说明：title:tab标题   menucode：自定义值(这里用来存储菜单代码) icon：图标  closable：是否显示关闭按钮
+	*/
+    wrapper.addIframeTab = function (title, menucode, url, icon, closable) {
+        if (!closable) closable = false;//默认值是false，不显示关闭按钮
+        if (!menucode) menucode = '';
+        wrapper.maintabs.tabs('addIframeTab', {
+            //tab参数为一对象，其属性同于原生add方法参数
+            opts_ext: {
+                title: title, menucode: menucode, closable: closable, icon: icon,
+                tools: [{
+                    iconCls: 'icon-mini-refresh',
+                    handler: function (e) {
+                        var temp_title = $(e.target).parent().parent().text();
+                        wrapper.maintabs.tabs('updateIframeTab', { 'which': temp_title });
+                    }
+                }]
+            },
+            /*iframe参数用于设置iframe信息，包含属性有：
+			src：iframe地址
+			frameBorder：iframe边框,，默认值为0
+			delay：淡入淡出效果时间
+			height：iframe高度，默认值为100%
+			width：iframe宽度，默认值为100%
+			*/
+            iframe: { src: url, delay: 10 }
+        });
+        wrapper.maintabs.tabs('addEventParam');
+    }
+
+    //打开Tab标签页面
+    wrapper.openTabHandler = function ($tab, hasTab, subtitle, menucode, url, icon) {
+        if (!hasTab) {
+            wrapper.addIframeTab(subtitle, menucode, url, icon, true);//使用tabs扩展方法新增tab
+        } else {
+            $tab.tabs('select', subtitle); //选中Tab页面
+            //$tab.tabs('updateIframeTab', { 'which': subtitle });//选择TAB时刷新页面
+        }
+        //$('#homebody').layout('collapse', 'west');
+    };
+
+    wrapper.getTabTitles = function ($tab) {
+        var titles = [];
+        var tabs = $tab.tabs('tabs');
+        $.each(tabs, function () { titles.push($(this).panel('options').title); });
+        return titles;
+    };
+
+    //新增Tab标签页面
+    wrapper.addTab = function (subtitle, menucode, url, icon) {
+        if (!url || url == '#') return false;
+        var $tab = wrapper.maintabs;
+        var tabCount = $tab.tabs('tabs').length;
+        var hasTab = $tab.tabs('exists', subtitle);
+        if ((tabCount <= wrapper.settings.maxTabCount) || hasTab)
+            wrapper.openTabHandler($tab, hasTab, subtitle, menucode, url, icon);
+        else
+            com.message("confirm", '<b style="color:red">您当前打开了太多的页面，如果继续打开，会造成程序运行缓慢，无法流畅操作！</b>', function (b) {
+                if (b)
+                    wrapper.openTabHandler($tab, hasTab, subtitle, url, icon);
+            });
+    };
+    /*----------------------------TabsExtEnd---------------------------------*/
+
+    function Success(message) {
+        jSuccess(message, {
+            HorizontalPosition: "center",// 水平位置:left, center, right
+            VerticalPosition: "center",// 垂直位置：top, center, bottom
+        });
+    }
+    //需要点击
+    function SuccessManual(message) {
+        jSuccess(message, {
+            autoHide: false,       // 是否自动隐藏提示条
+            clickOverlay: true,  // 是否单击遮罩层才关闭提示条
+            MinWidth: 200,        // 最小宽度
+            TimeShown: 1500,      // 显示时间：毫秒
+            ShowTimeEffect: 200,  // 显示到页面上所需时间：毫秒
+            HideTimeEffect: 200,  // 从页面上消失所需时间：毫秒
+            LongTrip: 15,         // 当提示条显示和隐藏时的位移
+            HorizontalPosition: "center",// 水平位置:left, center, right
+            VerticalPosition: "center",// 垂直位置：top, center, bottom
+            ShowOverlay: true,     // 是否显示遮罩层
+            ColorOverlay: "#000",  // 设置遮罩层的颜色
+            OpacityOverlay: 0.3,   // 设置遮罩层的透明度
+        });
+    }
+
+    function Error(message)
+    {
+        jError(message, {
+            autoHide: false,
+            HorizontalPosition : "center",
+            VerticalPosition : "center",
+        });
+    }
+
+    function Info(message) {
+        jNotify(message, {
+            autoHide: false,
+            HorizontalPosition: "center",
+            VerticalPosition: "center",
+        });
+    }
+
+
+
+</script>
+
+</html>

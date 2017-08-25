@@ -1,0 +1,182 @@
+﻿@{
+    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button).ToList();
+}
+<table id="tableList" class="easyui-treegrid" style="width:99%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
+       data-options="
+    url:'/Menu/Index',
+    idField:'ID',
+    treeField:'Name',
+    loadFilter :function(data)
+    {
+        $.each(data.rows, function(i,n) {
+            if(parseInt(n.ParentID) != 0){
+                data.rows[i]._parentId = n.ParentID;
+            }
+            if(n.Icon!='')
+            {
+                data.rows[i].iconCls = n.Icon;
+            }
+        });
+        return data;
+    },
+    onLoadSuccess: function(row, data)
+    {
+       $(this).treegrid('collapseAll');
+       var root = $(this).treegrid('getRoot');
+       $(this).treegrid('expand',root.ID);
+    }
+    ">
+    <thead>
+        <tr>
+            <th data-options="field:'Name'">名称</th>
+            <th data-options="field:'Url'">Url</th>
+            <th data-options="field:'MenuType'">类型</th>
+            <th data-options="field:'Control',width:80">控制器</th>
+            <th data-options="field:'Action',width:80">操作</th>
+            <th data-options="field:'UIEvent',width:80">UI事件</th>
+            <th data-options="field:'State',width:60">状态</th>
+            <th data-options="field:'Sort',width:60">排序</th>
+            <th data-options="field:'Describe'">描述</th>
+            <th data-options="field:'AddTime',width:180,formatter:show.formatDate">添加时间</th>
+        </tr>
+    </thead>
+    <div id="tb" style="text-align:right;">
+        @foreach (var item in ButtonList)
+        {
+            <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.UIEvent)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
+        }
+    </div>
+</table>
+<div id="ModelForm"></div>
+@section Scripts{
+<script>
+
+
+    function ShowDefault(url,title,iconCls)
+    {
+        var Selected = $('#tableList').treegrid('getSelected');
+        if(Selected == null)
+        {
+            $.messager.alert('提示信息','请选择一行父节点！','warning');
+            return;
+        }
+        show.windows({
+            id:"ModelForm",
+            url:url + "?ParentID="+ Selected.ID,
+            width:580,
+            iconCls:iconCls,
+            title:title,
+            buttons: 
+            [{
+                text: '保存',
+                iconCls:'icon-ok',
+                handler: function () {
+                    $("#datafrom").submit();
+                }
+            }, {
+                text: '关闭',
+                iconCls:'icon-cancel',
+                handler: function () {
+                    $('#ModelForm').window('close');
+                }
+            }]
+        });
+    }
+
+    function ShowEdit(url,title,iconCls)
+    {
+        var Selected = $('#tableList').treegrid('getSelected');
+        if(Selected == null)
+        {
+            $.messager.alert('提示信息','请选择一行父节点！','warning');
+            return;
+        }
+
+        show.windows({
+            id:"ModelForm",
+            url:url + "?Id="+ Selected.ID,
+            width:580,
+            iconCls:iconCls,
+            title:title,
+            buttons: 
+            [{
+                text: '保存',
+                iconCls:'icon-ok',
+                handler: function () {
+                    $("#datafrom").submit();
+                }
+            }, {
+                text: '关闭',
+                iconCls:'icon-cancel',
+                handler: function () {
+                    $('#ModelForm').window('close');
+                }
+            }]
+        });
+    }
+    
+
+    /*将一般的JSON格式转为EasyUI TreeGrid树控件的JSON格式 
+     * param rows:json数据对象 
+     * param idFieldName:表id的字段名 
+     * param pidFieldName:表父级id的字段名 
+     * param fileds:要显示的字段,多个字段用逗号分隔 
+     */
+     function ConvertToTreeGridJson(rows, idFieldName, pidFieldName, fileds) {  
+         function exists(rows, ParentId) {  
+             for (var i = 0; i < rows.length; i++) {  
+                 if (rows[i][idFieldName] == ParentId)  
+                     return true;  
+             }  
+             return false;  
+         }  
+         var nodes = [];  
+         // get the top level nodes  
+         for (var i = 0; i < rows.length; i++) {  
+             var row = rows[i];  
+             if (!exists(rows, row[pidFieldName])) {  
+                 var data = {  
+                     id: row[idFieldName]  
+                 }  
+                 var arrFiled = fileds.split(",");  
+                 for (var j = 0; j < arrFiled.length; j++)  
+                 {  
+                     if (arrFiled[j] != idFieldName)  
+                         data[arrFiled[j]] = row[arrFiled[j]];  
+                 }  
+                 nodes.push(data);  
+             }  
+         }  
+      
+         var toDo = [];  
+         for (var i = 0; i < nodes.length; i++) {  
+             toDo.push(nodes[i]);  
+         }  
+         while (toDo.length) {  
+             var node = toDo.shift(); // the parent node  
+             // get the children nodes  
+             for (var i = 0; i < rows.length; i++) {  
+                 var row = rows[i];  
+                 if (row[pidFieldName] == node.id) {  
+                     var child = {  
+                         id: row[idFieldName]  
+                     };  
+                     var arrFiled = fileds.split(",");  
+                     for (var j = 0; j < arrFiled.length; j++) {  
+                         if (arrFiled[j] != idFieldName) {  
+                             child[arrFiled[j]] = row[arrFiled[j]];  
+                         }  
+                     }  
+                     if (node.children) {  
+                         node.children.push(child);  
+                     } else {  
+                         node.children = [child];  
+                     }  
+                     toDo.push(child);  
+                 }  
+             }  
+         }  
+         return nodes;  
+     };  
+</script>
+}

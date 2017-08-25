@@ -1,0 +1,34 @@
+﻿@{
+    this.Layout = null;
+    List<Infrastructure.Entity.Base_Menu> Base_MenuList = this.ViewBag.Base_MenuList;
+    var DataList = Base_MenuList.Select(o => new
+    {
+        ID = o.ID,
+        Name = o.Name,
+        Url = o.Url,
+        Sort = o.Sort,
+        Describe = o.Describe,
+        AddTime = o.AddTime,
+        State = o.State,
+        MenuType = o.MenuType ,
+    }).ToList();
+
+    DataList.ForEach(o =>
+    {
+        switch(o.MenuType == 1)
+        {
+            case 1:
+                o.MenuType = "导航";
+                break;
+            case 2:
+                o.MenuType = "菜单";
+                break;
+            case 3:
+                o.MenuType = "按钮";
+                break;
+        }
+    });
+    
+    var json = Newtonsoft.Json.JsonConvert.SerializeObject(DataList);
+}
+@this.Html.Raw(json)
