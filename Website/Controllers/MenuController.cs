@@ -98,7 +98,7 @@ namespace Website.Controllers
                 AjaxResult.Message = "数据不存在";
                 return new JsonResult() { Data = AjaxResult };
             }
-            baseSys_Menu = Sys_Menu.MapTo(baseSys_Menu);
+            baseSys_Menu = this.Request.ConvertRequestToModel<Sys_Menu>(baseSys_Menu,Sys_Menu);
             this.Entity.SaveChanges();
             return new JsonResult() { Data = AjaxResult };
         }

@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Web;
 
-namespace Infrastructure.Extend
+namespace Infrastructure
 {
     public static class HttpRequestExtensions
     {
