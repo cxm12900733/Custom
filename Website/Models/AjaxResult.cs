@@ -10,6 +10,10 @@ namespace Website.Models
     /// </summary>
     public class AjaxResult
     {
+        public AjaxResult()
+        {
+            this.IsSuccess = true;
+        }
         /// <summary>
         /// 业务是否成功
         /// </summary>

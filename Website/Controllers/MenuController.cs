@@ -46,6 +46,7 @@ namespace Website.Controllers
         [HttpPost]
         public JsonResult Add(Sys_Menu Sys_Menu)
         {
+            var AjaxResult = new AjaxResult();
             Sys_Menu.AddTime = DateTime.Now;
             switch (Sys_Menu.MenuType)
             {
@@ -63,18 +64,15 @@ namespace Website.Controllers
             Sys_Menu.UIEvent = Sys_Menu.UIEvent.IsEmpty() ? string.Empty : Sys_Menu.UIEvent;
             this.Entity.Sys_Menu.Add(Sys_Menu);
             this.Entity.SaveChanges();
-            var AjaxResult = new AjaxResult()
-            {
-                IsSuccess = true,
-                Message = "操作成功",
-            };
+
+            AjaxResult.Message = "操作成功";
             return new JsonResult() { Data = AjaxResult };
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            var Sys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o=>o.ID == id);
+            var Sys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Id);
             if (Sys_Menu==null)
             {
                 
@@ -86,11 +84,7 @@ namespace Website.Controllers
         [HttpPost]
         public JsonResult Edit(Sys_Menu Sys_Menu)
         {
-            var AjaxResult = new AjaxResult()
-            {
-                IsSuccess = true,
-                Message = "操作成功",
-            };
+            var AjaxResult = new AjaxResult();
             var baseSys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Sys_Menu.ID);
             if (baseSys_Menu == null)
             {
@@ -100,12 +94,16 @@ namespace Website.Controllers
             }
             baseSys_Menu = this.Request.ConvertRequestToModel<Sys_Menu>(baseSys_Menu,Sys_Menu);
             this.Entity.SaveChanges();
+
+            AjaxResult.Message = "操作成功";
             return new JsonResult() { Data = AjaxResult };
         }
 
         [HttpPost]
-        public ActionResult Del()
+        public ActionResult Del(int Id)
         {
+            var baseSys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Id);
+            this.Entity.Sys_Menu.Remove(baseSys_Menu);
             return View();
         }
     }
