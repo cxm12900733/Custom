@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Infrastructure.Tool
 {
     /// <summary>
-    /// AutoMapper帮助类
+    /// Mapper帮助类
+    /// 现在使用AutoMapper组件
     /// </summary>
     public static class MapperHelper
     {
