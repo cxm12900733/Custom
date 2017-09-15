@@ -166,6 +166,8 @@
     <Content Include="Views\Menu\Add.cshtml" />
     <Content Include="Views\Menu\Add2.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Shared\Succeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\customIcons.css" />

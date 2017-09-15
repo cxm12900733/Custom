@@ -84,7 +84,12 @@ namespace Website.Controllers
             return JsonResult;
         }
 
-        
+        public ActionResult Error(string message,string url = "")
+        {
+            ViewBag.message = message;
+            ViewBag.url = url;
+            return View("Error");
+        }
 
     }
 
