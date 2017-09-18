@@ -84,20 +84,21 @@ namespace Website.Controllers
             return JsonResult;
         }
 
-        public ActionResult Error(string message, string url = "", string title = "温馨提示")
+        public ActionResult Error(string message, SortedDictionary<string, string> links = null, string title = "温馨提示")
         {
             ViewBag.message = message;
             ViewBag.title = title;
-            ViewBag.url = url;
-            return View();
+            ViewBag.links = links;
+            return View("Error");
         }
 
-        public ActionResult Succeed(string message, string url = "", string title = "操作成功")
+        public ActionResult Succeed(string message, SortedDictionary<string, string> links = null, string title = "操作成功", bool isWindow = true)
         {
             ViewBag.message = message;
             ViewBag.title = title;
-            ViewBag.url = url;
-            return View();
+            ViewBag.links = links;
+            ViewBag.isWindow = isWindow;
+            return View("Succeed");
         }
 
     }

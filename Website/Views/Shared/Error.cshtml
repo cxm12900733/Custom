@@ -1,7 +1,8 @@
 ﻿@{
-    Layout = null;
+    //Layout = null;
     string message = ViewBag.message;
     string title = ViewBag.title;
+    SortedDictionary<string, string> links = ViewBag.links;
 }
 <!doctype html>
 <html>
@@ -16,13 +17,19 @@
         <i class="fa fa-exclamation-circle" style="color:#FB0;"></i>
         <div class="error_box2">
             <span class="sp01" style="color: #f38e2c;">@(title)</span>
-            <span class="sp02">@(message)</span>
+            <span class="sp02">信息：@(message)</span>
             <span class="sp04">时间：@(DateTime.Now)</span>
-            <span style="font-size:14px;">请点击：
-
-            <a href="javascript: history.go(-1);" style="color:red;text-decoration:none;font-weight:bold;">返回上一步操作</a>
-
+            <span class="sp05">请点击：
+                @if (links != null)
+                {
+                    foreach (var item in links)
+                    {
+                        <a href="@(item.Value)">@(item.Key)</a>
+                    }
+                }
+                <a href="javascript: history.go(-1);" style="color:red;text-decoration:none;font-weight:bold;">返回上一步操作</a>
             </span>
+
         </div>
     </div>
 </body>

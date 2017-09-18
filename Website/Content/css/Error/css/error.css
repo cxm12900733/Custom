@@ -2,8 +2,9 @@
 .error_box{ width: 500px; height: auto; margin: 2px auto; overflow: hidden;}
 .error_box i{ display: block; float: left; font-size:100px;width:20%;margin-top: 15px;}
 .error_box .error_box2{  margin-left: 20px;}
-.error_box .error_box2 span{ display: block; font-size: 14px;}
-.error_box .error_box2 .sp01{ font-size: 24px; margin-top: 8px; font-weight: bold;}
-.error_box .error_box2 .sp02{ color: #999;margin: 8px auto;}
-.error_box .error_box2 .sp03{ color: #999;}
+.error_box .error_box2 span{ display: block; font-size: 12px;}
+.error_box .error_box2 .sp01{ font-size: 20px; margin-top: 8px; font-weight: bold;}
+.error_box .error_box2 .sp02{ margin: 8px auto;}
+.error_box .error_box2 .sp05{ font-size:12px;}
+.error_box .error_box2 .sp05 a{ text-decoration:none;font-weight:bold;color:red;margin-right:10px;}
 .error_box .error_box2 .return_step{ border: 0; color: #fff; background: #434c5c; width: 150px; height: 44px; line-height: 44px; font-size: 16px;}

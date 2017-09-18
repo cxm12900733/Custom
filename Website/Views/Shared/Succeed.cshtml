@@ -1,7 +1,9 @@
 ﻿@{
-    Layout = null;
+    //Layout = null;
     string message = ViewBag.message;
     string title = ViewBag.title;
+    bool isWindow = ViewBag.isWindow;
+    SortedDictionary<string, string> links = ViewBag.links;
 }
 <!doctype html>
 <html>
@@ -16,12 +18,29 @@
         <i class="fa fa-check" style="color:green;"></i>
         <div class="error_box2">
             <span class="sp01" style="color:green;">@(title)</span>
-            <span class="sp02">@(message)</span>
+            <span class="sp02">信息：@(message)</span>
             <span class="sp04">时间：@(DateTime.Now)</span>
-            <span style="font-size:14px;">
-                请点击：<a href="javascript: history.go(-1);" style="color:red;text-decoration:none;font-weight:bold;">关闭</a>
+            <span class="sp05">请点击：
+            @if (links != null)
+            {
+                foreach (var item in links)
+                {
+                    <a href="@(item.Value)" >@(item.Key)</a>
+                }
+            }
+            @if (isWindow)
+            {
+                @:<a href="javascript: void(0);" onclick="CloseWindow()">关闭窗口</a>
+            }
             </span>
         </div>
     </div>
 </body>
+<script>
+    function CloseWindow()
+    {
+        var id = $(".window-body").attr("id");
+        $("#" + id).window('close');
+    }
+</script>
 </html>

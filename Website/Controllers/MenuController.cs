@@ -37,11 +37,10 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Add(int ParentID)
         {
-            return this.Error("aa");
-            //var Sys_Menu = new Sys_Menu();
-            //Sys_Menu.ParentID = ParentID;
-            //this.ViewBag.Sys_Menu = Sys_Menu;
-            //return View();
+            var Sys_Menu = new Sys_Menu();
+            Sys_Menu.ParentID = ParentID;
+            this.ViewBag.Sys_Menu = Sys_Menu;
+            return View();
         }
 
         [HttpPost]
@@ -65,7 +64,7 @@ namespace Website.Controllers
             Sys_Menu.UIEvent = Sys_Menu.UIEvent.IsEmpty() ? string.Empty : Sys_Menu.UIEvent;
             this.Entity.Sys_Menu.Add(Sys_Menu);
             this.Entity.SaveChanges();
-
+            //return this.Succeed("操作成功");
             AjaxResult.Message = "操作成功";
             return new JsonResult() { Data = AjaxResult };
         }

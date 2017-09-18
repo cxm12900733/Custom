@@ -65,21 +65,22 @@
             url:url + "?ParentID="+ Selected.ID,
             width:580,
             iconCls:iconCls,
-            title:title,
-            buttons: 
-            [{
-                text: '保存',
-                iconCls:'icon-ok',
-                handler: function () {
-                    $("#datafrom").submit();
-                }
-            }, {
-                text: '关闭',
-                iconCls:'icon-cancel',
-                handler: function () {
-                    $('#ModelForm').window('close');
-                }
-            }]
+            title:title
+            //,
+            //buttons: 
+            //[{
+            //    text: '保存',
+            //    iconCls:'icon-ok',
+            //    handler: function () {
+            //        $("#datafrom").submit();
+            //    }
+            //}, {
+            //    text: '关闭',
+            //    iconCls:'icon-cancel',
+            //    handler: function () {
+            //        $('#ModelForm').window('close');
+            //    }
+            //}]
         });
     }
 
