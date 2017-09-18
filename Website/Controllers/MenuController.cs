@@ -37,10 +37,11 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Add(int ParentID)
         {
-            var Sys_Menu = new Sys_Menu();
-            Sys_Menu.ParentID = ParentID;
-            this.ViewBag.Sys_Menu = Sys_Menu;
-            return View();
+            return this.Error("aa");
+            //var Sys_Menu = new Sys_Menu();
+            //Sys_Menu.ParentID = ParentID;
+            //this.ViewBag.Sys_Menu = Sys_Menu;
+            //return View();
         }
 
         [HttpPost]

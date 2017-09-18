@@ -1,17 +1,27 @@
 ﻿@{
     Layout = null;
+    string message = ViewBag.message;
+    string title = ViewBag.title;
 }
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width" />
-    <title>错误</title>
+    <meta charset="utf-8">
+    <title>@(title)</title>
+    <link href="/Content/css/Error/css/error.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h2>
-        抱歉，处理您的请求时出错。
-    </h2>
+    <div class="error_box">
+        <i class="fa fa-check" style="color:green;"></i>
+        <div class="error_box2">
+            <span class="sp01" style="color:green;">@(title)</span>
+            <span class="sp02">@(message)</span>
+            <span class="sp04">时间：@(DateTime.Now)</span>
+            <span style="font-size:14px;">
+                请点击：<a href="javascript: history.go(-1);" style="color:red;text-decoration:none;font-weight:bold;">关闭</a>
+            </span>
+        </div>
+    </div>
 </body>
 </html>

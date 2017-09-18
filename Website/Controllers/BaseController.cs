@@ -84,11 +84,20 @@ namespace Website.Controllers
             return JsonResult;
         }
 
-        public ActionResult Error(string message,string url = "")
+        public ActionResult Error(string message, string url = "", string title = "温馨提示")
         {
             ViewBag.message = message;
+            ViewBag.title = title;
             ViewBag.url = url;
-            return View("Error");
+            return View();
+        }
+
+        public ActionResult Succeed(string message, string url = "", string title = "操作成功")
+        {
+            ViewBag.message = message;
+            ViewBag.title = title;
+            ViewBag.url = url;
+            return View();
         }
 
     }

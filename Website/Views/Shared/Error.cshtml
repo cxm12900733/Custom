@@ -1,11 +1,29 @@
 ﻿@{
-    //Layout = null;
+    Layout = null;
+    string message = ViewBag.message;
+    string title = ViewBag.title;
 }
-<script type="text/javascript">
-    $.messager.alert('警告', '警告消息');
-    //$.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
-    //    if (r) {
-    //        alert('确认删除');
-    //    }
-    //});
-</script>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@(title)</title>
+    <link href="/Content/css/Error/css/error.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body >
+    <div class="error_box">
+        <i class="fa fa-exclamation-circle" style="color:#FB0;"></i>
+        <div class="error_box2">
+            <span class="sp01" style="color: #f38e2c;">@(title)</span>
+            <span class="sp02">@(message)</span>
+            <span class="sp04">时间：@(DateTime.Now)</span>
+            <span style="font-size:14px;">请点击：
+
+            <a href="javascript: history.go(-1);" style="color:red;text-decoration:none;font-weight:bold;">返回上一步操作</a>
+
+            </span>
+        </div>
+    </div>
+</body>
+</html>
