@@ -6,7 +6,7 @@
     var CustomIconListStr = Newtonsoft.Json.JsonConvert.SerializeObject(CustomIconList);
 }
 <!--预建窗口-->
-<form id="datafrom" method="post">
+<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?tableid=tableList" class="panel-body panel-body-noborder window-body">
     <input type="hidden" name="id" value="@(Sys_Menu.ID)" />
     <table cellpadding=" 5">
         <tr>
@@ -28,14 +28,14 @@
                     <option value="@(MenuType.Interface)" @(Sys_Menu.MenuType == MenuType.Interface ? "selected" : "")>介面</option>
                     <option value="@(MenuType.Button)" @(Sys_Menu.MenuType == MenuType.Button ? "selected" : "")>按钮</option>
                     <option value="@(MenuType.Powers)" @(Sys_Menu.MenuType == MenuType.Powers ? "selected" : "")>权限</option>
-                </select> 
+                </select>
             </td>
             <td>菜单状态</td>
             <td>
                 <select id="State" name="State" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
                     <option value="@(State.Normal)" @(Sys_Menu.State == State.Normal ? "selected" : "")>正常</option>
                     <option value="@(State.Lock)" @(Sys_Menu.State == State.Lock ? "selected" : "")>锁定</option>
-                </select> 
+                </select>
             </td>
         </tr>
         <tr>
@@ -62,36 +62,23 @@
             <td>描述</td>
             <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Menu.Describe)" class="easyui-textbox" data-options="multiline:true,height:60,width:'100%'" /></td>
         </tr>
+        <tr>
+            <td colspan="4" style="text-align:right;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="javascript:$('#datafrom').submit()">提交</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:parent.show.CloseWindow('#ModelForm')">关闭</a>
+            </td>
+        </tr>
     </table>
 </form>
 @section Scripts{
 <script>
-    $('#datafrom').form({
-        novalidate:true,
-        url:"/@(this.ControllerName)/@(this.ActionName)",
-        onSubmit: function(){
-            var isValid = $(this).form('validate');
-            //if (isValid){
-            //    $.messager.progress();
-            //}
-            return isValid;	// 返回false终止表单提交
+    //$('#ModelForm').window('close')
+    $("#datafrom").submit( function () {
+        if(!$('#datafrom').form('validate'))
+        {
+            return false;
         }
-        //,
-        //success:function(data){
-        //    $.messager.progress('close');
-        //    var data = eval('(' + data + ')');  // change the JSON string to javascript object
-        //    if(data.IsSuccess == true)
-        //    {
-        //        $('#ModelForm').window('close');
-        //        parent.Success(data.Message);
-        //        $('#tableList').treegrid('reload');
-        //    }
-        //    else
-        //    {
-        //        parent.Error(data.Message);
-        //    }
-        //}
-    });
+    } );
     $("#MenuType").combobox({
         onSelect: function (record) {
             FormRule(record.value)

@@ -1,5 +1,4 @@
-*{ padding: 0; margin: 0; font-family: '微软雅黑';}
-.error_box{ width: 500px; height: auto; margin: 2px auto; overflow: hidden;}
+.error_box{ width: 500px; height: auto; margin: 2px auto; overflow: hidden; font-family: '微软雅黑';}
 .error_box i{ display: block; float: left; font-size:100px;width:20%;margin-top: 15px;}
 .error_box .error_box2{  margin-left: 20px;}
 .error_box .error_box2 span{ display: block; font-size: 12px;}

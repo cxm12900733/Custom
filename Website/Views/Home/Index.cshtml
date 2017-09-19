@@ -9,13 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/default/easyui.css">
 		<link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="/Content/css/customIcons.css">
-        <link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/jquery.jnotify/css/jNotify.jquery.css" />
 		
 	    <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/jquery.min.js"></script>
 	    <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/jquery.easyui.min.js"></script>
         <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/locale/easyui-lang-zh_CN.js"></script>
 		<script type="text/javascript" src="/Content/JS/Plugins/easyui.tabs.extend.js"></script>
-        <script type="text/javascript" src="/Content/JS/Plugins/jquery.jnotify/jNotify.jquery.js"></script>
         <script type="text/javascript" src="/Content/JS/Custom/Utils.js"></script>
 		<style>
 		</style>
@@ -141,48 +139,6 @@
             });
     };
     /*----------------------------TabsExtEnd---------------------------------*/
-
-    function Success(message) {
-        jSuccess(message, {
-            HorizontalPosition: "center",// 水平位置:left, center, right
-            VerticalPosition: "center",// 垂直位置：top, center, bottom
-        });
-    }
-    //需要点击
-    function SuccessManual(message) {
-        jSuccess(message, {
-            autoHide: false,       // 是否自动隐藏提示条
-            clickOverlay: true,  // 是否单击遮罩层才关闭提示条
-            MinWidth: 200,        // 最小宽度
-            TimeShown: 1500,      // 显示时间：毫秒
-            ShowTimeEffect: 200,  // 显示到页面上所需时间：毫秒
-            HideTimeEffect: 200,  // 从页面上消失所需时间：毫秒
-            LongTrip: 15,         // 当提示条显示和隐藏时的位移
-            HorizontalPosition: "center",// 水平位置:left, center, right
-            VerticalPosition: "center",// 垂直位置：top, center, bottom
-            ShowOverlay: true,     // 是否显示遮罩层
-            ColorOverlay: "#000",  // 设置遮罩层的颜色
-            OpacityOverlay: 0.3,   // 设置遮罩层的透明度
-        });
-    }
-
-    function Error(message)
-    {
-        jError(message, {
-            autoHide: false,
-            HorizontalPosition : "center",
-            VerticalPosition : "center",
-        });
-    }
-
-    function Info(message) {
-        jNotify(message, {
-            autoHide: false,
-            HorizontalPosition: "center",
-            VerticalPosition: "center",
-        });
-    }
-
 
 
 </script>

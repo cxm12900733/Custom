@@ -44,9 +44,8 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public JsonResult Add(Sys_Menu Sys_Menu)
+        public ActionResult Add(Sys_Menu Sys_Menu)
         {
-            var AjaxResult = new AjaxResult();
             Sys_Menu.AddTime = DateTime.Now;
             switch (Sys_Menu.MenuType)
             {
@@ -64,9 +63,7 @@ namespace Website.Controllers
             Sys_Menu.UIEvent = Sys_Menu.UIEvent.IsEmpty() ? string.Empty : Sys_Menu.UIEvent;
             this.Entity.Sys_Menu.Add(Sys_Menu);
             this.Entity.SaveChanges();
-            //return this.Succeed("操作成功");
-            AjaxResult.Message = "操作成功";
-            return new JsonResult() { Data = AjaxResult };
+            return this.Succeed("操作成功");
         }
 
         [HttpGet]
@@ -75,28 +72,23 @@ namespace Website.Controllers
             var Sys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Id);
             if (Sys_Menu==null)
             {
-                
+                return this.Error("数据不存在");
             }
             this.ViewBag.Sys_Menu = Sys_Menu;
             return View("Add");
         }
 
         [HttpPost]
-        public JsonResult Edit(Sys_Menu Sys_Menu)
+        public ActionResult Edit(Sys_Menu Sys_Menu)
         {
-            var AjaxResult = new AjaxResult();
             var baseSys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Sys_Menu.ID);
             if (baseSys_Menu == null)
             {
-                AjaxResult.IsSuccess = false;
-                AjaxResult.Message = "数据不存在";
-                return new JsonResult() { Data = AjaxResult };
+                return this.Error("数据不存在");
             }
             baseSys_Menu = this.Request.ConvertRequestToModel<Sys_Menu>(baseSys_Menu,Sys_Menu);
             this.Entity.SaveChanges();
-
-            AjaxResult.Message = "操作成功";
-            return new JsonResult() { Data = AjaxResult };
+            return this.Succeed("操作成功");
         }
 
         [HttpPost]

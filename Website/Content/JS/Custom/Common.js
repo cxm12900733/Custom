@@ -16,39 +16,33 @@ show.formatDate = function (value, row, index) {
     }
 }
 
-show.windows = function (params)
-{
-    //id, url, width, height, iconCls, title,buttons
+show.Windows = function (params){
+    //id, url, width, height, iconCls, title
     if (!$.isEmptyObject(params.id))
     {
-        $('#' + params.id).dialog({
+        var url = $.isEmptyObject(params.url) ? "" : params.url;
+        var content = '<iframe id="' + params.id + '" src="' + url + '" width="100%" height="99%" frameborder="0" scrolling="no"></iframe>';
+        $('#' + params.id).window({
             closed: false,
             cache: false,
-            href: $.isEmptyObject(params.url) ? "" : params.url,
+            content: content,
             iconCls: $.isEmptyObject(params.iconCls) ? null : params.iconCls,
             title: $.isEmptyObject(params.title) ? "系统弹窗" : params.title,
             modal: true,
-            resizable: true,
             width: !$.isNumeric(params.width) ? "auto" : params.width,
             height: !$.isNumeric(params.height) ? "auto" : params.height,
-            inline: true,
-            buttons: $.isEmptyObject(params.buttons) ? null : params.buttons,
+            minimizable: false,
+            maximizable: false,
+            collapsible: false,
         }).dialog("center");
-        //$('#' + params.id).window({
-        //    href: $.isEmptyObject(params.url) ? "" : params.url,
-        //    iconCls: $.isEmptyObject(params.iconCls) ? null : params.iconCls,
-        //    title: $.isEmptyObject(params.title) ? "系统弹窗" : params.title,
-        //    closed: false,
-        //    cache: false,
-        //    modal: true,
-        //    resizable: true,
-        //    minimizable: false,
-        //    maximizable: false,
-        //    collapsible: false,
-        //    shadow: false,
-        //    inline: true,
-        //    width: !$.isNumeric(params.width) ? "auto" : params.width,
-        //    height: !$.isNumeric(params.height) ? "auto" : params.height,
-        //}).window("center");
     }
+}
+
+show.CloseWindow = function (iframeId) {
+    $(iframeId).window('close');
+}
+
+show.Refresh = function (id)
+{
+    $(id).treegrid('reload');
 }

@@ -60,27 +60,13 @@
             $.messager.alert('提示信息','请选择一行父节点！','warning');
             return;
         }
-        show.windows({
+        show.Windows({
             id:"ModelForm",
             url:url + "?ParentID="+ Selected.ID,
             width:580,
+            height:350,
             iconCls:iconCls,
             title:title
-            //,
-            //buttons: 
-            //[{
-            //    text: '保存',
-            //    iconCls:'icon-ok',
-            //    handler: function () {
-            //        $("#datafrom").submit();
-            //    }
-            //}, {
-            //    text: '关闭',
-            //    iconCls:'icon-cancel',
-            //    handler: function () {
-            //        $('#ModelForm').window('close');
-            //    }
-            //}]
         });
     }
 
@@ -93,27 +79,15 @@
             return;
         }
 
-        show.windows({
+        show.Windows({
             id:"ModelForm",
             url:url + "?Id="+ Selected.ID,
             width:580,
+            height:350,
             iconCls:iconCls,
-            title:title,
-            buttons: 
-            [{
-                text: '保存',
-                iconCls:'icon-ok',
-                handler: function () {
-                    $("#datafrom").submit();
-                }
-            }, {
-                text: '关闭',
-                iconCls:'icon-cancel',
-                handler: function () {
-                    $('#ModelForm').window('close');
-                }
-            }]
+            title:title
         });
     }
+
 </script>
 }

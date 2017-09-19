@@ -84,20 +84,34 @@ namespace Website.Controllers
             return JsonResult;
         }
 
-        public ActionResult Error(string message, SortedDictionary<string, string> links = null, string title = "温馨提示")
+        /// <summary>
+        /// 错误信息介面
+        /// </summary>
+        /// <param name="message">信息</param>
+        /// <param name="links">链接列表</param>
+        /// <param name="title">标题</param>
+        /// <returns></returns>
+        protected ActionResult Error(string message, SortedDictionary<string, string> links = null, string title = "温馨提示")
         {
             ViewBag.message = message;
             ViewBag.title = title;
             ViewBag.links = links;
             return View("Error");
         }
-
-        public ActionResult Succeed(string message, SortedDictionary<string, string> links = null, string title = "操作成功", bool isWindow = true)
+        /// <summary>
+        /// 成功介面
+        /// </summary>
+        /// <param name="message">信息</param>
+        /// <param name="links">链接列表</param>
+        /// <param name="title">标题</param>
+        /// <param name="isCloseWindow">是否有关闭窗口链接</param>
+        /// <returns></returns>
+        protected ActionResult Succeed(string message, SortedDictionary<string, string> links = null, string title = "操作成功", bool isCloseWindow = true)
         {
             ViewBag.message = message;
             ViewBag.title = title;
             ViewBag.links = links;
-            ViewBag.isWindow = isWindow;
+            ViewBag.isCloseWindow = isCloseWindow;
             return View("Succeed");
         }
 

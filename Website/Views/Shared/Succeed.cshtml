@@ -1,9 +1,9 @@
 ﻿@{
-    //Layout = null;
     string message = ViewBag.message;
     string title = ViewBag.title;
-    bool isWindow = ViewBag.isWindow;
+    bool isCloseWindow = ViewBag.isCloseWindow;
     SortedDictionary<string, string> links = ViewBag.links;
+    string tableid = Request.QueryString["tableid"];//传tableid将刷新父窗口列表
 }
 <!doctype html>
 <html>
@@ -28,7 +28,7 @@
                     <a href="@(item.Value)" >@(item.Key)</a>
                 }
             }
-            @if (isWindow)
+            @if (isCloseWindow)
             {
                 @:<a href="javascript: void(0);" onclick="CloseWindow()">关闭窗口</a>
             }
@@ -37,10 +37,15 @@
     </div>
 </body>
 <script>
+    var tableid = '@(tableid)';
     function CloseWindow()
     {
-        var id = $(".window-body").attr("id");
-        $("#" + id).window('close');
+        var iframeId = window.frameElement && window.frameElement.id || '';
+        parent.show.CloseWindow("#" + iframeId);
+        if (tableid != '')
+        {
+            parent.show.Refresh("#" + tableid);
+        }
     }
 </script>
 </html>
