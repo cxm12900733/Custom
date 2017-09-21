@@ -35,7 +35,7 @@ namespace Website.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add(int ParentID)
+        public ActionResult Add(int ParentID = 1)
         {
             var Sys_Menu = new Sys_Menu();
             Sys_Menu.ParentID = ParentID;
@@ -92,11 +92,16 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Del(int Id)
+        public JsonResult Del(string ids)
         {
-            var baseSys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Id);
-            this.Entity.Sys_Menu.Remove(baseSys_Menu);
-            return View();
+            var Result = new AjaxResult();
+            var idsStrArr = ids.Split(',');
+            int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));  
+            var baseSys_Menu = this.Entity.Sys_Menu.Where(o => idsArr.Contains(o.ID)).ToList();
+            this.Entity.Sys_Menu.RemoveRange(baseSys_Menu);
+            this.Entity.SaveChanges();
+            Result.Message = "操作成功";
+            return this.ToJson(Result);
         }
     }
 }

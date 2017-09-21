@@ -6,6 +6,8 @@
     url:'/Menu/Index',
     idField:'ID',
     treeField:'Name',
+    singleSelect:false,
+    ctrlSelect:true,
     loadFilter :function(data)
     {
         $.each(data.rows, function(i,n) {
@@ -55,15 +57,18 @@
 
     function ShowDefault(url,title,iconCls)
     {
-        var Selected = $('#tableList').treegrid('getSelected');
-        if(Selected == null)
-        {
-            $.messager.alert('提示信息','请选择一行父节点！','warning');
-            return;
+        var Selected = $('#tableList').treegrid('getSelections');
+        if(Selected.length == 1){ 
+            url += "?ParentID="+ Selected[0].ID 
         }
+        //else if(Selected.length > 1)
+        //{
+        //    $.messager.alert('提示信息','请选择一行数据！','warning');
+        //    return;
+        //}
         show.Windows({
             id:"ModelForm",
-            url:url + "?ParentID="+ Selected.ID,
+            url:url,
             width:580,
             height:350,
             iconCls:iconCls,
@@ -73,20 +78,57 @@
 
     function ShowEdit(url,title,iconCls)
     {
-        var Selected = $('#tableList').treegrid('getSelected');
+        var Selected = $('#tableList').treegrid('getSelections');
         if(Selected == null)
         {
-            $.messager.alert('提示信息','请选择一行父节点！','warning');
+            $.messager.alert('提示信息','请选择一行数据！','warning');
             return;
         }
 
         show.Windows({
             id:"ModelForm",
-            url:url + "?Id="+ Selected.ID,
+            url:url + "?Id="+ Selected[0].ID,
             width:580,
             height:350,
             iconCls:iconCls,
             title:title
+        });
+    }
+
+    function Del(url,title,iconCls)
+    {
+        var Selected = $('#tableList').treegrid('getSelections');
+        var ids = "";
+        if(Selected == null)
+        {
+            $.messager.alert('提示信息','请至少选择一行数据！','warning');
+            return;
+        }
+        var alertMessage = "";
+        $.each( Selected, function(i, n){
+            if(n.children != null)
+            {
+                alertMessage = '请先清空"'+n.Name+'"下面的子项';
+                return;
+            }
+            ids += n.ID + ",";
+        });
+        if(alertMessage != "")
+        {
+            $.messager.alert('提示信息',alertMessage,'warning');
+            return;
+        }
+        ids = ids.substr(0, ids.length-1);
+        $.messager.confirm('确认对话框',"确认要删除数据？", function(r){
+            if (r){
+                $.post(url, { ids: ids},function(result){
+                    if(result.data.IsSuccess)
+                    {
+                        $("#tableList").treegrid('reload');
+                    }
+                    $.messager.alert('提示信息',result.data.Message,'info');
+                },'json');
+            }
         });
     }
 
