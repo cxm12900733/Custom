@@ -131,7 +131,10 @@
     <Compile Include="Common\ManageWebViewPage.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Content Include="Content\css\customIcons\large_shapes.png" />
+    <Content Include="Content\css\customIcons\large_smartart.png" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -165,9 +168,6 @@
     <Content Include="Content\css\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Content\css\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\css\font-awesome\scss\_variables.scss" />
-    <None Include="Controllers\MenubackController.cs1">
-      <SubType>Code</SubType>
-    </None>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,7 +201,6 @@
     <Content Include="Content\JS\Plugins\jquery.jnotify\images\info.png" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\images\success.png" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\jNotify.jquery.js" />
-    <Content Include="Views\副本 Menu\Index.cshtml" />
     <Content Include="Views\Menu\Add.cshtml" />
     <Content Include="Views\Menu\Add2.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
@@ -2315,18 +2314,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Menubak\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Menubak\LoadData.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Menu\Index2.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Controllers\Menuback2Controller.cs2" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,5 +1,5 @@
 ﻿@{
-    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button).ToList();
+    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 3).ToList();
 }
 <table id="tableList" class="easyui-treegrid" style="width:99%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
        data-options="
@@ -55,7 +55,7 @@
 <script>
 
 
-    function ShowDefault(url,title,iconCls)
+    function ShowAdd(url,title,iconCls)
     {
         var Selected = $('#tableList').treegrid('getSelections');
         if(Selected.length == 1){ 
