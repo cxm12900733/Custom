@@ -28,10 +28,15 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult Index(Sys_Menu Sys_Menu)
+        public ActionResult Index(Paging<Sys_Role> Paging)
         {
-            List<Sys_Role> Sys_RoleList = this.Entity.Sys_Role.OrderBy(o => o.AddTime).ToList();
-            return this.ToTableJson(Sys_RoleList);
+            if (!Paging.Condition.Name.IsEmpty())
+            { 
+                
+            }
+            List<Sys_Role> Sys_RoleList = this.Entity.Sys_Role.Skip(Paging.Rows).Take(Paging.Take).OrderBy(o => o.AddTime).ToList();
+            int Count = this.Entity.Sys_Role.Count();
+            return this.ToTableJson(Sys_RoleList,Count);
         }
 
         [HttpGet]

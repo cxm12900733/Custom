@@ -45,6 +45,11 @@ namespace Infrastructure.Entity
         /// </summary>
         [Required]
         public string MenuIDs { get; set; }
-        
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        [Required]
+        public int Sort { get; set; }
     }
 }

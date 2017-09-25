@@ -62,7 +62,7 @@ namespace Website.Controllers
         /// <param name="DataList">数据列</param>
         /// <param name="Total">总数</param>
         /// <returns></returns>
-        protected JsonResult ToTableJson(object DataList, bool IsGet = false, int Total = 0)
+        protected JsonResult ToTableJson(object DataList, int Total = 0, bool IsGet = false)
         {
             var JsonResult = new JsonResult() { ContentType = "text/html" };
             JsonResult.JsonRequestBehavior = IsGet ? JsonRequestBehavior.AllowGet : JsonRequestBehavior.DenyGet;

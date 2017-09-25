@@ -25,5 +25,12 @@ namespace Website.Models
         /// 查询条件
         /// </summary>
         public T Condition { get; set; }
+
+        public int Take
+        { 
+            get{
+                return (this.Page - 1) * this.Rows;
+            } 
+        }
     }
 }

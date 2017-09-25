@@ -1,43 +1,19 @@
 ﻿@{
-    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 3).ToList();
+    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 56).ToList();
 }
-<table id="tableList" class="easyui-treegrid" style="width:99%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
+<table id="tableList" class="easyui-treegrid" style="width:99%;" toolbar="#tb" title="角色管理" iconcls="icon-new"
        data-options="
-    url:'/Menu/Index',
+    url:'/Role/Index',
     idField:'ID',
     treeField:'Name',
     singleSelect:false,
     ctrlSelect:true,
-    loadFilter :function(data)
-    {
-        $.each(data.rows, function(i,n) {
-            if(parseInt(n.ParentID) != 0){
-                data.rows[i]._parentId = n.ParentID;
-            }
-
-            if(n.Icon!='')
-            {
-                data.rows[i].iconCls = n.Icon;
-            }
-        });
-        return data;
-    },
-    onLoadSuccess: function(row, data)
-    {
-       $(this).treegrid('collapseAll');
-       var root = $(this).treegrid('getRoot');
-       $(this).treegrid('expand',root.ID);
-    }
+    pagination:true
     ">
     <thead>
         <tr>
             <th data-options="field:'Name'">名称</th>
-            <th data-options="field:'Url'">Url</th>
-            <th data-options="field:'MenuType',formatter:StateName">类型</th>
-            <th data-options="field:'Control',width:80">控制器</th>
-            <th data-options="field:'Action',width:80">操作</th>
-            <th data-options="field:'UIEvent',width:80">UI事件</th>
-            <th data-options="field:'State',width:60">状态</th>
+            <th data-options="field:'State',formatter:StateName">类型</th>
             <th data-options="field:'Sort',width:60">排序</th>
             <th data-options="field:'Describe'">描述</th>
             <th data-options="field:'AddTime',width:180,formatter:show.formatDate">添加时间</th>
