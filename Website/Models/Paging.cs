@@ -8,8 +8,7 @@ namespace Website.Models
     /// <summary>
     /// 分页模型
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class Paging<T>
+    public class Paging 
     {
         /// <summary>
         /// 当前页
@@ -20,11 +19,6 @@ namespace Website.Models
         /// 行数
         /// </summary>
         public int Rows { get; set; }
-
-        /// <summary>
-        /// 查询条件
-        /// </summary>
-        public T Condition { get; set; }
 
         public int Take
         { 

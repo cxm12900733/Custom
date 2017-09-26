@@ -28,13 +28,14 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult Index(Paging<Sys_Role> Paging)
+        public ActionResult Index(Paging Paging, Sys_Role Sys_Role)
         {
-            if (!Paging.Condition.Name.IsEmpty())
-            { 
-                
+            var query = this.Entity.Sys_Role.AsQueryable();
+            if (!Sys_Role.Name.IsEmpty())
+            {
+                query.Where(o => o.Name == Sys_Role.Name);
             }
-            List<Sys_Role> Sys_RoleList = this.Entity.Sys_Role.Skip(Paging.Rows).Take(Paging.Take).OrderBy(o => o.AddTime).ToList();
+            List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Skip(Paging.Rows).Take(Paging.Take).ToList();
             int Count = this.Entity.Sys_Role.Count();
             return this.ToTableJson(Sys_RoleList,Count);
         }
