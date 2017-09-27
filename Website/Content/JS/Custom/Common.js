@@ -21,7 +21,7 @@ show.Windows = function (params){
     if (!$.isEmptyObject(params.id))
     {
         var url = $.isEmptyObject(params.url) ? "" : params.url;
-        var content = '<iframe id="' + params.id + '" src="' + url + '" width="100%" height="99%" frameborder="0" scrolling="no"></iframe>';
+        var content = '<iframe id="' + params.id + '" src="' + url + '" width="100%" height="98%" frameborder="0" scrolling="no"></iframe>';
         $('#' + params.id).window({
             closed: false,
             cache: false,
@@ -45,4 +45,17 @@ show.CloseWindow = function (iframeId) {
 show.Refresh = function (id)
 {
     $(id).treegrid('reload');
+}
+
+show.StateName = function (value, row, index) {
+    var returl = "";
+    switch (value) {
+        case 1:
+            returl = "正常"
+            break;
+        case 2:
+            returl = "停用"
+            break;
+    }
+    return returl;
 }

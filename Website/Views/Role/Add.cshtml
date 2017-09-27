@@ -1,66 +1,36 @@
 ﻿@{
-    Sys_Menu Sys_Menu = ViewBag.Sys_Menu;
-    var MenuTreeList = this.MenuTree.OrderBy(o => o.Sort).Select(o => new { id = o.ID, text = o.Name, pId = o.ParentID, iconCls = o.Icon }).ToList();
-    var MenuTreeJsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(MenuTreeList);
-    var CustomIconList = Website.Common.CustomIcons.CustomIconList.Select(o => new { value = o.Value, text = o.Key, iconCls = o.Value }).ToList();
-    var CustomIconListStr = Newtonsoft.Json.JsonConvert.SerializeObject(CustomIconList);
+    Sys_Role Sys_Role = ViewBag.Sys_Role ?? new Sys_Role();
 }
 <!--预建窗口-->
 <form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?tableid=tableList" class="panel-body panel-body-noborder window-body">
-    <input type="hidden" name="id" value="@(Sys_Menu.ID)" />
-    <table cellpadding=" 5">
+    <input type="hidden" name="id" value="@(Sys_Role.ID)" />
+    <table cellpadding="5" >
         <tr>
-            <td>菜单名称</td>
-            <td style="width:200px;"><input id="Name" name="Name" value="@(Sys_Menu.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
-            <td>父节点</td>
-            <td style="width:200px;">
-                <select id="ParentID" name="ParentID" class="easyui-combotree" data-options="panelHeight:'auto',editable:false,width:'100%',data: treeMenus,
-                    onLoadSuccess: function (node, data) {
-                        $('#ParentID').combotree('setValue', ParentID);
-                    }"></select>
-            </td>
+            <td style="width:100px;">名称</td>
+            <td style="width:250px;"><input id="Name" name="Name" value="@(Sys_Role.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
         </tr>
         <tr>
-            <td>菜单类型</td>
-            <td>
-                <select id="MenuType" name="MenuType" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
-                    <option value="@(MenuType.Directory)" @(Sys_Menu.MenuType == MenuType.Directory ? "selected" : "")>目录</option>
-                    <option value="@(MenuType.Interface)" @(Sys_Menu.MenuType == MenuType.Interface ? "selected" : "")>介面</option>
-                    <option value="@(MenuType.Button)" @(Sys_Menu.MenuType == MenuType.Button ? "selected" : "")>按钮</option>
-                    <option value="@(MenuType.Powers)" @(Sys_Menu.MenuType == MenuType.Powers ? "selected" : "")>权限</option>
-                </select>
-            </td>
-            <td>菜单状态</td>
+            <td>状态</td>
             <td>
                 <select id="State" name="State" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
-                    <option value="@(State.Normal)" @(Sys_Menu.State == State.Normal ? "selected" : "")>正常</option>
-                    <option value="@(State.Lock)" @(Sys_Menu.State == State.Lock ? "selected" : "")>锁定</option>
+                    <option value="@(State.Normal)" @(Sys_Role.State == State.Normal ? "selected" : "")>正常</option>
+                    <option value="@(State.Lock)" @(Sys_Role.State == State.Lock ? "selected" : "")>停用</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td>控制器</td>
-            <td><input id="Control" name="Control" value="@(Sys_Menu.Control)" class=" easyui-textbox" type="text" data-options=" required:true,width:'100%'" /></td>
-            <td>操作</td>
-            <td><input id="Action" name="Action" value="@(Sys_Menu.Action)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
-        </tr>
-        <tr>
-            <td>图标样式</td>
-            <td>
-                <input id="Icon" name="Icon" value="@(Sys_Menu.Icon)" class="easyui-combobox" type="text" data-options="showItemIcon: true,data:CustomIconJson,width:'100%'" />
-            </td>
-            <td>UI事件</td>
-            <td><input id="UIEvent" name="UIEvent" value="@(Sys_Menu.UIEvent)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
-        </tr>
-        <tr>
-            <td>菜单Url</td>
-            <td><input id="Url" name="Url" value="@(Sys_Menu.Url)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
-            <td>菜单排序</td>
-            <td><input id="Sort" name="Sort" value="@(Sys_Menu.Sort)" class="easyui-numberspinner" data-options="required:true,min:0,width:'100%'"></td>
+            <td>排序</td>
+            <td><input id="Sort" name="Sort" value="@(Sys_Role.Sort)" class=" easyui-textbox" type="text" data-options=" required:true,width:'100%'" /></td>
         </tr>
         <tr>
             <td>描述</td>
-            <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Menu.Describe)" class="easyui-textbox" data-options="multiline:true,height:60,width:'100%'" /></td>
+            <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Role.Describe)" class="easyui-textbox" data-options="multiline:true,height:60,width:'100%'" /></td>
+        </tr>
+        <tr>
+            <td>添加时间</td>
+            <td>
+                @(Sys_Role.AddTime != DateTime.MinValue ? Sys_Role.AddTime.ToString("yyyy-MM-dd HH:mm") : "--")
+            </td>
         </tr>
         <tr>
             <td colspan="4" style="text-align:right;">
@@ -78,38 +48,9 @@
             return false;
         }
     } );
-    $("#MenuType").combobox({
-        onSelect: function (record) {
-            FormRule(record.value)
-        }
-    });
-    var MenuTreeJson = JSON.parse('@(this.Html.Raw(MenuTreeJsonStr))');
-    var treeMenus = utils.toTreeData(MenuTreeJson, "id", "pId", "children");
-    var ParentID = @(Sys_Menu.ParentID);
-    var CustomIconJson = JSON.parse('@(this.Html.Raw(CustomIconListStr))');
-
-
-    function FormRule(value)
-    {
-        if (value == "@(MenuType.Directory)") {
-            $("#Url,#Control,#Action,#UIEvent").textbox("disable");
-            $("#Icon").textbox("enable");
-        }
-        else if (value == "@(MenuType.Powers)") {
-            $("#Url,#UIEvent,#Icon").textbox("disable");
-            $("#Control,#Action").textbox("enable");
-        }
-        else if (value == "@(MenuType.Interface)") {
-            $("#UIEvent").textbox("disable");
-            $("#Url,#Control,#Action,#Icon").textbox("enable");
-        }
-        else {
-            $("#Url,#Control,#Action,#UIEvent,#Icon").textbox("enable");
-        }
-    }
     //easyui解析器
     $.parser.onComplete = function () {
-        FormRule($("#MenuType").val());
+        
     }
 </script>
 }

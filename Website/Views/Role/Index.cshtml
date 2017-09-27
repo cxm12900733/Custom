@@ -1,11 +1,10 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 56).ToList();
 }
-<table id="tableList" class="easyui-treegrid" style="width:99%;" toolbar="#tb" title="角色管理" iconcls="icon-new"
+<table id="tableList" class="easyui-datagrid" style="width:99%;" toolbar="#tb" title="角色管理" iconcls="icon-new"
        data-options="
     url:'/Role/Index',
     idField:'ID',
-    treeField:'Name',
     singleSelect:false,
     ctrlSelect:true,
     pagination:true
@@ -13,7 +12,7 @@
     <thead>
         <tr>
             <th data-options="field:'Name'">名称</th>
-            <th data-options="field:'State',formatter:StateName">类型</th>
+            <th data-options="field:'State',formatter:show.StateName">类型</th>
             <th data-options="field:'Sort',width:60">排序</th>
             <th data-options="field:'Describe'">描述</th>
             <th data-options="field:'AddTime',width:180,formatter:show.formatDate">添加时间</th>
@@ -33,20 +32,11 @@
 
     function ShowAdd(url,title,iconCls)
     {
-        var Selected = $('#tableList').treegrid('getSelections');
-        if(Selected.length == 1){ 
-            url += "?ParentID="+ Selected[0].ID 
-        }
-        //else if(Selected.length > 1)
-        //{
-        //    $.messager.alert('提示信息','请选择一行数据！','warning');
-        //    return;
-        //}
         show.Windows({
             id:"ModelForm",
             url:url,
-            width:580,
-            height:350,
+            width:400,
+            height:300,
             iconCls:iconCls,
             title:title
         });
@@ -64,8 +54,8 @@
         show.Windows({
             id:"ModelForm",
             url:url + "?Id="+ Selected[0].ID,
-            width:580,
-            height:350,
+            width:400,
+            height:300,
             iconCls:iconCls,
             title:title
         });
@@ -80,20 +70,6 @@
             $.messager.alert('提示信息','请至少选择一行数据！','warning');
             return;
         }
-        var alertMessage = "";
-        $.each( Selected, function(i, n){
-            if(n.children != null)
-            {
-                alertMessage = '请先清空"'+n.Name+'"下面的子项';
-                return;
-            }
-            ids += n.ID + ",";
-        });
-        if(alertMessage != "")
-        {
-            $.messager.alert('提示信息',alertMessage,'warning');
-            return;
-        }
         ids = ids.substr(0, ids.length-1);
         $.messager.confirm('确认对话框',"确认要删除数据？", function(r){
             if (r){
@@ -106,27 +82,6 @@
                 },'json');
             }
         });
-    }
-
-    function StateName(value,row,index)
-    {
-        var returl = "";
-        switch(value)
-        {
-            case 1:
-                returl = "目录"
-                break;
-            case 2:
-                returl = "介面"
-                break;
-            case 3:
-                returl = "按钮"
-                break;
-            case 4:
-                returl = "权限"
-                break;
-        }
-        return returl;
     }
 
 </script>

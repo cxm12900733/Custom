@@ -35,7 +35,7 @@ namespace Website.Controllers
             {
                 query.Where(o => o.Name == Sys_Role.Name);
             }
-            List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Skip(Paging.Rows).Take(Paging.Take).ToList();
+            List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Take(Paging.Rows).Skip(Paging.Skip).ToList();
             int Count = this.Entity.Sys_Role.Count();
             return this.ToTableJson(Sys_RoleList,Count);
         }
@@ -47,24 +47,12 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Sys_Menu Sys_Menu)
+        public ActionResult Add(Sys_Role Sys_Role)
         {
-            Sys_Menu.AddTime = DateTime.Now;
-            switch (Sys_Menu.MenuType)
-            {
-                case MenuType.Directory:
-                    Sys_Menu.Url = string.Empty;
-                    Sys_Menu.Control = string.Empty;
-                    Sys_Menu.Action = string.Empty;
-                    break;
-                case MenuType.Powers:
-                    Sys_Menu.Url = string.Empty;
-                    break;
-            }
-            Sys_Menu.Describe = Sys_Menu.Describe.IsEmpty() ? string.Empty : Sys_Menu.Describe;
-            Sys_Menu.Icon = Sys_Menu.Icon.IsEmpty() ? string.Empty : Sys_Menu.Icon;
-            Sys_Menu.UIEvent = Sys_Menu.UIEvent.IsEmpty() ? string.Empty : Sys_Menu.UIEvent;
-            this.Entity.Sys_Menu.Add(Sys_Menu);
+            Sys_Role.AddTime = DateTime.Now;
+            Sys_Role.Describe = Sys_Role.Describe.IsEmpty() ? string.Empty : Sys_Role.Describe;
+            Sys_Role.MenuIDs = Sys_Role.MenuIDs.IsEmpty() ? string.Empty : Sys_Role.MenuIDs;
+            this.Entity.Sys_Role.Add(Sys_Role);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }

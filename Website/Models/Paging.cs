@@ -20,7 +20,7 @@ namespace Website.Models
         /// </summary>
         public int Rows { get; set; }
 
-        public int Take
+        public int Skip
         { 
             get{
                 return (this.Page - 1) * this.Rows;
