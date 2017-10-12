@@ -3,7 +3,8 @@
     string title = ViewBag.title;
     bool isCloseWindow = ViewBag.isCloseWindow;
     SortedDictionary<string, string> links = ViewBag.links;
-    string tableid = Request.QueryString["tableid"];//传tableid将刷新父窗口列表
+    string datagridid = Request.QueryString["datagridid"];//传入datagridid将刷新datagrid控件
+    string treegridid = Request.QueryString["treegridid"];//传入treegridid将刷新treegrid控件
 }
 <!doctype html>
 <html>
@@ -37,14 +38,19 @@
     </div>
 </body>
 <script>
-    var tableid = '@(tableid)';
+    var datagridid = '@(datagridid)';
+    var treegridid = '@(treegridid)';
     function CloseWindow()
     {
         var iframeId = window.frameElement && window.frameElement.id || '';
         parent.show.CloseWindow("#" + iframeId);
-        if (tableid != '')
+        if (treegridid != '')
         {
-            parent.show.Refresh("#" + tableid);
+            parent.show.RefreshTreeGrid("#" + treegridid);
+        }
+        if (datagridid != '')
+        {
+            parent.show.RefreshDataGrid("#" + datagridid);
         }
     }
 </script>

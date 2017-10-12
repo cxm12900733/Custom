@@ -21,14 +21,24 @@ namespace Infrastructure.Entity
         /// </summary>
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { name = value ?? string.Empty; }
+        }
+        private string name = string.Empty;
 
         /// <summary>
         /// 描述
         /// </summary>
         [Required]
         [StringLength(200)]
-        public string Describe { get; set; }
+        public string Describe
+        {
+            get { return describe; }
+            set { describe = value ?? string.Empty; }
+        }
+        private string describe = string.Empty;
 
         /// <summary>
         /// 状态
@@ -44,7 +54,12 @@ namespace Infrastructure.Entity
         /// 菜单ID字符串
         /// </summary>
         [Required]
-        public string MenuIDs { get; set; }
+        public string MenuIDs
+        {
+            get { return menuids; }
+            set { menuids = value ?? string.Empty; }
+        }
+        private string menuids = string.Empty;
 
         /// <summary>
         /// 排序

@@ -50,8 +50,6 @@ namespace Website.Controllers
         public ActionResult Add(Sys_Role Sys_Role)
         {
             Sys_Role.AddTime = DateTime.Now;
-            Sys_Role.Describe = Sys_Role.Describe.IsEmpty() ? string.Empty : Sys_Role.Describe;
-            Sys_Role.MenuIDs = Sys_Role.MenuIDs.IsEmpty() ? string.Empty : Sys_Role.MenuIDs;
             this.Entity.Sys_Role.Add(Sys_Role);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
@@ -60,24 +58,24 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            var Sys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Id);
-            if (Sys_Menu==null)
+            var Sys_Role = this.Entity.Sys_Role.FirstOrDefault(o => o.ID == Id);
+            if (Sys_Role == null)
             {
                 return this.Error("数据不存在");
             }
-            this.ViewBag.Sys_Menu = Sys_Menu;
+            this.ViewBag.Sys_Role = Sys_Role;
             return View("Add");
         }
 
         [HttpPost]
-        public ActionResult Edit(Sys_Menu Sys_Menu)
+        public ActionResult Edit(Sys_Role Sys_Role)
         {
-            var baseSys_Menu = this.Entity.Sys_Menu.FirstOrDefault(o => o.ID == Sys_Menu.ID);
-            if (baseSys_Menu == null)
+            var baseSys_Role = this.Entity.Sys_Role.FirstOrDefault(o => o.ID == Sys_Role.ID);
+            if (baseSys_Role == null)
             {
                 return this.Error("数据不存在");
             }
-            baseSys_Menu = this.Request.ConvertRequestToModel<Sys_Menu>(baseSys_Menu,Sys_Menu);
+            baseSys_Role = this.Request.ConvertRequestToModel<Sys_Role>(baseSys_Role, Sys_Role);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }

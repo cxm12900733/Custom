@@ -42,8 +42,12 @@ show.CloseWindow = function (iframeId) {
     $(iframeId).window('close');
 }
 
-show.Refresh = function (id)
+show.RefreshDataGrid = function (id)
 {
+    $(id).datagrid('reload');
+}
+
+show.RefreshTreeGrid = function (id) {
     $(id).treegrid('reload');
 }
 

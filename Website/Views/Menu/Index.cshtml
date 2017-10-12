@@ -36,7 +36,7 @@
             <th data-options="field:'Url'">Url</th>
             <th data-options="field:'MenuType',formatter:MenuTypeName">类型</th>
             <th data-options="field:'Control',width:80">控制器</th>
-            <th data-options="field:'Action',width:80">操作</th>
+            <th data-options="field:'Method',width:80">操作</th>
             <th data-options="field:'UIEvent',width:80">UI事件</th>
             <th data-options="field:'State',width:60,formatter:show.StateName">状态</th>
             <th data-options="field:'Sort',width:60">排序</th>
@@ -85,6 +85,11 @@
             $.messager.alert('提示信息','请选择一行数据！','warning');
             return;
         }
+        if(Selected[0].ID == 1)
+        {
+            $.messager.alert('提示信息','不能编辑根目录','warning');
+            return;
+        }
 
         show.Windows({
             id:"ModelForm",
@@ -110,6 +115,11 @@
             if(n.children != null)
             {
                 alertMessage = '请先清空"'+n.Name+'"下面的子项';
+                return;
+            }
+            if(n.ID == 1)
+            {
+                alertMessage = '根目录不能删除';
                 return;
             }
             ids += n.ID + ",";

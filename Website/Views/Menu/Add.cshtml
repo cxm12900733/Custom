@@ -6,7 +6,7 @@
     var CustomIconListStr = Newtonsoft.Json.JsonConvert.SerializeObject(CustomIconList);
 }
 <!--预建窗口-->
-<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?tableid=tableList" class="panel-body panel-body-noborder window-body">
+<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?treegridid=tableList" class="panel-body panel-body-noborder window-body">
     <input type="hidden" name="id" value="@(Sys_Menu.ID)" />
     <table cellpadding=" 5">
         <tr>
@@ -42,7 +42,7 @@
             <td>控制器</td>
             <td><input id="Control" name="Control" value="@(Sys_Menu.Control)" class=" easyui-textbox" type="text" data-options=" required:true,width:'100%'" /></td>
             <td>操作</td>
-            <td><input id="Action" name="Action" value="@(Sys_Menu.Action)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
+            <td><input id="Method" name="Method" value="@(Sys_Menu.Method)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
         </tr>
         <tr>
             <td>图标样式</td>
@@ -92,19 +92,19 @@
     function FormRule(value)
     {
         if (value == "@(MenuType.Directory)") {
-            $("#Url,#Control,#Action,#UIEvent").textbox("disable");
+            $("#Url,#Control,#Method,#UIEvent").textbox("disable");
             $("#Icon").textbox("enable");
         }
         else if (value == "@(MenuType.Powers)") {
             $("#Url,#UIEvent,#Icon").textbox("disable");
-            $("#Control,#Action").textbox("enable");
+            $("#Control,#Method").textbox("enable");
         }
         else if (value == "@(MenuType.Interface)") {
             $("#UIEvent").textbox("disable");
-            $("#Url,#Control,#Action,#Icon").textbox("enable");
+            $("#Url,#Control,#Method,#Icon").textbox("enable");
         }
         else {
-            $("#Url,#Control,#Action,#UIEvent,#Icon").textbox("enable");
+            $("#Url,#Control,#Method,#UIEvent,#Icon").textbox("enable");
         }
     }
     //easyui解析器

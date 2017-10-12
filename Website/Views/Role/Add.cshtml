@@ -2,12 +2,12 @@
     Sys_Role Sys_Role = ViewBag.Sys_Role ?? new Sys_Role();
 }
 <!--预建窗口-->
-<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?tableid=tableList" class="panel-body panel-body-noborder window-body">
+<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?datagridid=tableList" class="panel-body panel-body-noborder window-body">
     <input type="hidden" name="id" value="@(Sys_Role.ID)" />
-    <table cellpadding="5" >
+    <table cellpadding="5">
         <tr>
-            <td style="width:100px;">名称</td>
-            <td style="width:250px;"><input id="Name" name="Name" value="@(Sys_Role.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
+            <td>名称</td>
+            <td style="width:290px;"><input id="Name" name="Name" value="@(Sys_Role.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
         </tr>
         <tr>
             <td>状态</td>

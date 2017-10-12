@@ -22,7 +22,12 @@ namespace Infrastructure.Entity
         /// </summary>
         [Required]
         [StringLength(20)]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { name = value ?? string.Empty; }
+        }
+        private string name = string.Empty;
 
         /// <summary>
         /// 菜单类型
@@ -35,42 +40,72 @@ namespace Infrastructure.Entity
         /// </summary>
         [Required]
         [StringLength(100)]
-        public string Url { get;set; }
+        public string Url 
+        {
+            get { return url; }
+            set { url = value ?? string.Empty; }
+        }
+        private string url = string.Empty;
 
         /// <summary>
         /// UI事件
         /// </summary>
         [Required]
         [StringLength(100)]
-        public string UIEvent { get; set; }
+        public string UIEvent
+        {
+            get { return uievent; }
+            set { uievent = value ?? string.Empty; }
+        }
+        private string uievent = string.Empty;
 
         /// <summary>
         /// 控制器
         /// </summary>
         [Required]
         [StringLength(100)]
-        public string Control { get; set; }
+        public string Control
+        {
+            get { return control; }
+            set { control = value ?? string.Empty; }
+        }
+        private string control = string.Empty;
 
         /// <summary>
         /// 操作
         /// </summary>
         [Required]
         [StringLength(100)]
-        public string Action { get; set; }
+        public string Method
+        {
+            get { return method; }
+            set { method = value ?? string.Empty; }
+        }
+        private string method = string.Empty;
 
         /// <summary>
         /// 描述
         /// </summary>
         [Required]
         [StringLength(200)]
-        public string Describe { get; set; }
+        public string Describe
+        {
+            get { return describe; }
+            set { describe = value ?? string.Empty; }
+        }
+        private string describe = string.Empty;
 
         /// <summary>
         /// 图标
         /// </summary>
         [Required]
         [StringLength(50)]
-        public string Icon { get; set; }
+        public string Icon
+        {
+            get { return icon; }
+            set { icon = value ?? string.Empty; }
+        }
+        private string icon = string.Empty;
 
         /// <summary>
         /// 排序

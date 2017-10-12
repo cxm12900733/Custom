@@ -47,20 +47,6 @@ namespace Website.Controllers
         public ActionResult Add(Sys_Menu Sys_Menu)
         {
             Sys_Menu.AddTime = DateTime.Now;
-            switch (Sys_Menu.MenuType)
-            {
-                case MenuType.Directory:
-                    Sys_Menu.Url = string.Empty;
-                    Sys_Menu.Control = string.Empty;
-                    Sys_Menu.Action = string.Empty;
-                    break;
-                case MenuType.Powers:
-                    Sys_Menu.Url = string.Empty;
-                    break;
-            }
-            Sys_Menu.Describe = Sys_Menu.Describe.IsEmpty() ? string.Empty : Sys_Menu.Describe;
-            Sys_Menu.Icon = Sys_Menu.Icon.IsEmpty() ? string.Empty : Sys_Menu.Icon;
-            Sys_Menu.UIEvent = Sys_Menu.UIEvent.IsEmpty() ? string.Empty : Sys_Menu.UIEvent;
             this.Entity.Sys_Menu.Add(Sys_Menu);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
