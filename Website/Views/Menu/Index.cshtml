@@ -1,7 +1,7 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 3).ToList();
 }
-<table id="tableList" class="easyui-treegrid" style="width:99%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
+<table id="tableList" class="easyui-treegrid" style="width:100%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
        data-options="
     url:'/Menu/Index',
     idField:'ID',

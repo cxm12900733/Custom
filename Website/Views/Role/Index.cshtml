@@ -1,31 +1,40 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 56).ToList();
 }
-<table id="tableList" class="easyui-datagrid" style="width:99%;" toolbar="#tb" title="角色管理" iconcls="icon-new"
-       data-options="
-    url:'/Role/Index',
-    idField:'ID',
-    singleSelect:false,
-    ctrlSelect:true,
-    pagination:true,
-    ">
-    <thead>
-        <tr>
-            <th data-options="field:'Name'">名称</th>
-            <th data-options="field:'State',formatter:show.StateName">类型</th>
-            <th data-options="field:'Sort',width:60">排序</th>
-            <th data-options="field:'Describe'">描述</th>
-            <th data-options="field:'AddTime',width:180,formatter:show.formatDate">添加时间</th>
-        </tr>
-    </thead>
-    <div id="tb" style="text-align:right;">
-        @foreach (var item in ButtonList)
-        {
-            <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.UIEvent)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
-        }
-    </div>
-</table>
-<div id="ModelForm"></div>
+<div id="cc" class="easyui-layout" style="width:100%;" data-options="height:$(window).height()-35">
+    <div data-options=" region:'west',border:false,split:true" style="width:500px;">
+    <table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
+            url:'/Role/Index',
+            idField:'ID',
+            singleSelect:false,
+            ctrlSelect:true,
+            pagination:true,
+            rownumbers:true,
+            pageSize:20,
+            striped:true,
+            height: $(window).height() - 35
+            ">
+        <thead>
+            <tr>
+                <th data-options="field:'Name',width:250">名称</th>
+                <th data-options="field:'State',width:40,formatter:show.StateName">类型</th>
+                <th data-options="field:'Sort',width:40">排序</th>
+                <th data-options="field:'AddTime',width:130,formatter:show.formatDate">添加时间</th>
+            </tr>
+        </thead>
+        <div id="tb" style="text-align:right;">
+            @foreach (var item in ButtonList)
+            {
+                <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.UIEvent)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
+            }
+        </div>
+    </table>
+    <div id="ModelForm"></div>
+</div>
+
+    <div data-options="region:'center'" style="padding:5px;background:#eee;"></div>
+</div>  
+
 @section Scripts{
 <script>
 
