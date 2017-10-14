@@ -24,7 +24,7 @@ namespace Website.Common
         }
 
         /// <summary>
-        /// 菜单树
+        /// 菜单列表
         /// </summary>
         public List<Sys_Menu> MenuTree
         {
