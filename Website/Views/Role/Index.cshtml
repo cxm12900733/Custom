@@ -43,7 +43,8 @@
     ctrlSelect:true,
     fitColumns:true,
     checkbox:true,
-    height: $(window).height() - 35
+    height: $(window).height() - 35,
+    cascadeCheck:false
     ">
             <thead>
                 <tr>
@@ -65,15 +66,18 @@
     $.parser.onComplete = function () {
         //console.log(json);
         var newdata = LoadJson(json,"3,6,8");
-        console.log(newdata);
-        $('#powerList').datagrid('loadData', newdata);
+        //console.log(newdata);
+        $('#powerList').treegrid('loadData', newdata);
         //$('#powerList').datagrid('reload');
         
-        
+        //console.log(json);
         //$('#tableList').datagrid('checkRow', 0);
         $('#tableList').datagrid({
             onSelect: function (index, row) {
-                console.log(row);
+                console.log(row.MenuIDs);
+                var ab = LoadJson(json,row.MenuIDs);
+                $('#powerList').treegrid('loadData', ab);
+                $('#powerList').treegrid('reload');
             }
         });
 
@@ -85,9 +89,7 @@
         var powersArr;
         if(powers!=null && powers != "")
         {
-            console.log(powers);
             powersArr = powers.split(",");
-            console.log(powersArr);
         }
         $.each(newdata.rows, function(i,n) {
             if(parseInt(n.ParentID) != 0){
@@ -102,7 +104,6 @@
             {
                 if(n.ID == parseInt(v))
                 {
-                    console.log(n.ID + "=" + parseInt(v));
                     newdata.rows[i].checked = true;
                 }
             });
