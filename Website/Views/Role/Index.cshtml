@@ -35,30 +35,15 @@
     </div>
 
     <div data-options="region:'center',border:false">
-        <table id="tableList" class="easyui-treegrid" style="width:95%;" title="权限列表"
+        <table id="powerList" class="easyui-treegrid" style="width:95%;" title="权限列表"
                data-options="
     idField:'ID',
     treeField:'Name',
     singleSelect:false,
     ctrlSelect:true,
     fitColumns:true,
-    data:json,
     checkbox:true,
-    height: $(window).height() - 35,
-    loadFilter :function(data)
-    {
-        $.each(data.rows, function(i,n) {
-            if(parseInt(n.ParentID) != 0){
-                data.rows[i]._parentId = n.ParentID;
-            }
-
-            if(n.Icon!='')
-            {
-                data.rows[i].iconCls = n.Icon;
-            }
-        });
-        return data;
-    },
+    height: $(window).height() - 35
     ">
             <thead>
                 <tr>
@@ -78,9 +63,13 @@
 
     //easyui解析器
     $.parser.onComplete = function () {
-        console.log(json);
+        //console.log(json);
         var newdata = LoadJson(json,"3,6,8");
         console.log(newdata);
+        $('#powerList').datagrid('loadData', newdata);
+        //$('#powerList').datagrid('reload');
+        
+        
         //$('#tableList').datagrid('checkRow', 0);
         $('#tableList').datagrid({
             onSelect: function (index, row) {
@@ -113,7 +102,8 @@
             {
                 if(n.ID == parseInt(v))
                 {
-                    newdata.rows[i].checkState = true;
+                    console.log(n.ID + "=" + parseInt(v));
+                    newdata.rows[i].checked = true;
                 }
             });
             
