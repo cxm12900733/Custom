@@ -28,6 +28,8 @@ namespace Infrastructure
         public DbSet<Sys_ManagePower> Sys_RoleMenu { get; set; }
         public DbSet<Sys_Role> Sys_Role { get; set; }
         public DbSet<Sys_Manage> Sys_Manage { get; set; }
+
+        public DbSet<Sys_Dept> Sys_Dept { get; set; }
         #endregion
 
         /// <summary>

@@ -5,7 +5,7 @@
 }
 <div id="cc" class="easyui-layout" style="width:100%;" data-options="height:$(window).height()-35">
     <div data-options=" region:'west',border:false,split:true" style="width:500px;">
-        <table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
+        <table id="tableList" class="easyui-datalist" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
             url:'/Role/Index',
             idField:'ID',
             singleSelect:false,
@@ -34,7 +34,7 @@
         <div id="ModelForm"></div>
     </div>
 
-    <div data-options="region:'center',border:false">
+    @*<div data-options="region:'center',border:false">
         <table id="powerList" class="easyui-treegrid" style="width:95%;" title="权限列表"
                data-options="
     idField:'ID',
@@ -55,7 +55,7 @@
             </thead>
         </table>
 
-    </div>
+    </div>*@
 </div>  
 
 @section Scripts{

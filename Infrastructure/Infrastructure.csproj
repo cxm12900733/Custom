@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Sys_Dept.cs" />
     <Compile Include="Extend\HttpRequestExtensions.cs" />
     <Compile Include="Factory\DBContextFactory.cs" />
     <Compile Include="EntityContext.cs" />
