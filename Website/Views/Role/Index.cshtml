@@ -4,8 +4,8 @@
     string json = Newtonsoft.Json.JsonConvert.SerializeObject(MenuTreeList);
 }
 <div id="cc" class="easyui-layout" style="width:100%;" data-options="height:$(window).height()-35">
-    <div data-options=" region:'west',border:false,split:true" style="width:500px;">
-        <table id="tableList" class="easyui-datalist" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
+    <div data-options=" region:'west',border:false,split:true" style="width:100%;">
+        <table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
             url:'/Role/Index',
             idField:'ID',
             singleSelect:false,
@@ -18,9 +18,10 @@
             ">
             <thead>
                 <tr>
-                    <th data-options="field:'Name',width:250">名称</th>
-                    <th data-options="field:'State',width:40,formatter:show.StateName">类型</th>
-                    <th data-options="field:'Sort',width:40">排序</th>
+                    <th data-options="field:'Name',width:200">名称</th>
+                    <th data-options="field:'State',width:60,formatter:show.StateName">状态</th>
+                    <th data-options="field:'Sort',width:60">排序</th>
+                    <th data-options="field:'Describe'">描述</th>
                     <th data-options="field:'AddTime',width:130,formatter:show.formatDate">添加时间</th>
                 </tr>
             </thead>
@@ -33,29 +34,6 @@
         </table>
         <div id="ModelForm"></div>
     </div>
-
-    @*<div data-options="region:'center',border:false">
-        <table id="powerList" class="easyui-treegrid" style="width:95%;" title="权限列表"
-               data-options="
-    idField:'ID',
-    treeField:'Name',
-    singleSelect:false,
-    ctrlSelect:true,
-    fitColumns:true,
-    checkbox:true,
-    height: $(window).height() - 35,
-    cascadeCheck:false
-    ">
-            <thead>
-                <tr>
-                    <th data-options="field:'Name'">名称</th>
-                    <th data-options="field:'MenuType',formatter:MenuTypeName">类型</th>
-                    <th data-options="field:'Describe'">描述</th>
-                </tr>
-            </thead>
-        </table>
-
-    </div>*@
 </div>  
 
 @section Scripts{
@@ -64,22 +42,18 @@
 
     //easyui解析器
     $.parser.onComplete = function () {
-        //console.log(json);
-        var newdata = LoadJson(json,"3,6,8");
-        //console.log(newdata);
-        $('#powerList').treegrid('loadData', newdata);
-        //$('#powerList').datagrid('reload');
+        //var newdata = LoadJson(json,"3,6,8");
+        //$('#powerList').treegrid('loadData', newdata);
+        ////$('#powerList').datagrid('reload');
         
-        //console.log(json);
-        //$('#tableList').datagrid('checkRow', 0);
-        $('#tableList').datagrid({
-            onSelect: function (index, row) {
-                console.log(row.MenuIDs);
-                var ab = LoadJson(json,row.MenuIDs);
-                $('#powerList').treegrid('loadData', ab);
-                $('#powerList').treegrid('reload');
-            }
-        });
+        //$('#tableList').datagrid({
+        //    onSelect: function (index, row) {
+        //        console.log(row.MenuIDs);
+        //        var ab = LoadJson(json,row.MenuIDs);
+        //        $('#powerList').treegrid('loadData', ab);
+        //        $('#powerList').treegrid('reload');
+        //    }
+        //});
 
     };
 
