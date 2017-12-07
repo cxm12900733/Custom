@@ -1,7 +1,6 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 56).ToList();
-    var MenuTreeList = new { rows = this.MenuTree.Where(o => o.State == State.Normal), total = 0 };
-    string json = Newtonsoft.Json.JsonConvert.SerializeObject(MenuTreeList);
+    
 }
 <div id="cc" class="easyui-layout" style="width:100%;" data-options="height:$(window).height()-35">
     <div data-options=" region:'west',border:false,split:true" style="width:100%;">
@@ -38,7 +37,7 @@
 
 @section Scripts{
 <script>
-    var json = @(this.Html.Raw(json));
+    @*var json = @(this.Html.Raw(json));*@
 
     //easyui解析器
     $.parser.onComplete = function () {
@@ -92,8 +91,8 @@
         show.Windows({
             id:"ModelForm",
             url:url,
-            width:400,
-            height:300,
+            width:800,
+            height:450,
             iconCls:iconCls,
             title:title
         });
@@ -141,26 +140,7 @@
         });
     }
 
-    function MenuTypeName(value,row,index)
-    {
-        var returl = "";
-        switch(value)
-        {
-            case 1:
-                returl = "目录"
-                break;
-            case 2:
-                returl = "介面"
-                break;
-            case 3:
-                returl = "按钮"
-                break;
-            case 4:
-                returl = "权限"
-                break;
-        }
-        return returl;
-    }
+    
 
 </script>
 }
