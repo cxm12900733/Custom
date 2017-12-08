@@ -195,13 +195,14 @@
     <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\css\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Content\JS\Custom\EasyUiExtend.js" />
     <Content Include="Content\JS\Custom\Common.js" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\css\jNotify.jquery.css" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\images\error.png" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\images\info.png" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\images\success.png" />
     <Content Include="Content\JS\Plugins\jquery.jnotify\jNotify.jquery.js" />
-    <Content Include="Views\Menu\Add.cshtml" />
+    <Content Include="Views\Menu\Edit.cshtml" />
     <Content Include="Views\Menu\Add2.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Shared\Succeed.cshtml" />
@@ -2319,7 +2320,7 @@
     <Content Include="Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Role\Add.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

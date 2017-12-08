@@ -8,6 +8,9 @@ namespace Website.Models.EasyUI
     public class TreeModel
     {
         public int ID { get; set; }
+        /// <summary>
+        /// 节点文本
+        /// </summary>
         public string text { get; set; }
         public int ParentID { get; set; }
         /// <summary>
@@ -18,6 +21,10 @@ namespace Website.Models.EasyUI
         /// 图标样式
         /// </summary>
         public string iconCls { get; set; } 
+        /// <summary>
+        /// 选中
+        /// </summary>
+        public bool @checked {get;set;}
     }
 
     public static class TreeModelList

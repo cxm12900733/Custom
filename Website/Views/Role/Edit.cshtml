@@ -1,0 +1,99 @@
+﻿@{
+    Sys_Role Sys_Role = ViewBag.Sys_Role ?? new Sys_Role();
+    var MenuTreeList = this.MenuTree.OrderBy(o=>o.Sort).Where(o => o.State == State.Normal).Select(o => new TreeModel { ID = o.ID, ParentID = o.ParentID, iconCls = o.Icon, state = "open", text = o.Name }).ToList();
+    if (!Sys_Role.MenuIDs.IsEmpty())
+    {
+
+        var CheckedStr = Sys_Role.MenuIDs.Split(',');
+        var CheckedList = Array.ConvertAll<string, int>(CheckedStr, delegate(string s) { return int.Parse(s); });
+        MenuTreeList.ForEach(o =>
+        {
+            if (CheckedList.Contains(o.ID))
+            {
+                o.@checked = true;
+            }
+        });
+    }
+    
+    string json = Newtonsoft.Json.JsonConvert.SerializeObject(MenuTreeList);
+}
+<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?datagridid=tableList" class="panel-body panel-body-noborder window-body">
+    <div id="cc" class="easyui-layout" data-options="height:$(window).height()-10">
+        <div data-options="region:'west',split:true" style="width:300px;">
+            <input type="hidden" name="id" value="@(Sys_Role.ID)" />
+            <input type="hidden" id="MenuIDs" name="MenuIDs" value="@(Sys_Role.MenuIDs)" />
+            <table cellpadding="5">
+                <tr>
+                    <td>名称</td>
+                    <td style="width:200px;"><input id="Name" name="Name" value="@(Sys_Role.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td>
+                        <select id="State" name="State" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
+                            <option value="@(State.Normal)" @(Sys_Role.State == State.Normal ? "selected" : "")>正常</option>
+                            <option value="@(State.Lock)" @(Sys_Role.State == State.Lock ? "selected" : "")>停用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>排序</td>
+                    <td><input id="Sort" name="Sort" value="@(Sys_Role.Sort)" class="easyui-numberspinner" data-options="required:true,min:0,width:'100%'"></td>
+                </tr>
+                <tr>
+                    <td>描述</td>
+                    <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Role.Describe)" class="easyui-textbox" data-options="multiline:true,height:60,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>添加时间</td>
+                    <td>
+                        @(Sys_Role.AddTime != DateTime.MinValue ? Sys_Role.AddTime.ToString("yyyy-MM-dd HH:mm") : "--")
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div data-options="region:'center'" style="width:300px;">
+            <ul id="powerList"></ul>
+        </div>
+        <div data-options="region:'south'" style="height:30px;text-align:right;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="javascript:$('#datafrom').submit()">提交</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:parent.UI.CloseWindow('#ModelForm')">关闭</a>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        var json = @(this.Html.Raw(json));
+        $(function () {
+            var treedata = utils.toTreeData(json,'ID','ParentID','children');
+            $('#powerList').tree({  
+                animate:true,
+                checkbox:true,
+                lines:true,
+                data:treedata
+            }); 
+        });
+
+        $("#datafrom").submit(function () {
+            if (!$('#datafrom').form('validate')) {
+                return false;
+            }
+            else
+            {
+                var nodes = $('#powerList').tree('getChecked');	
+                var MenuIDs = "";
+                if(nodes.length>0)
+                {
+                    var arrayObj = new Array();
+                    $.each( nodes, function(i, n){
+                        arrayObj.push(n.ID);
+                    });
+                    MenuIDs = arrayObj.join(',');
+                }
+                $("#MenuIDs").val(MenuIDs);
+            }
+            
+        });
+    </script>
+}

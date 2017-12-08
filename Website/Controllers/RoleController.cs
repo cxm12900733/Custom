@@ -28,12 +28,12 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult Index(Paging Paging, Sys_Role Sys_Role)
+        public ActionResult TableList(Paging Paging, Sys_Role Sys_Role)
         {
             var query = this.Entity.Sys_Role.AsQueryable();
-            if (!Sys_Role.Name.IsEmpty())
+            if (!Sys_Role.Name.IsNullOrEmpty())
             {
-                query.Where(o => o.Name == Sys_Role.Name);
+                query = query.Where(o => o.Name == Sys_Role.Name);
             }
             List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Take(Paging.Rows).Skip(Paging.Skip).ToList();
             int Count = this.Entity.Sys_Role.Count();
@@ -43,7 +43,7 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            return View();
+            return View("Edit");
         }
 
         [HttpPost]
@@ -64,7 +64,7 @@ namespace Website.Controllers
                 return this.Error("数据不存在");
             }
             this.ViewBag.Sys_Role = Sys_Role;
-            return View("Add");
+            return View();
         }
 
         [HttpPost]

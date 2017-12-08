@@ -8,27 +8,27 @@ namespace Infrastructure
 {
     public static class BaseType
     {
-        public static bool IsEmpty(this string val)
+        public static bool IsNullOrEmpty(this string val)
         {
             return string.IsNullOrEmpty(val);
         }
 
-        public static bool IsZero(this int val)
+        public static bool IsNullOrEmpty(this int val)
         {
             return val == 0 ? true : false;
         }
 
-        public static bool IsZero(this decimal val)
+        public static bool IsNullOrEmpty(this decimal val)
         {
             return val == decimal.Zero ? true : false;
         }
 
-        public static bool IsZero(this byte val)
+        public static bool IsNullOrEmpty(this byte val)
         {
             return val == 0 ? true : false;
         }
 
-        public static bool IsEmpty(this Guid val)
+        public static bool IsNullOrEmpty(this Guid val)
         {
             return val == null || val == Guid.Empty ? true : false;
         }

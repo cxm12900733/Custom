@@ -28,7 +28,7 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult Index(Sys_Menu Sys_Menu)
+        public ActionResult TableList(Sys_Menu Sys_Menu)
         {
             List<Sys_Menu> Base_MenuList = this.Entity.Sys_Menu.OrderBy(o => o.Sort).ToList();
             return this.ToTableJson(Base_MenuList);
@@ -40,13 +40,30 @@ namespace Website.Controllers
             var Sys_Menu = new Sys_Menu();
             Sys_Menu.ParentID = ParentID;
             this.ViewBag.Sys_Menu = Sys_Menu;
-            return View();
+            return View("Edit");
         }
 
         [HttpPost]
         public ActionResult Add(Sys_Menu Sys_Menu)
         {
             Sys_Menu.AddTime = DateTime.Now;
+            switch(Sys_Menu.MenuType)
+            {
+                case MenuType.Directory:
+                    Sys_Menu.Control = string.Empty;
+                    Sys_Menu.Method = string.Empty;
+                    Sys_Menu.UIEvent = string.Empty;
+                    Sys_Menu.Url = string.Empty;
+                    break;
+                case MenuType.Powers:
+                    Sys_Menu.Url = string.Empty;
+                    Sys_Menu.UIEvent = string.Empty;
+                    Sys_Menu.Icon = string.Empty;
+                    break;
+                case MenuType.Interface:
+                    Sys_Menu.UIEvent = string.Empty;
+                    break;  
+            }
             this.Entity.Sys_Menu.Add(Sys_Menu);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
@@ -61,7 +78,7 @@ namespace Website.Controllers
                 return this.Error("数据不存在");
             }
             this.ViewBag.Sys_Menu = Sys_Menu;
-            return View("Add");
+            return View();
         }
 
         [HttpPost]
@@ -73,6 +90,23 @@ namespace Website.Controllers
                 return this.Error("数据不存在");
             }
             baseSys_Menu = this.Request.ConvertRequestToModel<Sys_Menu>(baseSys_Menu,Sys_Menu);
+            switch (baseSys_Menu.MenuType)
+            {
+                case MenuType.Directory:
+                    baseSys_Menu.Control = string.Empty;
+                    baseSys_Menu.Method = string.Empty;
+                    baseSys_Menu.UIEvent = string.Empty;
+                    baseSys_Menu.Url = string.Empty;
+                    break;
+                case MenuType.Powers:
+                    baseSys_Menu.Url = string.Empty;
+                    baseSys_Menu.UIEvent = string.Empty;
+                    baseSys_Menu.Icon = string.Empty;
+                    break;
+                case MenuType.Interface:
+                    baseSys_Menu.UIEvent = string.Empty;
+                    break;
+            }
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }

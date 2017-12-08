@@ -5,10 +5,9 @@
 <div id="cc" class="easyui-layout" style="width:100%;" data-options="height:$(window).height()-35">
     <div data-options=" region:'west',border:false,split:true" style="width:100%;">
         <table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
-            url:'/Role/Index',
+            url:'/Role/TableList',
             idField:'ID',
             singleSelect:false,
-            ctrlSelect:true,
             pagination:true,
             rownumbers:true,
             pageSize:20,
@@ -37,62 +36,14 @@
 
 @section Scripts{
 <script>
-    @*var json = @(this.Html.Raw(json));*@
-
-    //easyui解析器
-    $.parser.onComplete = function () {
-        //var newdata = LoadJson(json,"3,6,8");
-        //$('#powerList').treegrid('loadData', newdata);
-        ////$('#powerList').datagrid('reload');
-        
-        //$('#tableList').datagrid({
-        //    onSelect: function (index, row) {
-        //        console.log(row.MenuIDs);
-        //        var ab = LoadJson(json,row.MenuIDs);
-        //        $('#powerList').treegrid('loadData', ab);
-        //        $('#powerList').treegrid('reload');
-        //    }
-        //});
-
-    };
-
-    function LoadJson(data,powers)
-    {
-        var newdata = data;
-        var powersArr;
-        if(powers!=null && powers != "")
-        {
-            powersArr = powers.split(",");
-        }
-        $.each(newdata.rows, function(i,n) {
-            if(parseInt(n.ParentID) != 0){
-                newdata.rows[i]._parentId = n.ParentID;
-            }
-
-            if(n.Icon!='')
-            {
-                newdata.rows[i].iconCls = n.Icon;
-            }
-            $.each(powersArr,function(k,v)
-            {
-                if(n.ID == parseInt(v))
-                {
-                    newdata.rows[i].checked = true;
-                }
-            });
-            
-        });
-
-        return newdata;
-    }
 
     function ShowAdd(url,title,iconCls)
     {
-        show.Windows({
+        UI.Windows({
             id:"ModelForm",
             url:url,
-            width:800,
-            height:450,
+            width:600,
+            height:500,
             iconCls:iconCls,
             title:title
         });
@@ -107,11 +58,11 @@
             return;
         }
 
-        show.Windows({
+        UI.Windows({
             id:"ModelForm",
             url:url + "?Id="+ Selected[0].ID,
-            width:400,
-            height:300,
+            width: 600,
+            height: 500,
             iconCls:iconCls,
             title:title
         });

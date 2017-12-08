@@ -3,7 +3,7 @@
 }
 <table id="tableList" class="easyui-treegrid" style="width:100%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
        data-options="
-    url:'/Menu/Index',
+    url:'/Menu/TableList',
     idField:'ID',
     treeField:'Name',
     singleSelect:false,
@@ -11,23 +11,13 @@
     fitColumns:true,
     loadFilter :function(data)
     {
-        $.each(data.rows, function(i,n) {
-            if(parseInt(n.ParentID) != 0){
-                data.rows[i]._parentId = n.ParentID;
-            }
-            
-            if(n.Icon!='')
-            {
-                data.rows[i].iconCls = n.Icon;
-            }
-        });
-        return data;
+       return UI.LoadTreegrId(data);
     },
     onLoadSuccess: function(row, data)
     {
-       $(this).treegrid('collapseAll');
-       var root = $(this).treegrid('getRoot');
-       $(this).treegrid('expand',root.ID);
+       //$(this).treegrid('collapseAll');
+       //var root = $(this).treegrid('getRoot');
+       //$(this).treegrid('expand',root.ID);
     }
     ">
     <thead>
@@ -67,7 +57,7 @@
         //    $.messager.alert('提示信息','请选择一行数据！','warning');
         //    return;
         //}
-        show.Windows({
+        UI.Windows({
             id:"ModelForm",
             url:url,
             width:580,
@@ -91,7 +81,7 @@
             return;
         }
 
-        show.Windows({
+        UI.Windows({
             id:"ModelForm",
             url:url + "?Id="+ Selected[0].ID,
             width:580,

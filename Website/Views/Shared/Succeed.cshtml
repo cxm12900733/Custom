@@ -43,14 +43,14 @@
     function CloseWindow()
     {
         var iframeId = window.frameElement && window.frameElement.id || '';
-        parent.show.CloseWindow("#" + iframeId);
+        parent.UI.CloseWindow("#" + iframeId);
         if (treegridid != '')
         {
-            parent.show.RefreshTreeGrid("#" + treegridid);
+            parent.UI.RefreshTreeGrid("#" + treegridid);
         }
         if (datagridid != '')
         {
-            parent.show.RefreshDataGrid("#" + datagridid);
+            parent.UI.RefreshDataGrid("#" + datagridid);
         }
     }
 </script>

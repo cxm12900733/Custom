@@ -16,41 +16,6 @@ show.formatDate = function (value, row, index) {
     }
 }
 
-show.Windows = function (params){
-    //id, url, width, height, iconCls, title
-    if (!$.isEmptyObject(params.id))
-    {
-        var url = $.isEmptyObject(params.url) ? "" : params.url;
-        var content = '<iframe id="' + params.id + '" src="' + url + '" width="100%" height="98%" frameborder="0" scrolling="no"></iframe>';
-        $('#' + params.id).window({
-            closed: false,
-            cache: false,
-            content: content,
-            iconCls: $.isEmptyObject(params.iconCls) ? null : params.iconCls,
-            title: $.isEmptyObject(params.title) ? "系统弹窗" : params.title,
-            modal: true,
-            width: !$.isNumeric(params.width) ? "auto" : params.width,
-            height: !$.isNumeric(params.height) ? "auto" : params.height,
-            minimizable: false,
-            maximizable: false,
-            collapsible: false,
-        }).dialog("center");
-    }
-}
-
-show.CloseWindow = function (iframeId) {
-    $(iframeId).window('close');
-}
-
-show.RefreshDataGrid = function (id)
-{
-    $(id).datagrid('reload');
-}
-
-show.RefreshTreeGrid = function (id) {
-    $(id).treegrid('reload');
-}
-
 show.StateName = function (value, row, index) {
     var returl = "";
     switch (value) {
