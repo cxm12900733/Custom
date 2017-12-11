@@ -23,17 +23,13 @@
                     <th data-options="field:'Sort',width:60">排序</th>
                     <th data-options="field:'Describe'">描述</th>
                     <th data-options="field:'AddTime',width:130,formatter:show.formatDate">添加时间</th>
-                    <th data-options="field:'X',width:60,formatter:">操作</th>
+                    <th data-options="field:'X',width:60">操作</th>
                 </tr>
             </thead>
             <div id="tb">
                 @foreach (var item in TableButtonList)
                 {
-                    <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.UIEvent)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
-                }
-                @foreach (var item in RowButtonList)
-                {
-                    item.UIEvent
+                    <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
                 }
             </div>
         </table>
@@ -44,7 +40,7 @@
 @section Scripts{
 <script>
 
-    function ShowAdd(url,title,iconCls)
+    function Add(url,title,iconCls)
     {
         UI.Windows({
             id:"ModelForm",
@@ -56,7 +52,7 @@
         });
     }
 
-    function ShowEdit(url,title,iconCls)
+    function Edit(url,title,iconCls)
     {
         var Selected = $('#tableList').treegrid('getSelections');
         if(Selected == null)

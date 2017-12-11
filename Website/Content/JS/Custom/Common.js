@@ -17,14 +17,24 @@ show.formatDate = function (value, row, index) {
 }
 
 show.StateName = function (value, row, index) {
-    var returl = "";
+    var result = "";
     switch (value) {
         case 1:
-            returl = "正常"
+            result = "正常"
             break;
         case 2:
-            returl = "停用"
+            result = "停用"
             break;
     }
-    return returl;
+    return result;
+}
+
+show.RowButton = function (value, row, index) {
+    var result = "";
+    if (rowButtons.length > 0) {
+        $.each(rowButtons, function (i, n) {
+            result += '<a onclick="">' + n.Name + '</a>'
+        });
+    }
+    return result;
 }

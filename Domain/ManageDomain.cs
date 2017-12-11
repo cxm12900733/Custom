@@ -55,7 +55,7 @@ namespace Domain
         public static ManageDomain Create(string UserName, string Mobile, string Email, string Password)
         {
             //1.账户名、手机号码、邮箱必须要填一个 
-            if (UserName.IsEmpty() && Mobile.IsEmpty() && Email.IsEmpty())
+            if (UserName.IsNullOrEmpty() && Mobile.IsNullOrEmpty() && Email.IsNullOrEmpty())
             {
                 throw new Exception("请填写账户名、手机号码、邮箱中的一个");
             }
