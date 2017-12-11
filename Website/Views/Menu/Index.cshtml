@@ -1,5 +1,8 @@
 ﻿@{
-    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 3).ToList();
+    var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 3).ToList();
+    var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 3).ToList();
+    var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).ToList();
+    
 }
 <table id="tableList" class="easyui-treegrid" style="width:100%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
        data-options="
@@ -7,8 +10,8 @@
     idField:'ID',
     treeField:'Name',
     singleSelect:false,
-    ctrlSelect:true,
     fitColumns:true,
+    striped:true,
     loadFilter :function(data)
     {
        return UI.LoadTreegrId(data);
@@ -22,22 +25,22 @@
     ">
     <thead>
         <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
             <th data-options="field:'Name'">名称</th>
             <th data-options="field:'Url'">Url</th>
             <th data-options="field:'MenuType',formatter:MenuTypeName">类型</th>
             <th data-options="field:'Control',width:80">控制器</th>
             <th data-options="field:'Method',width:80">操作</th>
-            <th data-options="field:'UIEvent',width:80">UI事件</th>
             <th data-options="field:'State',width:60,formatter:show.StateName">状态</th>
             <th data-options="field:'Sort',width:60">排序</th>
             <th data-options="field:'Describe'">描述</th>
             <th data-options="field:'AddTime',width:180,formatter:show.formatDate">添加时间</th>
         </tr>
     </thead>
-    <div id="tb" style="text-align:right;">
-        @foreach (var item in ButtonList)
+    <div id="tb">
+        @foreach (var item in TableButtonList)
         {
-            <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.UIEvent)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
+            <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
         }
     </div>
 </table>
@@ -46,7 +49,7 @@
 <script>
 
 
-    function ShowAdd(url,title,iconCls)
+    function Add(url,title,iconCls)
     {
         var Selected = $('#tableList').treegrid('getSelections');
         if(Selected.length == 1){ 
@@ -67,7 +70,7 @@
         });
     }
 
-    function ShowEdit(url,title,iconCls)
+    function Edit(url,title,iconCls)
     {
         var Selected = $('#tableList').treegrid('getSelections');
         if(Selected == null)

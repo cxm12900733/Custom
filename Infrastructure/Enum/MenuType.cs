@@ -22,13 +22,18 @@ namespace Infrastructure
         Interface = 2,
 
         /// <summary>
-        /// 按钮
+        /// 表按钮
         /// </summary>
-        Button = 3,
+        TableButton = 3,
 
         /// <summary>
         /// 权限
         /// </summary>
         Powers = 4,
+
+        /// <summary>
+        /// 行按钮
+        /// </summary>
+        RowButton = 5,
     }
 }

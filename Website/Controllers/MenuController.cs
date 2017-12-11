@@ -52,17 +52,12 @@ namespace Website.Controllers
                 case MenuType.Directory:
                     Sys_Menu.Control = string.Empty;
                     Sys_Menu.Method = string.Empty;
-                    Sys_Menu.UIEvent = string.Empty;
                     Sys_Menu.Url = string.Empty;
                     break;
                 case MenuType.Powers:
                     Sys_Menu.Url = string.Empty;
-                    Sys_Menu.UIEvent = string.Empty;
                     Sys_Menu.Icon = string.Empty;
-                    break;
-                case MenuType.Interface:
-                    Sys_Menu.UIEvent = string.Empty;
-                    break;  
+                    break; 
             }
             this.Entity.Sys_Menu.Add(Sys_Menu);
             this.Entity.SaveChanges();
@@ -95,16 +90,11 @@ namespace Website.Controllers
                 case MenuType.Directory:
                     baseSys_Menu.Control = string.Empty;
                     baseSys_Menu.Method = string.Empty;
-                    baseSys_Menu.UIEvent = string.Empty;
                     baseSys_Menu.Url = string.Empty;
                     break;
                 case MenuType.Powers:
                     baseSys_Menu.Url = string.Empty;
-                    baseSys_Menu.UIEvent = string.Empty;
                     baseSys_Menu.Icon = string.Empty;
-                    break;
-                case MenuType.Interface:
-                    baseSys_Menu.UIEvent = string.Empty;
                     break;
             }
             this.Entity.SaveChanges();

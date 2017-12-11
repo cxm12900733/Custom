@@ -48,18 +48,6 @@ namespace Infrastructure.Entity
         private string url = string.Empty;
 
         /// <summary>
-        /// UI事件
-        /// </summary>
-        [Required]
-        [StringLength(100)]
-        public string UIEvent
-        {
-            get { return uievent; }
-            set { uievent = value ?? string.Empty; }
-        }
-        private string uievent = string.Empty;
-
-        /// <summary>
         /// 控制器
         /// </summary>
         [Required]

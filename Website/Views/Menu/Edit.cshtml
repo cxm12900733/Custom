@@ -26,8 +26,9 @@
                 <select id="MenuType" name="MenuType" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
                     <option value="@(MenuType.Directory)" @(Sys_Menu.MenuType == MenuType.Directory ? "selected" : "")>目录</option>
                     <option value="@(MenuType.Interface)" @(Sys_Menu.MenuType == MenuType.Interface ? "selected" : "")>介面</option>
-                    <option value="@(MenuType.Button)" @(Sys_Menu.MenuType == MenuType.Button ? "selected" : "")>按钮</option>
+                    <option value="@(MenuType.TableButton)" @(Sys_Menu.MenuType == MenuType.TableButton ? "selected" : "")>表按钮</option>
                     <option value="@(MenuType.Powers)" @(Sys_Menu.MenuType == MenuType.Powers ? "selected" : "")>权限</option>
+                    <option value="@(MenuType.RowButton)" @(Sys_Menu.MenuType == MenuType.RowButton ? "selected" : "")>行按钮</option>
                 </select>
             </td>
             <td>菜单状态</td>
@@ -49,14 +50,12 @@
             <td>
                 <input id="Icon" name="Icon" value="@(Sys_Menu.Icon)" class="easyui-combobox" type="text" data-options="showItemIcon: true,data:CustomIconJson,width:'100%'" />
             </td>
-            <td>UI事件</td>
-            <td><input id="UIEvent" name="UIEvent" value="@(Sys_Menu.UIEvent)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
+            <td>排序</td>
+            <td><input id="Sort" name="Sort" value="@(Sys_Menu.Sort)" class="easyui-numberspinner" data-options="required:true,min:0,width:'100%'"></td>
         </tr>
         <tr>
             <td>菜单Url</td>
-            <td><input id="Url" name="Url" value="@(Sys_Menu.Url)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
-            <td>菜单排序</td>
-            <td><input id="Sort" name="Sort" value="@(Sys_Menu.Sort)" class="easyui-numberspinner" data-options="required:true,min:0,width:'100%'"></td>
+            <td colspan="3"><input id="Url" name="Url" value="@(Sys_Menu.Url)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
         </tr>
         <tr>
             <td>描述</td>

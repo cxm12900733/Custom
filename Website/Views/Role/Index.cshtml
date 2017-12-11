@@ -1,6 +1,7 @@
 ﻿@{
-    var ButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.Button && o.ParentID == 56).ToList();
-    
+    var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 56).ToList();
+    var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 56).ToList();
+    var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 56).ToList();
 }
 <div id="cc" class="easyui-layout" style="width:100%;" data-options="height:$(window).height()-35">
     <div data-options=" region:'west',border:false,split:true" style="width:100%;">
@@ -16,17 +17,23 @@
             ">
             <thead>
                 <tr>
+                    <th data-options="field:'ck',checkbox:true"></th>
                     <th data-options="field:'Name',width:200">名称</th>
                     <th data-options="field:'State',width:60,formatter:show.StateName">状态</th>
                     <th data-options="field:'Sort',width:60">排序</th>
                     <th data-options="field:'Describe'">描述</th>
                     <th data-options="field:'AddTime',width:130,formatter:show.formatDate">添加时间</th>
+                    <th data-options="field:'X',width:60,formatter:">操作</th>
                 </tr>
             </thead>
-            <div id="tb" style="text-align:right;">
-                @foreach (var item in ButtonList)
+            <div id="tb">
+                @foreach (var item in TableButtonList)
                 {
                     <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.UIEvent)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
+                }
+                @foreach (var item in RowButtonList)
+                {
+                    item.UIEvent
                 }
             </div>
         </table>
