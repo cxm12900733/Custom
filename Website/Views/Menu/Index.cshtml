@@ -1,54 +1,54 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 3).ToList();
     var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 3).ToList();
-    var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).Select(o => new { o.Name, o.Method }).ToList();
+    var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).Select(o => new {o.ID, o.Name, o.Method,o.Icon,o.Url }).ToList();
     string RowButtonJson = Newtonsoft.Json.JsonConvert.SerializeObject(RowButtonList);
 }
-<table id="tableList" class="easyui-treegrid" style="width:100%;" toolbar="#tb" title="菜单管理" iconcls="icon-new"
-       data-options="
-    url:'/Menu/TableList',
-    idField:'ID',
-    treeField:'Name',
-    singleSelect:false,
-    fitColumns:true,
-    striped:true,
-    loadFilter :function(data)
-    {
-       return UI.LoadTreegrId(data);
-    },
-    onLoadSuccess: function(row, data)
-    {
-       //$(this).treegrid('collapseAll');
-       //var root = $(this).treegrid('getRoot');
-       //$(this).treegrid('expand',root.ID);
-    }
-    ">
+<table id="tableList" class="easyui-datagrid" toolbar="#tb" title="菜单管理" iconcls="icon-new" data-options="height:$(window).height()-25">
     <thead>
         <tr>
-            <th data-options="field:'ck',checkbox:true"></th>
-            <th data-options="field:'Name'">名称</th>
-            <th data-options="field:'Url'">Url</th>
-            <th data-options="field:'MenuType',formatter:MenuTypeName">类型</th>
+            <th data-options="field:'ck',width:20,checkbox:true"></th>
+            <th data-options="field:'Name',width:150">名称</th>
+            <th data-options="field:'Url',width:150">Url</th>
+            <th data-options="field:'MenuType',width:40,formatter:MenuTypeName">类型</th>
             <th data-options="field:'Control',width:80">控制器</th>
             <th data-options="field:'Method',width:80">操作</th>
-            <th data-options="field:'State',width:60,formatter:show.StateName">状态</th>
-            <th data-options="field:'Sort',width:60">排序</th>
-            <th data-options="field:'Describe'">描述</th>
-            <th data-options="field:'AddTime',width:180,formatter:show.formatDate">添加时间</th>
-            <th data-options="field:'X',width:60,formatter:show.RowButton">操作</th>
+            <th data-options="field:'State',width:30,formatter:show.StateName">状态</th>
+            <th data-options="field:'Sort',width:30">排序</th>
+            <th data-options="field:'AddTime',width:120,formatter:show.formatDate">添加时间</th>
+            <th data-options="field:'Operate',width:60">操作</th>
         </tr>
     </thead>
-    <div id="tb">
-        @foreach (var item in TableButtonList)
-        {
-            <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
-        }
-    </div>
 </table>
+<div id="tb">
+    @foreach (var item in TableButtonList)
+    {
+        <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
+    }
+</div>
+
 <div id="ModelForm"></div>
 @section Scripts{
 <script>
     var rowButtons = @(Html.Raw(RowButtonJson));
+    $('#tableList').treegrid({    
+        url:'/Menu/TableList',
+        idField:'ID',
+        treeField:'Name',
+        fitColumns:true,
+        striped:true,
+        checkOnSelect:false,
+        selectOnCheck:false,
+        loadFilter :function(data)
+        {
+            data = UI.RowButton(rowButtons,data);
+            return UI.LoadTreegrId(data);
+        },
+        onLoadSuccess: function(row, data)
+        {
+            UI.ShowRowButton(rowButtons,data);
+        }  
+    });  
 
     function Add(url,title,iconCls)
     {
@@ -56,11 +56,6 @@
         if(Selected.length == 1){ 
             url += "?ParentID="+ Selected[0].ID 
         }
-        //else if(Selected.length > 1)
-        //{
-        //    $.messager.alert('提示信息','请选择一行数据！','warning');
-        //    return;
-        //}
         UI.Windows({
             id:"ModelForm",
             url:url,
@@ -71,15 +66,9 @@
         });
     }
 
-    function Edit(url,title,iconCls)
+    function Edit(url,title,iconCls,ID)
     {
-        var Selected = $('#tableList').treegrid('getSelections');
-        if(Selected == null)
-        {
-            $.messager.alert('提示信息','请选择一行数据！','warning');
-            return;
-        }
-        if(Selected[0].ID == 1)
+        if(ID == 1)
         {
             $.messager.alert('提示信息','不能编辑根目录','warning');
             return;
@@ -87,7 +76,7 @@
 
         UI.Windows({
             id:"ModelForm",
-            url:url + "?Id="+ Selected[0].ID,
+            url:url + "?Id="+ ID,
             width:580,
             height:350,
             iconCls:iconCls,
@@ -97,15 +86,15 @@
 
     function Del(url,title,iconCls)
     {
-        var Selected = $('#tableList').treegrid('getSelections');
-        var ids = "";
-        if(Selected == null)
+        var alertMessage = "";
+        var valArr = new Array;
+        var Selected = $('#tableList').treegrid('getChecked');
+        if(Selected.length <= 0)
         {
             $.messager.alert('提示信息','请至少选择一行数据！','warning');
             return;
         }
-        var alertMessage = "";
-        $.each( Selected, function(i, n){
+        $.each(Selected,function(i, n){
             if(n.children != null)
             {
                 alertMessage = '请先清空"'+n.Name+'"下面的子项';
@@ -116,14 +105,14 @@
                 alertMessage = '根目录不能删除';
                 return;
             }
-            ids += n.ID + ",";
+            valArr[i] = n.ID;
         });
         if(alertMessage != "")
         {
             $.messager.alert('提示信息',alertMessage,'warning');
             return;
         }
-        ids = ids.substr(0, ids.length-1);
+        var ids = valArr.join(',');
         $.messager.confirm('确认对话框',"确认要删除数据？", function(r){
             if (r){
                 $.post(url, { ids: ids},function(result){

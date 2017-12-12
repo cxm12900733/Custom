@@ -81,3 +81,22 @@ UI.LoadTreegrId = function (data) {
 
 //    return newdata;
 //}
+
+UI.RowButton = function (rowButtons,data) {
+    if (rowButtons.length > 0) {
+        $.each(data.rows, function (k, v) {
+            $.each(rowButtons, function (i, n) {
+                data.rows[k].Operate = '<a onclick="' + n.Method + '(\'' + n.Url + '\',\'' + n.Name + '\',\'' + n.Icon + '\',\''+v.ID+'\')" class="' + n.Method + '">' + n.Name + '</a>';
+            });
+        });
+    }
+    return data;
+}
+
+UI.ShowRowButton = function (rowButtons, data) {
+    if (rowButtons.length > 0) {
+        $.each(rowButtons, function (i, n) {
+            $("." + n.Method).linkbutton({ text: n.Name, plain: true, iconCls: n.Icon });
+        });
+    }
+}

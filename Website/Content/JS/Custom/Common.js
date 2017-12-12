@@ -29,12 +29,3 @@ show.StateName = function (value, row, index) {
     return result;
 }
 
-show.RowButton = function (value, row, index) {
-    var result = "";
-    if (rowButtons.length > 0) {
-        $.each(rowButtons, function (i, n) {
-            result += '<a onclick="">' + n.Name + '</a>'
-        });
-    }
-    return result;
-}
