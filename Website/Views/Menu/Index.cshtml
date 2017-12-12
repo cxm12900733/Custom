@@ -1,8 +1,8 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 3).ToList();
     var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 3).ToList();
-    var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).Select(o => new {o.ID, o.Name, o.Method,o.Icon,o.Url }).ToList();
-    string RowButtonJson = Newtonsoft.Json.JsonConvert.SerializeObject(RowButtonList);
+    //var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).Select(o => new {o.ID, o.Name, o.Method,o.Icon,o.Url }).ToList();
+    //string RowButtonJson = Newtonsoft.Json.JsonConvert.SerializeObject(RowButtonList);
 }
 <table id="tableList" class="easyui-datagrid" toolbar="#tb" title="菜单管理" iconcls="icon-new" data-options="height:$(window).height()-25">
     <thead>
@@ -16,7 +16,7 @@
             <th data-options="field:'State',width:30,formatter:show.StateName">状态</th>
             <th data-options="field:'Sort',width:30">排序</th>
             <th data-options="field:'AddTime',width:120,formatter:show.formatDate">添加时间</th>
-            <th data-options="field:'Operate',width:60">操作</th>
+            @*<th data-options="field:'Operate',width:60">操作</th>*@
         </tr>
     </thead>
 </table>
@@ -30,7 +30,7 @@
 <div id="ModelForm"></div>
 @section Scripts{
 <script>
-    var rowButtons = @(Html.Raw(RowButtonJson));
+    @*var rowButtons = @(Html.Raw(RowButtonJson));*@
     $('#tableList').treegrid({    
         url:'/Menu/TableList',
         idField:'ID',
@@ -41,12 +41,12 @@
         selectOnCheck:false,
         loadFilter :function(data)
         {
-            data = UI.RowButton(rowButtons,data);
+            //data = UI.RowButton(rowButtons,data);
             return UI.LoadTreegrId(data);
         },
         onLoadSuccess: function(row, data)
         {
-            UI.ShowRowButton(rowButtons,data);
+            //UI.ShowRowButton(rowButtons,data);
         }  
     });  
 
@@ -66,9 +66,15 @@
         });
     }
 
-    function Edit(url,title,iconCls,ID)
+    function Edit(url,title,iconCls)
     {
-        if(ID == 1)
+        var Selected = $('#tableList').treegrid('getSelections');
+        if(Selected.length <= 0)
+        {
+            $.messager.alert('提示信息','请选择一行数据！','warning');
+            return;
+        }
+        if(Selected[0].ID == 1)
         {
             $.messager.alert('提示信息','不能编辑根目录','warning');
             return;
@@ -76,7 +82,7 @@
 
         UI.Windows({
             id:"ModelForm",
-            url:url + "?Id="+ ID,
+            url:url + "?Id="+ Selected[0].ID,
             width:580,
             height:350,
             iconCls:iconCls,
@@ -91,7 +97,7 @@
         var Selected = $('#tableList').treegrid('getChecked');
         if(Selected.length <= 0)
         {
-            $.messager.alert('提示信息','请至少选择一行数据！','warning');
+            $.messager.alert('提示信息','请至少勾选一行数据！','warning');
             return;
         }
         $.each(Selected,function(i, n){

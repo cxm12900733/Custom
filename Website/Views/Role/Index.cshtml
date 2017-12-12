@@ -3,25 +3,15 @@
     var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 56).ToList();
     var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 56).ToList();
 }
-<table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new" data-options="
-    url:'/Role/TableList',
-    idField:'ID',
-    singleSelect:false,
-    pagination:true,
-    rownumbers:true,
-    pageSize:20,
-    striped:true,
-    height: $(window).height() - 25
-    ">
+<table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new">
     <thead>
         <tr>
             <th data-options="field:'ck',checkbox:true"></th>
-            <th data-options="field:'Name',width:200">名称</th>
-            <th data-options="field:'State',width:60,formatter:show.StateName">状态</th>
-            <th data-options="field:'Sort',width:60">排序</th>
+            <th data-options="field:'Name',width:150">名称</th>
+            <th data-options="field:'State',width:40,formatter:show.StateName">状态</th>
+            <th data-options="field:'Sort',width:30">排序</th>
             <th data-options="field:'Describe'">描述</th>
             <th data-options="field:'AddTime',width:130,formatter:show.formatDate">添加时间</th>
-            <th data-options="field:'X',width:60">操作</th>
         </tr>
     </thead>
 </table>
@@ -35,6 +25,19 @@
 
 @section Scripts{
 <script>
+
+    $('#tableList').treegrid({   
+        url:'/Role/TableList',
+        idField:'ID',
+        fitColumns:true,
+        striped:true,
+        checkOnSelect:false,
+        selectOnCheck:false,
+        pagination:true,
+        rownumbers:true,
+        pageSize:20,
+        height: $(window).height() - 25,
+    }); 
 
     function Add(url,title,iconCls)
     {
@@ -69,14 +72,33 @@
 
     function Del(url,title,iconCls)
     {
-        var Selected = $('#tableList').treegrid('getSelections');
-        var ids = "";
-        if(Selected == null)
+        var alertMessage = "";
+        var valArr = new Array;
+        var Selected = $('#tableList').treegrid('getChecked');
+        if(Selected.length <= 0)
         {
-            $.messager.alert('提示信息','请至少选择一行数据！','warning');
+            $.messager.alert('提示信息','请至少勾选一行数据！','warning');
             return;
         }
-        ids = ids.substr(0, ids.length-1);
+        $.each(Selected,function(i, n){
+            if(n.children != null)
+            {
+                alertMessage = '请先清空"'+n.Name+'"下面的子项';
+                return;
+            }
+            if(n.ID == 1)
+            {
+                alertMessage = '根目录不能删除';
+                return;
+            }
+            valArr[i] = n.ID;
+        });
+        if(alertMessage != "")
+        {
+            $.messager.alert('提示信息',alertMessage,'warning');
+            return;
+        }
+        var ids = valArr.join(',');
         $.messager.confirm('确认对话框',"确认要删除数据？", function(r){
             if (r){
                 $.post(url, { ids: ids},function(result){
