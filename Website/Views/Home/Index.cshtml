@@ -6,17 +6,24 @@
     <head>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
         <meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/bootstrap/easyui.css">
 		<link rel="stylesheet" type="text/css" href="/Content/JS/Plugins/EasyUI/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="/Content/css/customIcons.css">
+        <link rel="stylesheet" type="text/css" href="/Content/css/font-awesome/css/font-awesome.css">
 		
 	    <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/jquery.min.js"></script>
 	    <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/jquery.easyui.min.js"></script>
         <script type="text/javascript" src="/Content/JS/Plugins/EasyUI/locale/easyui-lang-zh_CN.js"></script>
 		<script type="text/javascript" src="/Content/JS/Plugins/easyui.tabs.extend.js"></script>
         <script type="text/javascript" src="/Content/JS/Custom/Utils.js"></script>
-		<style>
-		</style>
+        <style>
+            .l-btn-icon {
+                font-size: 16px;
+            }
+            .color-green {
+                color: #35aa47 !important;
+            }
+        </style>
 	</head>
     <body class="easyui-layout">
 		<div data-options="region:'north'" style="height:60px;"></div>   
@@ -29,6 +36,7 @@
 			</div> 
 		</div> 
 	</body>
+</html>
 <script type="text/javascript">
     $(function () {
         var menus = '{"Menu": [{"id": 1,"text": "开发者功能","pId":0,"iconCls":"icon-drive_user"},{"id": 2,"text": "系统设置","pId":0,"iconCls":"icon-accept"},{"id": 3,"text": "菜单管理","pId":1,"iconCls":"icon-application_side_tree","Url":"/menu/index"},{"id": 4,"text": "角色管理","pId":2,"iconCls":"icon-chart_bar","Url":"/Role/index"},{"id": 5,"text": "3-菜单","pId":2}]}';
@@ -142,5 +150,3 @@
 
 
 </script>
-
-</html>

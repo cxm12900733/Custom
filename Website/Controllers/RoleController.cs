@@ -35,7 +35,7 @@ namespace Website.Controllers
             {
                 query = query.Where(o => o.Name == Sys_Role.Name);
             }
-            List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Take(Paging.Rows).Skip(Paging.Skip).ToList();
+            List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Skip(Paging.Skip).Take(Paging.Rows).ToList();
             int Count = this.Entity.Sys_Role.Count();
             return this.ToTableJson(Sys_RoleList,Count);
         }
@@ -85,9 +85,9 @@ namespace Website.Controllers
         {
             var Result = new AjaxResult();
             var idsStrArr = ids.Split(',');
-            int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));  
-            var baseSys_Menu = this.Entity.Sys_Menu.Where(o => idsArr.Contains(o.ID)).ToList();
-            this.Entity.Sys_Menu.RemoveRange(baseSys_Menu);
+            int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));
+            var baseSys_Role = this.Entity.Sys_Role.Where(o => idsArr.Contains(o.ID)).ToList();
+            this.Entity.Sys_Role.RemoveRange(baseSys_Role);
             this.Entity.SaveChanges();
             Result.Message = "操作成功";
             return this.ToJson(Result);

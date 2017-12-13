@@ -4,7 +4,7 @@
     //var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).Select(o => new {o.ID, o.Name, o.Method,o.Icon,o.Url }).ToList();
     //string RowButtonJson = Newtonsoft.Json.JsonConvert.SerializeObject(RowButtonList);
 }
-<table id="tableList" class="easyui-datagrid" toolbar="#tb" title="菜单管理" iconcls="icon-new" data-options="height:$(window).height()-25">
+<table id="tableList" class="easyui-treegrid" toolbar="#tb" title="菜单管理" iconcls="icon-new" >
     <thead>
         <tr>
             <th data-options="field:'ck',width:20,checkbox:true"></th>
@@ -21,6 +21,7 @@
     </thead>
 </table>
 <div id="tb">
+    <a class="easyui-linkbutton" iconcls="fa fa-refresh color-green" plain="true" onclick="javascript: location.reload();">刷新</a>
     @foreach (var item in TableButtonList)
     {
         <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
@@ -31,24 +32,26 @@
 @section Scripts{
 <script>
     @*var rowButtons = @(Html.Raw(RowButtonJson));*@
-    $('#tableList').treegrid({    
-        url:'/Menu/TableList',
-        idField:'ID',
-        treeField:'Name',
-        fitColumns:true,
-        striped:true,
-        checkOnSelect:false,
-        selectOnCheck:false,
-        loadFilter :function(data)
-        {
-            //data = UI.RowButton(rowButtons,data);
-            return UI.LoadTreegrId(data);
-        },
-        onLoadSuccess: function(row, data)
-        {
-            //UI.ShowRowButton(rowButtons,data);
-        }  
-    });  
+    $(function () {
+        $('#tableList').treegrid({
+            url: '/Menu/TableList',
+            idField: 'ID',
+            treeField: 'Name',
+            fitColumns: true,
+            striped: true,
+            checkOnSelect: false,
+            selectOnCheck: false,
+            height:$(window).height()-25,
+            loadFilter: function (data) {
+                //data = UI.RowButton(rowButtons,data);
+                return UI.LoadTreegrId(data);
+            },
+            onLoadSuccess: function (row, data) {
+                //UI.ShowRowButton(rowButtons,data);
+            }
+        });
+    });
+    
 
     function Add(url,title,iconCls)
     {

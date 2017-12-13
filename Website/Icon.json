@@ -1,0 +1,82 @@
+[
+  {
+    "text": "刷新",
+    "value": "fa fa-refresh color-green",
+    "iconCls": "fa fa-refresh color-green"
+  },
+  {
+    "text": "身份证",
+    "value": "fa fa-address-card-o",
+    "iconCls": "fa fa-address-card-o"
+  },
+  {
+    "text": "锚",
+    "value": "fa fa-anchor",
+    "iconCls": "fa fa-anchor"
+  },
+  {
+    "text": "范围图表",
+    "value": "fa fa-area-chart color-purple",
+    "iconCls": "fa fa-area-chart color-purple"
+  },
+  {
+    "text": "禁止",
+    "value": "fa fa-ban color-red",
+    "iconCls": "fa fa-ban color-red"
+  },
+  {
+    "text": "银行",
+    "value": "fa fa-bank",
+    "iconCls": "fa fa-bank"
+  },
+  {
+    "text": "条型图表",
+    "value": "fa fa-bar-chart color-blue",
+    "iconCls": "fa fa-bar-chart color-blue"
+  },
+  {
+    "text": "铃声",
+    "value": "fa fa-bell color-yellow",
+    "iconCls": "fa fa-bell color-yellow"
+  },
+  {
+    "text": "禁止铃声",
+    "value": "fa fa-bell-slash color-yellow",
+    "iconCls": "fa fa-bell-slash color-yellow"
+  },
+  {
+    "text": "雷电",
+    "value": "fa fa-bolt color-yellow",
+    "iconCls": "fa fa-bolt color-yellow"
+  },
+  {
+    "text": "打勾",
+    "value": "fa fa-check color-green",
+    "iconCls": "fa fa-check color-green"
+  },
+  {
+    "text": "关闭/删除",
+    "value": "fa fa-close color-red",
+    "iconCls": "fa fa-close color-red"
+  },
+  {
+    "text": "时钟",
+    "value": "fa fa-clock-o color-yellow",
+    "iconCls": "fa fa-clock-o color-yellow"
+  },
+  {
+    "text": "编辑",
+    "value": "fa fa-edit color-green",
+    "iconCls": "fa fa-edit color-green"
+  },
+  {
+    "text": "添加",
+    "value": "fa fa-plus color-green",
+    "iconCls": "fa fa-plus color-green"
+  },
+  {
+    "text": "配置",
+    "value": "fa fa-cog",
+    "iconCls": "fa fa-cog"
+  }
+]

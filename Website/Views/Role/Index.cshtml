@@ -1,7 +1,6 @@
 ﻿@{
     var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 56).ToList();
     var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 56).ToList();
-    var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 56).ToList();
 }
 <table id="tableList" class="easyui-datagrid" toolbar="#tb" title="角色管理" iconcls="icon-new">
     <thead>
@@ -17,6 +16,7 @@
 </table>
 <div id="ModelForm"></div>
 <div id="tb">
+    <a class="easyui-linkbutton" iconcls="icon-reload" plain="true" onclick="javascript: location.reload();">刷新</a>
     @foreach (var item in TableButtonList)
     {
         <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
@@ -25,19 +25,21 @@
 
 @section Scripts{
 <script>
-
-    $('#tableList').treegrid({   
-        url:'/Role/TableList',
-        idField:'ID',
-        fitColumns:true,
-        striped:true,
-        checkOnSelect:false,
-        selectOnCheck:false,
-        pagination:true,
-        rownumbers:true,
-        pageSize:20,
-        height: $(window).height() - 25,
-    }); 
+    $(function () {
+        $('#tableList').datagrid({   
+            url:'/Role/TableList',
+            idField:'ID',
+            fitColumns:true,
+            striped:true,
+            checkOnSelect:false,
+            selectOnCheck:false,
+            singleSelect:true,
+            pagination:true,
+            rownumbers:true,
+            pageSize:20,
+            height: $(window).height() - 25,
+        }); 
+    });
 
     function Add(url,title,iconCls)
     {
@@ -53,7 +55,7 @@
 
     function Edit(url,title,iconCls)
     {
-        var Selected = $('#tableList').treegrid('getSelections');
+        var Selected = $('#tableList').datagrid('getSelections');
         if(Selected == null)
         {
             $.messager.alert('提示信息','请选择一行数据！','warning');
@@ -74,7 +76,7 @@
     {
         var alertMessage = "";
         var valArr = new Array;
-        var Selected = $('#tableList').treegrid('getChecked');
+        var Selected = $('#tableList').datagrid('getChecked');
         if(Selected.length <= 0)
         {
             $.messager.alert('提示信息','请至少勾选一行数据！','warning');
@@ -104,7 +106,7 @@
                 $.post(url, { ids: ids},function(result){
                     if(result.data.IsSuccess)
                     {
-                        $("#tableList").treegrid('reload');
+                        $("#tableList").datagrid('reload');
                     }
                     $.messager.alert('提示信息',result.data.Message,'info');
                 },'json');

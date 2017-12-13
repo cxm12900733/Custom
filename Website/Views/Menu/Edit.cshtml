@@ -2,9 +2,18 @@
     Sys_Menu Sys_Menu = ViewBag.Sys_Menu;
     var MenuTreeList = this.MenuTree.OrderBy(o => o.Sort).Select(o => new { id = o.ID, text = o.Name, pId = o.ParentID, iconCls = o.Icon }).ToList();
     var MenuTreeJsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(MenuTreeList);
-    var CustomIconList = Website.Common.CustomIcons.CustomIconList.Select(o => new { value = o.Value, text = o.Key, iconCls = o.Value }).ToList();
-    var CustomIconListStr = Newtonsoft.Json.JsonConvert.SerializeObject(CustomIconList);
+    //var CustomIconList = Website.Common.CustomIcons.CustomIconList.Select(o => new { value = o.Value, text = o.Key, iconCls = o.Value }).ToList();
+    //var CustomIconListStr = Newtonsoft.Json.JsonConvert.SerializeObject(CustomIconList);
+    string filename = this.Server.MapPath("/Icon.json");
+    string jsonstr = System.IO.File.ReadAllText(filename);
+    var ComboboxModelList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ComboboxModel>>(jsonstr);
+    var CustomIconListStr = Newtonsoft.Json.JsonConvert.SerializeObject(ComboboxModelList);
 }
+<style>
+    .combobox-item {
+        font-size:16px;
+    }
+</style>
 <!--预建窗口-->
 <form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?treegridid=tableList" class="panel-body panel-body-noborder window-body">
     <input type="hidden" name="id" value="@(Sys_Menu.ID)" />
@@ -48,7 +57,7 @@
         <tr>
             <td>图标样式</td>
             <td>
-                <input id="Icon" name="Icon" value="@(Sys_Menu.Icon)" class="easyui-combobox" type="text" data-options="showItemIcon: true,data:CustomIconJson,width:'100%'" />
+                <input id="Icon" name="Icon" value="@(Sys_Menu.Icon)" class="easyui-combobox" type="text" data-options="panelMaxHeight:150,showItemIcon: true,data:CustomIconJson,width:'100%'" />
             </td>
             <td>排序</td>
             <td><input id="Sort" name="Sort" value="@(Sys_Menu.Sort)" class="easyui-numberspinner" data-options="required:true,min:0,width:'100%'"></td>
@@ -86,7 +95,7 @@
     var treeMenus = utils.toTreeData(MenuTreeJson, "id", "pId", "children");
     var ParentID = @(Sys_Menu.ParentID);
     var CustomIconJson = JSON.parse('@(this.Html.Raw(CustomIconListStr))');
-
+    console.log(CustomIconJson);
 
     function FormRule(value)
     {
