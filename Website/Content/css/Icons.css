@@ -1,0 +1,420 @@
+.Icons {
+    background-image: url('/Content/css/Icon.png');
+    background-repeat: no-repeat;
+}
+
+.Icons-accept {
+    background-position: 0px 0px;
+}
+
+.Icons-add {
+    background-position: -16px 0px;
+}
+
+.Icons-anchor {
+    background-position: -32px 0px;
+}
+
+.Icons-app {
+    background-position: -48px 0px;
+}
+
+.Icons-app_cascade {
+    background-position: -64px 0px;
+}
+
+.Icons-app_double {
+    background-position: -80px 0px;
+}
+
+.Icons-app_form {
+    background-position: -96px 0px;
+}
+
+.Icons-app_form_magnify {
+    background-position: -112px 0px;
+}
+
+.Icons-app_side_list {
+    background-position: -128px 0px;
+}
+
+.Icons-app_side_tree {
+    background-position: -144px 0px;
+}
+
+.Icons-app_view_list {
+    background-position: -160px 0px;
+}
+
+.Icons-asterisk_yellow {
+    background-position: -176px 0px;
+}
+
+.Icons-attach {
+    background-position: -192px 0px;
+}
+
+.Icons-auction_hammer {
+    background-position: -208px 0px;
+}
+
+.Icons-award_star_gold_3 {
+    background-position: -224px 0px;
+}
+
+.Icons-balance {
+    background-position: -240px 0px;
+}
+
+.Icons-bank {
+    background-position: -256px 0px;
+}
+
+.Icons-basket {
+    background-position: -272px 0px;
+}
+
+.Icons-bell {
+    background-position: -288px 0px;
+}
+
+.Icons-bomb {
+    background-position: -304px 0px;
+}
+
+.Icons-book {
+    background-position: -320px 0px;
+}
+
+.Icons-book_addresses {
+    background-position: -336px 0px;
+}
+
+.Icons-book_open {
+    background-position: -352px 0px;
+}
+
+.Icons-bricks {
+    background-position: -368px 0px;
+}
+
+.Icons-building {
+    background-position: -384px 0px;
+}
+
+.Icons-calendar_day {
+    background-position: -400px 0px;
+}
+
+.Icons-cancel {
+    background-position: -416px 0px;
+}
+
+.Icons-car {
+    background-position: -432px 0px;
+}
+
+.Icons-cart {
+    background-position: -448px 0px;
+}
+
+.Icons-chart_bar {
+    background-position: -464px 0px;
+}
+
+.Icons-chart_curve {
+    background-position: -480px 0px;
+}
+
+.Icons-chart_line {
+    background-position: -496px 0px;
+}
+
+.Icons-chart_organisation {
+    background-position: -512px 0px;
+}
+
+.Icons-chart_pie {
+    background-position: -528px 0px;
+}
+
+.Icons-clock {
+    background-position: -544px 0px;
+}
+
+.Icons-clock_red {
+    background-position: -560px 0px;
+}
+
+.Icons-cog {
+    background-position: -576px 0px;
+}
+
+.Icons-coins {
+    background-position: -592px 0px;
+}
+
+.Icons-comment {
+    background-position: -608px 0px;
+}
+
+.Icons-comments {
+    background-position: -624px 0px;
+}
+
+.Icons-computer {
+    background-position: -640px 0px;
+}
+
+.Icons-connect {
+    background-position: -656px 0px;
+}
+
+.Icons-credit_card {
+    background-position: -672px 0px;
+}
+
+.Icons-credit_card_green {
+    background-position: -688px 0px;
+}
+
+.Icons-cross {
+    background-position: -704px 0px;
+}
+
+.Icons-database {
+    background-position: -720px 0px;
+}
+
+.Icons-delete {
+    background-position: -736px 0px;
+}
+
+.Icons-disconnect {
+    background-position: -752px 0px;
+}
+
+.Icons-disk {
+    background-position: -768px 0px;
+}
+
+.Icons-drive {
+    background-position: -784px 0px;
+}
+
+.Icons-drive_user {
+    background-position: -800px 0px;
+}
+
+.Icons-drive_web {
+    background-position: -816px 0px;
+}
+
+.Icons-edit_add {
+    background-position: -832px 0px;
+}
+
+.Icons-edit_remove {
+    background-position: -848px 0px;
+}
+
+.Icons-email {
+    background-position: -864px 0px;
+}
+
+.Icons-error {
+    background-position: -880px 0px;
+}
+
+.Icons-flag_blue {
+    background-position: -896px 0px;
+}
+
+.Icons-group {
+    background-position: -912px 0px;
+}
+
+.Icons-heart {
+    background-position: -928px 0px;
+}
+
+.Icons-help {
+    background-position: -944px 0px;
+}
+
+.Icons-hourglass {
+    background-position: -960px 0px;
+}
+
+.Icons-image {
+    background-position: -976px 0px;
+}
+
+.Icons-images {
+    background-position: 0px -16px;
+}
+
+.Icons-key {
+    background-position: -16px -16px;
+}
+
+.Icons-lightbulb {
+    background-position: -32px -16px;
+}
+
+.Icons-lightbulb_off {
+    background-position: -48px -16px;
+}
+
+.Icons-lightning {
+    background-position: -64px -16px;
+}
+
+.Icons-link {
+    background-position: -80px -16px;
+}
+
+.Icons-link_break {
+    background-position: -96px -16px;
+}
+
+.Icons-lock {
+    background-position: -112px -16px;
+}
+
+.Icons-lock_open {
+    background-position: -128px -16px;
+}
+
+.Icons-lorry {
+    background-position: -144px -16px;
+}
+
+.Icons-magnifier {
+    background-position: -160px -16px;
+}
+
+.Icons-map {
+    background-position: -176px -16px;
+}
+
+.Icons-medal_gold_2 {
+    background-position: -192px -16px;
+}
+
+.Icons-money {
+    background-position: -208px -16px;
+}
+
+.Icons-money_dollar {
+    background-position: -224px -16px;
+}
+
+.Icons-money_yen {
+    background-position: -240px -16px;
+}
+
+.Icons-monitor {
+    background-position: -256px -16px;
+}
+
+.Icons-ok {
+    background-position: -272px -16px;
+}
+
+.Icons-page {
+    background-position: -288px -16px;
+}
+
+.Icons-pencil {
+    background-position: -304px -16px;
+}
+
+.Icons-print {
+    background-position: -320px -16px;
+}
+
+.Icons-rainbow {
+    background-position: -336px -16px;
+}
+
+.Icons-redo {
+    background-position: -352px -16px;
+}
+
+.Icons-rosette {
+    background-position: -368px -16px;
+}
+
+.Icons-ruby {
+    background-position: -384px -16px;
+}
+
+.Icons-server {
+    background-position: -400px -16px;
+}
+
+.Icons-server_chart {
+    background-position: -416px -16px;
+}
+
+.Icons-server_database {
+    background-position: -432px -16px;
+}
+
+.Icons-shield {
+    background-position: -448px -16px;
+}
+
+.Icons-star {
+    background-position: -464px -16px;
+}
+
+.Icons-tag_blue {
+    background-position: -480px -16px;
+}
+
+.Icons-tick {
+    background-position: -496px -16px;
+}
+
+.Icons-time {
+    background-position: -512px -16px;
+}
+
+.Icons-undo {
+    background-position: -528px -16px;
+}
+
+.Icons-user {
+    background-position: -576px -16px;
+}
+
+.Icons-user_comment {
+    background-position: -592px -16px;
+}
+
+.Icons-user_female {
+    background-position: -608px -16px;
+}
+
+.Icons-user_gray {
+    background-position: -624px -16px;
+}
+
+.Icons-user_suit {
+    background-position: -640px -16px;
+}
+
+.Icons-vcard {
+    background-position: -672px -16px;
+}
+
+.Icons-world {
+    background-position: -688px -16px;
+}
+
+.Icons-wrench_orange {
+    background-position: -704px -16px;
+}
