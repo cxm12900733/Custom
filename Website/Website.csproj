@@ -127,7 +127,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\JsonNetResult.cs" />
-    <Compile Include="Common\CustomIcons.cs" />
     <Compile Include="Common\ManageWebViewPage.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -141,6 +140,7 @@
     <Compile Include="Models\AjaxResult.cs" />
     <Compile Include="Models\Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\css\Custom\custom.css" />
     <Content Include="Content\css\Icon.png" />
     <Content Include="Content\css\Icons.css" />
     <Content Include="Content\css\Error\css\error.css" />
@@ -162,7 +162,7 @@
     <Content Include="Views\Shared\Succeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\customIcons.css" />
+    <Content Include="Content\css\Custom\customIcons.css" />
     <Content Include="Content\JS\Plugins\easyui.tabs.extend.js" />
     <Content Include="Content\JS\Plugins\EasyUI\easyloader.js" />
     <Content Include="Content\JS\Plugins\EasyUI\jquery.easyui.min.js" />

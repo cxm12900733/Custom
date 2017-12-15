@@ -73,6 +73,12 @@ namespace Website.Controllers
                 return this.Error("数据不存在");
             }
             this.ViewBag.Sys_Menu = Sys_Menu;
+            //图标文件
+            string filename = this.Server.MapPath("/Icon.json");
+            string jsonstr = System.IO.File.ReadAllText(filename);
+            var ComboboxModelList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ComboboxModel>>(jsonstr);
+            var CustomIconListJson = Newtonsoft.Json.JsonConvert.SerializeObject(ComboboxModelList.OrderBy(o => o.group).ToList());
+            this.ViewBag.CustomIconListJson = CustomIconListJson;
             return View();
         }
 

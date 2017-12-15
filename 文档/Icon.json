@@ -1,0 +1,155 @@
+[
+  {
+    "text": "打勾",
+    "value": "Icons Icons-accept",
+    "iconCls": "Icons Icons-accept",
+    "group": "工具栏"
+  },
+  {
+    "text": "添加",
+    "value": "Icons Icons-add",
+    "iconCls": "Icons Icons-add",
+    "group": "工具栏"
+  },
+    {
+        "text": "拍卖槌",
+        "value": "Icons Icons-auction_hammer",
+        "iconCls": "Icons Icons-auction_hammer",
+        "group": "工具栏"
+    },
+
+  {
+    "text": "锚",
+    "value": "Icons Icons-anchor",
+    "iconCls": "Icons Icons-anchor",
+    "group": "图标"
+  },
+  {
+    "text": "app",
+    "value": "Icons Icons-app",
+    "iconCls": "Icons Icons-app",
+    "group": "图标"
+  },
+  {
+    "text": "app_cascade",
+    "value": "Icons Icons-app_cascade",
+    "iconCls": "Icons Icons-app_cascade",
+    "group": "图标"
+  },
+  {
+    "text": "app_double",
+    "value": "Icons Icons-app_double",
+    "iconCls": "Icons Icons-app_double",
+    "group": "图标"
+  },
+  {
+    "text": "app_form",
+    "value": "Icons Icons-app_form",
+    "iconCls": "Icons Icons-app_form",
+    "group": "图标"
+  },
+  {
+    "text": "app_form_magnify",
+    "value": "Icons Icons-app_form_magnify",
+    "iconCls": "Icons Icons-app_form_magnify",
+    "group": "图标"
+  },
+  {
+    "text": "app_side_list",
+    "value": "Icons Icons-app_side_list",
+    "iconCls": "Icons Icons-app_side_list",
+    "group": "图标"
+  },
+  {
+    "text": "app_side_tree",
+    "value": "Icons Icons-app_side_tree",
+    "iconCls": "Icons Icons-app_side_tree",
+    "group": "图标"
+  },
+  {
+    "text": "app_view_list",
+    "value": "Icons Icons-app_view_list",
+    "iconCls": "Icons Icons-app_view_list",
+    "group": "图标"
+  },
+  {
+    "text": "asterisk_yellow",
+    "value": "Icons Icons-asterisk_yellow",
+    "iconCls": "Icons Icons-asterisk_yellow",
+    "group": "图标"
+  },
+  {
+    "text": "附件",
+    "value": "Icons Icons-attach",
+    "iconCls": "Icons Icons-attach",
+    "group": "图标"
+  },
+  {
+    "text": "星勋章",
+    "value": "Icons Icons-award_star_gold_3",
+    "iconCls": "Icons Icons-award_star_gold_3",
+    "group": "图标"
+  },
+    {
+        "text": "配置",
+        "value": "Icons Icons-cog",
+        "iconCls": "Icons Icons-cog",
+        "group": "图标"
+    },
+
+  {
+    "text": "金币",
+    "value": "Icons Icons-coins",
+    "iconCls": "Icons Icons-coins",
+    "group": "图标"
+  },
+  {
+    "text": "服务器",
+    "value": "Icons Icons-server",
+    "iconCls": "Icons Icons-server",
+    "group": "图标"
+  },
+  {
+    "text": "用户",
+    "value": "Icons Icons-user",
+    "iconCls": "Icons Icons-user",
+    "group": "图标"
+  },
+  {
+    "text": "身份证",
+    "value": "Icons Icons-vcard",
+    "iconCls": "Icons Icons-vcard",
+    "group": "图标"
+  },
+  {
+    "text": "地球",
+    "value": "Icons Icons-world",
+    "iconCls": "Icons Icons-world",
+    "group": "图标"
+  },
+    {
+        "text": "开发人员",
+        "value": "Icons Icons-drive_user",
+        "iconCls": "Icons Icons-drive_user",
+        "group": "图标"
+    },
+    {
+    "text": "添加",
+    "value": "Icons Icons-edit_add",
+    "iconCls": "Icons Icons-edit_add",
+    "group": "工具栏"
+  },
+  {
+    "text": "cancel",
+    "value": "Icons Icons-cancel",
+    "iconCls": "Icons Icons-cancel",
+    "group": "工具栏"
+  },
+  {
+    "text": "pencil",
+    "value": "Icons Icons-pencil",
+    "iconCls": "Icons Icons-pencil",
+    "group": "工具栏"
+  },
+  
+]
