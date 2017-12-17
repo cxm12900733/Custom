@@ -21,7 +21,7 @@
     </thead>
 </table>
 <div id="tb">
-    <a class="easyui-linkbutton" iconcls="" plain="true" onclick="javascript: location.reload();">刷新</a>
+    <a class="easyui-linkbutton" iconcls="icon-reload" plain="true" onclick="javascript: location.reload();">刷新</a>
     @foreach (var item in TableButtonList)
     {
         <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>

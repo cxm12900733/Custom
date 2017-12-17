@@ -42,13 +42,13 @@ namespace Website.Controllers
         /// <returns></returns>
         public bool RebuildCustomIcons()
         {
-            string CssRelativePath = "/Content/css/Custom/customIcons.css";
-            string IconsRelativePath = "/Content/css/Custom/customIcons/";
+            string CssRelativePath = "/Content/css/Custom/CustomIcons.css";
+            string DirectorieRelativePath = "/Content/css/Custom/Icons/";
             string JsonRelativePath = "/Icon.json";
             var CssPath = HttpContext.Server.MapPath(CssRelativePath);
-            var IconsPath = HttpContext.Server.MapPath(IconsRelativePath);
+            var DirectoriePath = HttpContext.Server.MapPath(DirectorieRelativePath);
             var JsonPath = HttpContext.Server.MapPath(JsonRelativePath);
-            var ImgFile = "customIcons/";
+            var ImgFile = "Icons/";
             /* 流程
              * 1.查询确认保存路径,并清空内容
              * 2.查询图标路径下的所有图标
@@ -62,27 +62,42 @@ namespace Website.Controllers
             var CssStreamWriter = new System.IO.StreamWriter(CssPathStrema);
             var JsonStreamWriter = new System.IO.StreamWriter(JsonPathStrema);
 
-            //取得图标文件列表，并组成样式
-            var icons = System.IO.Directory.EnumerateFiles(IconsPath);
-            string CssSaveString = string.Empty;
-            string JsonSaveString = string.Empty;
-            foreach (var item in icons)
+            try
             {
-                string fileName = System.IO.Path.GetFileName(item);
-                string pureFileName = fileName.Remove(fileName.LastIndexOf('.'));
-                //大括号转义->{{
-                CssSaveString += string.Format(".icon-{0} {{ background:url('{1}') no-repeat center center; }} \r\n", pureFileName, ImgFile + fileName);
-                //JsonSaveString += 
+                //取得图标文件列表，并组成样式
+                var Dirs = System.IO.Directory.GetDirectories(DirectoriePath);
+                string CssSaveString = string.Empty;
+                string JsonSaveString = string.Empty;
+                foreach (var Dir in Dirs)
+                {
+                    var DirName = System.IO.Path.GetFileName(Dir);
+                    var icons = System.IO.Directory.GetFiles(Dir);
+                    foreach (var item in icons)
+                    {
+                        string fileName = System.IO.Path.GetFileName(item);
+                        string pureFileName = fileName.Remove(fileName.LastIndexOf('.'));
+                        //大括号转义->{{
+                        CssSaveString += string.Format(".icon-{0} {{ background:url('{1}') no-repeat center center; }} \r\n", pureFileName, ImgFile + DirName + "/" + fileName);
+                        JsonSaveString += string.Format("{{\"text\": \"{0}\",\"value\": \"icon-{1}\",\"iconCls\": \"icon-{2}\",\"group\": \"{3}\"}}, \r\n"
+                            , pureFileName, pureFileName, pureFileName, DirName);
+                    }
+                }
+                JsonSaveString = "[\r\n" + JsonSaveString + "]\r\n";
+
+                //写入
+                CssStreamWriter.Write(CssSaveString);
+                JsonStreamWriter.Write(JsonSaveString);
             }
+            finally
+            {
+                //关闭
+                CssStreamWriter.Close();
+                CssPathStrema.Close();
 
-            //写入,关闭
-            CssStreamWriter.Write(CssSaveString);
-            CssStreamWriter.Close();
-            CssPathStrema.Close();
-
-            JsonStreamWriter.Write(JsonSaveString);
-            JsonStreamWriter.Close();
-            JsonPathStrema.Close();
+                JsonStreamWriter.Close();
+                JsonPathStrema.Close();
+            }
+            
             return true;
             
         }
