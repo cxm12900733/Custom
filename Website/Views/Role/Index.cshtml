@@ -2,19 +2,14 @@
     var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 56).ToList();
     var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 56).ToList();
 }
-<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?treegridid=tableList" class="panel-body panel-body-noborder window-body">
+<form id="datafrom" method="post" class="panel-body panel-body-noborder window-body">
     <table>
         <tr>
             <td align="right">名称：</td>
+            <td><input type="text" name="Name" class="easyui-textbox" /></td>
             <td>
-                <input type="text" id="txtAccount" name="txtAccount" class="easyui-textbox" />
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchData('datafrom','tableList')">查 询</a>
             </td>
-            <td align="right">名称：</td>
-            <td>
-                <input type="text" id="txtAccountvb" name="txtAccountvb" class="easyui-textbox" />
-            </td>
-            <td><a href="#" id="btn_search" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="searchData()">查 询</a></td>
-
         </tr>
     </table>
 </form>
@@ -41,25 +36,7 @@
 
 @section Scripts{
 <script>
-    function searchData()
-    {
-        var fromdata = $("#datafrom").serializeArray();
-        var jsondata = "";
-        jQuery.each( fromdata, function(i, field){
-            //console.log("name:" + field.name + " value:" + field.value);
-            jsondata += "'" + field.name + "':'" + field.value + "',";
-        });
-        //var a = JSON.stringify(fromdata);
-        jsondata = jsondata.substring(0, jsondata.length - 1);
-        jsondata = "{" + jsondata + "}";
-        console.log(jsondata);
-        var obj = JSON.parse(jsondata)
-        //var obj = jQuery.parseJSON(jsondata);
-        
-        $('#tableList').datagrid('load', obj);
-
-
-    }
+    
     
     $(function () {
         $('#tableList').datagrid({   
@@ -73,7 +50,7 @@
             pagination:true,
             rownumbers:true,
             pageSize:20,
-            height: $(window).height() - 25,
+            height: $(window).height() - 50,
         }); 
     });
 

@@ -33,7 +33,7 @@ namespace Website.Controllers
             var query = this.Entity.Sys_Role.AsNoTracking().AsQueryable();
             if (!Sys_Role.Name.IsNullOrEmpty())
             {
-                query = query.Where(o => o.Name == Sys_Role.Name);
+                query = query.Where(o => o.Name.Contains(Sys_Role.Name));
             }
             List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Skip(Paging.Skip).Take(Paging.Rows).ToList();
             int Count = this.Entity.Sys_Role.Count();

@@ -29,3 +29,15 @@ show.StateName = function (value, row, index) {
     return result;
 }
 
+//搜索
+function searchData(fromId, datagridId) {
+    var fromdata = $("#" + fromId).serializeArray();
+    var jsondata = "";
+    jQuery.each(fromdata, function (i, field) {
+        jsondata += '"' + field.name + '":"' + field.value + '",';
+    });
+    jsondata = jsondata.substring(0, jsondata.length - 1);
+    jsondata = "{ " + jsondata + " }";
+    var obj = jQuery.parseJSON(jsondata);
+    $('#' + datagridId).datagrid('load', obj);
+}
