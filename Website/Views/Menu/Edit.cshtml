@@ -13,7 +13,7 @@
     <table cellpadding=" 5">
         <tr>
             <td>菜单名称</td>
-            <td style="width:200px;"><input id="Name" name="Name" value="@(Sys_Menu.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
+            <td style="width:200px;"><input id="Name" name="Name" value="@(Sys_Menu.Name)" class="easyui-textbox" type="text" data-options="validType:'maxLength[20]',required:true,width:'100%'" /></td>
             <td>父节点</td>
             <td style="width:200px;">
                 <select id="ParentID" name="ParentID" class="easyui-combotree" data-options="panelHeight:'auto',editable:false,width:'100%',data: treeMenus,
@@ -50,7 +50,7 @@
         <tr>
             <td>图标样式</td>
             <td>
-                <input id="Icon" name="Icon" value="@(Sys_Menu.Icon)" class="easyui-combobox" type="text" data-options="textField:'text',valueField:'value',groupField:'group',panelMaxHeight:150,showItemIcon: true,data:CustomIconJson,width:'100%'" />
+                <input id="Icon" name="Icon" value="@(Sys_Menu.Icon)" class="easyui-combobox" type="text" data-options="validType:'maxLength[50]',textField:'text',valueField:'value',groupField:'group',panelMaxHeight:150,showItemIcon: true,data:CustomIconJson,width:'100%'" />
             </td>
             <td>排序</td>
             <td><input id="Sort" name="Sort" value="@(Sys_Menu.Sort)" class="easyui-numberspinner" data-options="required:true,min:0,width:'100%'"></td>
@@ -61,7 +61,7 @@
         </tr>
         <tr>
             <td>描述</td>
-            <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Menu.Describe)" class="easyui-textbox" data-options="multiline:true,height:60,width:'100%'" /></td>
+            <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Menu.Describe)" class="easyui-textbox" data-options="validType:'maxLength[200]',multiline:true,height:60,width:'70%'" /></td>
         </tr>
         <tr>
             <td colspan="4" style="text-align:right;">

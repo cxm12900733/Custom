@@ -100,3 +100,20 @@ UI.ShowRowButton = function (rowButtons, data) {
         });
     }
 }
+
+
+
+$.extend($.fn.validatebox.defaults.rules, {
+    minLength: {
+        validator: function (value, param) {
+            return value.length >= param[0];
+        },
+        message: '请输入最少{0}个字'
+    },
+    maxLength: {
+        validator: function (value, param) {
+            return value.length <= param[0];
+        },
+        message: '请输入最多{0}个字'
+    }
+});

@@ -4,7 +4,7 @@
     //var RowButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.RowButton && o.ParentID == 3).Select(o => new {o.ID, o.Name, o.Method,o.Icon,o.Url }).ToList();
     //string RowButtonJson = Newtonsoft.Json.JsonConvert.SerializeObject(RowButtonList);
 }
-<table id="tableList" class="easyui-treegrid" toolbar="#tb" title="菜单管理" iconcls="icon-new" >
+<table id="tableList" class="easyui-treegrid" toolbar="#tb" title="菜单管理" iconcls="icon-new">
     <thead>
         <tr>
             <th data-options="field:'ck',width:20,checkbox:true"></th>
@@ -20,6 +20,9 @@
         </tr>
     </thead>
 </table>
+
+
+
 <div id="tb">
     <a class="easyui-linkbutton" iconcls="icon-reload" plain="true" onclick="javascript: location.reload();">刷新</a>
     @foreach (var item in TableButtonList)
@@ -30,134 +33,122 @@
 
 <div id="ModelForm"></div>
 @section Scripts{
-<script>
-    @*var rowButtons = @(Html.Raw(RowButtonJson));*@
-    $(function () {
-        $('#tableList').treegrid({
-            url: '/Menu/TableList',
-            idField: 'ID',
-            treeField: 'Name',
-            fitColumns: true,
-            striped: true,
-            checkOnSelect: false,
-            selectOnCheck: false,
-            height:$(window).height()-25,
-            loadFilter: function (data) {
-                //data = UI.RowButton(rowButtons,data);
-                return UI.LoadTreegrId(data);
-            },
-            onLoadSuccess: function (row, data) {
-                //UI.ShowRowButton(rowButtons,data);
+    <script>
+@*var rowButtons = @(Html.Raw(RowButtonJson));*@
+        $(function () {
+            $('#tableList').treegrid({
+                url: '/Menu/TableList',
+                idField: 'ID',
+                treeField: 'Name',
+                fitColumns: true,
+                striped: true,
+                checkOnSelect: false,
+                selectOnCheck: false,
+                height: $(window).height() - 25,
+                loadFilter: function (data) {
+                    //data = UI.RowButton(rowButtons,data);
+                    return UI.LoadTreegrId(data);
+                },
+                onLoadSuccess: function (row, data) {
+                    //UI.ShowRowButton(rowButtons,data);
+                }
+            });
+        });
+
+
+        function Add(url, title, iconCls) {
+            var Selected = $('#tableList').treegrid('getSelections');
+            if (Selected.length == 1) {
+                url += "?ParentID=" + Selected[0].ID
             }
-        });
-    });
-    
-
-    function Add(url,title,iconCls)
-    {
-        var Selected = $('#tableList').treegrid('getSelections');
-        if(Selected.length == 1){ 
-            url += "?ParentID="+ Selected[0].ID 
-        }
-        UI.Windows({
-            id:"ModelForm",
-            url:url,
-            width:580,
-            height:350,
-            iconCls:iconCls,
-            title:title
-        });
-    }
-
-    function Edit(url,title,iconCls)
-    {
-        var Selected = $('#tableList').treegrid('getSelections');
-        if(Selected.length <= 0)
-        {
-            $.messager.alert('提示信息','请选择一行数据！','warning');
-            return;
-        }
-        if(Selected[0].ID == 1)
-        {
-            $.messager.alert('提示信息','不能编辑根目录','warning');
-            return;
+            UI.Windows({
+                id: "ModelForm",
+                url: url,
+                width: 580,
+                height: 350,
+                iconCls: iconCls,
+                title: title
+            });
         }
 
-        UI.Windows({
-            id:"ModelForm",
-            url:url + "?Id="+ Selected[0].ID,
-            width:580,
-            height:350,
-            iconCls:iconCls,
-            title:title
-        });
-    }
-
-    function Del(url,title,iconCls)
-    {
-        var alertMessage = "";
-        var valArr = new Array;
-        var Selected = $('#tableList').treegrid('getChecked');
-        if(Selected.length <= 0)
-        {
-            $.messager.alert('提示信息','请至少勾选一行数据！','warning');
-            return;
-        }
-        $.each(Selected,function(i, n){
-            if(n.children != null)
-            {
-                alertMessage = '请先清空"'+n.Name+'"下面的子项';
+        function Edit(url, title, iconCls) {
+            var Selected = $('#tableList').treegrid('getSelections');
+            if (Selected.length <= 0) {
+                $.messager.alert('提示信息', '请选择一行数据！', 'warning');
                 return;
             }
-            if(n.ID == 1)
-            {
-                alertMessage = '根目录不能删除';
+            if (Selected[0].ID == 1) {
+                $.messager.alert('提示信息', '不能编辑根目录', 'warning');
                 return;
             }
-            valArr[i] = n.ID;
-        });
-        if(alertMessage != "")
-        {
-            $.messager.alert('提示信息',alertMessage,'warning');
-            return;
+
+            UI.Windows({
+                id: "ModelForm",
+                url: url + "?Id=" + Selected[0].ID,
+                width: 580,
+                height: 350,
+                iconCls: iconCls,
+                title: title
+            });
         }
-        var ids = valArr.join(',');
-        $.messager.confirm('确认对话框',"确认要删除数据？", function(r){
-            if (r){
-                $.post(url, { ids: ids},function(result){
-                    if(result.data.IsSuccess)
-                    {
-                        $("#tableList").treegrid('reload');
-                    }
-                    $.messager.alert('提示信息',result.data.Message,'info');
-                },'json');
+
+        function Del(url, title, iconCls) {
+            var alertMessage = "";
+            var valArr = new Array;
+            var Selected = $('#tableList').treegrid('getChecked');
+            if (Selected.length <= 0) {
+                $.messager.alert('提示信息', '请至少勾选一行数据！', 'warning');
+                return;
             }
-        });
-    }
-
-    function MenuTypeName(value,row,index)
-    {
-        var returl = "";
-        switch(value)
-        {
-            case 1:
-                returl = "目录"
-                break;
-            case 2:
-                returl = "介面"
-                break;
-            case 3:
-                returl = "表按钮"
-                break;
-            case 4:
-                returl = "权限"
-                break;
-            case 5:
-                returl = "行按钮"
-                break;
+            $.each(Selected, function (i, n) {
+                if (n.children != null) {
+                    alertMessage = '请先清空"' + n.Name + '"下面的子项';
+                    return;
+                }
+                if (n.ID == 1) {
+                    alertMessage = '根目录不能删除';
+                    return;
+                }
+                valArr[i] = n.ID;
+            });
+            if (alertMessage != "") {
+                $.messager.alert('提示信息', alertMessage, 'warning');
+                return;
+            }
+            var ids = valArr.join(',');
+            $.messager.confirm('确认对话框', "确认要删除数据？", function (r) {
+                if (r) {
+                    $.post(url, { ids: ids }, function (result) {
+                        if (result.data.IsSuccess) {
+                            $("#tableList").treegrid('reload');
+                        }
+                        $.messager.alert('提示信息', result.data.Message, 'info');
+                    }, 'json');
+                }
+            });
         }
-        return returl;
-    }
 
-</script>
+        function MenuTypeName(value, row, index) {
+            var returl = "";
+            switch (value) {
+                case 1:
+                    returl = "目录"
+                    break;
+                case 2:
+                    returl = "介面"
+                    break;
+                case 3:
+                    returl = "表按钮"
+                    break;
+                case 4:
+                    returl = "权限"
+                    break;
+                case 5:
+                    returl = "行按钮"
+                    break;
+            }
+            return returl;
+        }
+
+    </script>
 }

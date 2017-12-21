@@ -25,7 +25,7 @@
             <table cellpadding="5">
                 <tr>
                     <td>名称</td>
-                    <td style="width:200px;"><input id="Name" name="Name" value="@(Sys_Role.Name)" class="easyui-textbox" type="text" data-options="required:true,width:'100%'" /></td>
+                    <td style="width:200px;"><input id="Name" name="Name" value="@(Sys_Role.Name)" class="easyui-textbox" type="text" data-options="validType:'maxLength[50]',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>状态</td>
@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <td>描述</td>
-                    <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Role.Describe)" class="easyui-textbox" data-options="multiline:true,height:60,width:'100%'" /></td>
+                    <td colspan="3"><input id="Describe" name="Describe" value="@(Sys_Role.Describe)" class="easyui-textbox" data-options="validType:'maxLength[200]',multiline:true,height:80,width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>添加时间</td>

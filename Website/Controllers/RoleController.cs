@@ -30,7 +30,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult TableList(Paging Paging, Sys_Role Sys_Role)
         {
-            var query = this.Entity.Sys_Role.AsQueryable();
+            var query = this.Entity.Sys_Role.AsNoTracking().AsQueryable();
             if (!Sys_Role.Name.IsNullOrEmpty())
             {
                 query = query.Where(o => o.Name == Sys_Role.Name);

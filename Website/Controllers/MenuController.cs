@@ -30,7 +30,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult TableList(Sys_Menu Sys_Menu)
         {
-            List<Sys_Menu> Base_MenuList = this.Entity.Sys_Menu.OrderBy(o => o.Sort).ToList();
+            List<Sys_Menu> Base_MenuList = this.Entity.Sys_Menu.AsNoTracking().OrderBy(o => o.Sort).ToList();
             return this.ToTableJson(Base_MenuList);
         }
 
