@@ -1,0 +1,95 @@
+﻿@{
+    Sys_Manage Sys_Manage = ViewBag.Sys_Manage ?? new Sys_Manage();
+    List<Sys_Role> Sys_RoleList = ViewBag.Sys_RoleList;
+    var RoleListJson = Newtonsoft.Json.JsonConvert.SerializeObject(Sys_RoleList);
+    this.ViewBag.RoleListJson = RoleListJson;
+    
+}
+<form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?datagridid=tableList" class="panel-body panel-body-noborder window-body">
+    <div id="cc" class="easyui-layout" data-options="height:$(window).height()-10">
+        <div data-options="region:'west',split:true,collapsible:false,title:'基础资料'" style="width:300px;">
+            <input type="hidden" name="id" value="@(Sys_Manage.ID)" />
+            <input type="hidden" id="RoleIDs" name="RoleIDs" value="@(Sys_Manage.RoleIDs)" />
+            <table cellpadding="5">
+                <tr>
+                    <td>名称</td>
+                    <td style="width:200px;"><input name="UserName" value="@(Sys_Manage.UserName)" class="easyui-textbox" data-options="iconCls:'icon-user_gray',validType:'maxLength[50]',required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input name="Password" value="@(Sys_Manage.Password)" class="easyui-textbox" data-options="iconCls:'icon-key',validType:'maxLength[30]',type:'password',required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>姓名</td>
+                    <td style="width:200px;"><input name="TrueName" value="@(Sys_Manage.TrueName)" class="easyui-textbox" data-options="iconCls:'icon-vcard',validType:'maxLength[20]',required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>移动电话</td>
+                    <td style="width:200px;"><input name="MobileNo" value="@(Sys_Manage.MobileNo)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>电子邮箱</td>
+                    <td style="width:200px;"><input name="Email" value="@(Sys_Manage.Email)" class="easyui-textbox" data-options="iconCls:'icon-email',validType:'maxLength[50]',required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td>
+                        <select name="State" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
+                            <option value="@(State.Normal)" @(Sys_Manage.State == State.Normal ? "selected" : "")>正常</option>
+                            <option value="@(State.Lock)" @(Sys_Manage.State == State.Lock ? "selected" : "")>停用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>添加时间</td>
+                    <td>
+                        @(Sys_Manage.AddTime != DateTime.MinValue ? Sys_Manage.AddTime.ToString("yyyy-MM-dd HH:mm") : "--")
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div data-options="region:'center',title:'角色设置'" style="width:300px;">
+            <ul id="RoleList"></ul>
+        </div>
+        <div data-options="region:'south'" style="height:30px;text-align:right;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="javascript:$('#datafrom').submit()">提交</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:parent.UI.CloseWindow('#ModelForm')">关闭</a>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        var json = @(this.Html.Raw(RoleListJson));
+        $(function () {
+            $('#RoleList').datalist({ 
+                checkbox: true, 
+                lines: true,
+                valueField:'ID',
+                textField:'Name',
+                data:json
+            });  
+        });
+
+        $("#datafrom").submit(function () {
+            if (!$('#datafrom').form('validate')) {
+                return false;
+            }
+            else
+            {
+                var Selected = $('#RoleList').datagrid('getChecked');	
+                var RoleIDs = "";
+                if(Selected.length>0)
+                {
+                    var arrayObj = new Array();
+                    $.each( nodes, function(i, n){
+                        arrayObj.push(n.ID);
+                    });
+                    RoleIDs = arrayObj.join(',');
+                }
+                $("#RoleIDs").val(RoleIDs);
+            }
+            
+        });
+    </script>
+}

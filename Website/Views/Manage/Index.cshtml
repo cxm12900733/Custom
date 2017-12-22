@@ -1,0 +1,132 @@
+﻿@{
+    var ButtonList = this.MenuTree.Where(o => (o.MenuType == MenuType.TableButton || o.MenuType == MenuType.RowButton) && o.ParentID == 76).ToList();
+    var TableButtonList = this.MenuTree.Where(o => o.MenuType == MenuType.TableButton && o.ParentID == 76).ToList();
+}
+<form id="datafrom" method="post" class="panel-body panel-body-noborder window-body">
+    <table>
+        <tr>
+            <td align="right">名称：</td>
+            <td><input type="text" name="Name" class="easyui-textbox" /></td>
+            <td>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchData('datafrom','tableList')">查 询</a>
+            </td>
+        </tr>
+    </table>
+</form>
+<table id="tableList" class="easyui-datagrid" toolbar="#tb" title="管理员管理" iconcls="icon-new">
+    <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'UserName',width:100">用户名</th>
+            <th data-options="field:'TrueName',width:80">姓名</th>
+            <th data-options="field:'MobileNo',width:100">移动电话</th>
+            <th data-options="field:'Email',width:100">电子邮箱</th>
+            <th data-options="field:'State',width:40,formatter:show.StateName">状态</th>
+            <th data-options="field:'AddTime',width:130,formatter:show.formatDate">添加时间</th>
+        </tr>
+    </thead>
+</table>
+<div id="ModelForm"></div>
+<div id="tb">
+    <a class="easyui-linkbutton" iconcls="icon-reload" plain="true" onclick="javascript: location.reload();">刷新</a>
+    @foreach (var item in TableButtonList)
+    {
+        <a class="easyui-linkbutton" iconcls="@(item.Icon)" plain="true" onclick="javascript: @(item.Method)('@(item.Url)','@(item.Name)','@(item.Icon)')">@(item.Name)</a>
+    }
+</div>
+
+@section Scripts{
+<script>
+    $(function () {
+        $('#tableList').datagrid({   
+            url:'/Manage/TableList',
+            idField:'ID',
+            fitColumns:true,
+            striped:true,
+            checkOnSelect:false,
+            selectOnCheck:false,
+            singleSelect:true,
+            pagination:true,
+            rownumbers:true,
+            pageSize:20,
+            height: $(window).height() - 50,
+        }); 
+    });
+
+    function Add(url,title,iconCls)
+    {
+        UI.Windows({
+            id:"ModelForm",
+            url:url,
+            width:600,
+            height:400,
+            iconCls:iconCls,
+            title:title
+        });
+    }
+
+    function Edit(url,title,iconCls)
+    {
+        var Selected = $('#tableList').datagrid('getSelections');
+        if(Selected == null)
+        {
+            $.messager.alert('提示信息','请选择一行数据！','warning');
+            return;
+        }
+
+        UI.Windows({
+            id:"ModelForm",
+            url:url + "?Id="+ Selected[0].ID,
+            width: 600,
+            height: 500,
+            iconCls:iconCls,
+            title:title
+        });
+    }
+
+    function Del(url,title,iconCls)
+    {
+        var alertMessage = "";
+        var valArr = new Array;
+        var Selected = $('#tableList').datagrid('getChecked');
+        if(Selected.length <= 0)
+        {
+            $.messager.alert('提示信息','请至少勾选一行数据！','warning');
+            return;
+        }
+        $.each(Selected,function(i, n){
+            if(n.children != null)
+            {
+                alertMessage = '请先清空"'+n.Name+'"下面的子项';
+                return;
+            }
+            if(n.ID == 1)
+            {
+                alertMessage = '根目录不能删除';
+                return;
+            }
+            valArr[i] = n.ID;
+        });
+        if(alertMessage != "")
+        {
+            $.messager.alert('提示信息',alertMessage,'warning');
+            return;
+        }
+        var ids = valArr.join(',');
+        $.messager.confirm('确认对话框',"确认要删除数据？", function(r){
+            if (r){
+                $.post(url, { ids: ids},function(result){
+                    if(result.data.IsSuccess)
+                    {
+                        $("#tableList").datagrid('reload');
+                    }
+                    $.messager.alert('提示信息',result.data.Message,'info');
+                },'json');
+            }
+        });
+    }
+
+    
+
+</script>
+}

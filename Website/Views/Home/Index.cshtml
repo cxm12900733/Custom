@@ -35,7 +35,7 @@
 </html>
 <script type="text/javascript">
     $(function () {
-        var menus = '{"Menu": [{"id": 1,"text": "开发者功能","pId":0,"iconCls":"icon-drive_user"},{"id": 2,"text": "系统设置","pId":0,"iconCls":"icon-accept"},{"id": 3,"text": "菜单管理","pId":1,"iconCls":"icon-application_side_tree","Url":"/menu/index"},{"id": 4,"text": "角色管理","pId":2,"iconCls":"icon-chart_bar","Url":"/Role/index"},{"id": 5,"text": "3-菜单","pId":2}]}';
+        var menus = '{"Menu": [{"id": 1,"text": "开发者功能","pId":0,"iconCls":"icon-drive_user"},{"id": 2,"text": "系统设置","pId":0,"iconCls":"icon-accept"},{"id": 3,"text": "菜单管理","pId":1,"iconCls":"icon-application_side_tree","Url":"/menu/index"},{"id": 4,"text": "角色管理","pId":2,"iconCls":"icon-chart_bar","Url":"/Role/index"},{"id": 5,"text": "基础设置","pId":0},{"id": 6,"text": "管理员管理","pId":5,"Url":"/Manage/index"}]}';
         wrapper.model = null;
         wrapper.model = JSON.parse(menus);
         var treeMenus = utils.toTreeData(wrapper.model.Menu, "id", "pId", "children");

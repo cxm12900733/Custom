@@ -62,6 +62,7 @@
 .icon-lorry { background:url('Icons/图标/lorry.png') no-repeat center center; } 
 .icon-map { background:url('Icons/图标/map.png') no-repeat center center; } 
 .icon-medal_gold_2 { background:url('Icons/图标/medal_gold_2.png') no-repeat center center; } 
+.icon-mobile_phone { background:url('Icons/图标/mobile_phone.png') no-repeat center center; } 
 .icon-money { background:url('Icons/图标/money.png') no-repeat center center; } 
 .icon-money_dollar { background:url('Icons/图标/money_dollar.png') no-repeat center center; } 
 .icon-money_yen { background:url('Icons/图标/money_yen.png') no-repeat center center; } 
@@ -87,10 +88,7 @@
 .icon-vcard { background:url('Icons/图标/vcard.png') no-repeat center center; } 
 .icon-world { background:url('Icons/图标/world.png') no-repeat center center; } 
 .icon-wrench_orange { background:url('Icons/图标/wrench_orange.png') no-repeat center center; } 
-.icon-accept { background:url('Icons/工具栏/accept.png') no-repeat center center; } 
-.icon-add { background:url('Icons/工具栏/add.png') no-repeat center center; } 
 .icon-cancel { background:url('Icons/工具栏/cancel.png') no-repeat center center; } 
-.icon-cross { background:url('Icons/工具栏/cross.png') no-repeat center center; } 
 .icon-edit_add { background:url('Icons/工具栏/edit_add.png') no-repeat center center; } 
 .icon-edit_remove { background:url('Icons/工具栏/edit_remove.png') no-repeat center center; } 
 .icon-link { background:url('Icons/工具栏/link.png') no-repeat center center; } 
@@ -98,7 +96,7 @@
 .icon-lock { background:url('Icons/工具栏/lock.png') no-repeat center center; } 
 .icon-lock_open { background:url('Icons/工具栏/lock_open.png') no-repeat center center; } 
 .icon-magnifier { background:url('Icons/工具栏/magnifier.png') no-repeat center center; } 
+.icon-marker { background:url('Icons/工具栏/marker.png') no-repeat center center; } 
 .icon-ok { background:url('Icons/工具栏/ok.png') no-repeat center center; } 
 .icon-pencil { background:url('Icons/工具栏/pencil.png') no-repeat center center; } 
 .icon-print { background:url('Icons/工具栏/print.png') no-repeat center center; } 
-.icon-tick { background:url('Icons/工具栏/tick.png') no-repeat center center; } 

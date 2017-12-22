@@ -19,7 +19,7 @@
 }
 <form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?datagridid=tableList" class="panel-body panel-body-noborder window-body">
     <div id="cc" class="easyui-layout" data-options="height:$(window).height()-10">
-        <div data-options="region:'west',split:true" style="width:300px;">
+        <div data-options="region:'west',split:true,collapsible:false,title:'基础资料'" style="width:300px;">
             <input type="hidden" name="id" value="@(Sys_Role.ID)" />
             <input type="hidden" id="MenuIDs" name="MenuIDs" value="@(Sys_Role.MenuIDs)" />
             <table cellpadding="5">
@@ -53,7 +53,7 @@
 
             </table>
         </div>
-        <div data-options="region:'center'" style="width:300px;">
+        <div data-options="region:'center',title:'权限设置'" style="width:300px;">
             <ul id="powerList"></ul>
         </div>
         <div data-options="region:'south'" style="height:30px;text-align:right;">

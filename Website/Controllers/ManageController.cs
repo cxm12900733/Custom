@@ -13,7 +13,7 @@ using Website.Models.EasyUI;
 
 namespace Website.Controllers
 {
-    public class MenuController : BaseController
+    public class ManageController : BaseController
     {
         /// <summary>
         /// 介面
@@ -28,44 +28,25 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult TableList(Sys_Menu Sys_Menu)
+        public ActionResult TableList(Sys_Manage Sys_Manage)
         {
-            List<Sys_Menu> Base_MenuList = this.Entity.Sys_Menu.AsNoTracking().OrderBy(o => o.Sort).ToList();
-            return this.ToTableJson(Base_MenuList);
+            List<Sys_Manage> Sys_ManageList = this.Entity.Sys_Manage.AsNoTracking().OrderByDescending(o => o.ID).ToList();
+            return this.ToTableJson(Sys_ManageList);
         }
 
         [HttpGet]
-        public ActionResult Add(int ParentID = 1)
+        public ActionResult Add()
         {
-            var Sys_Menu = new Sys_Menu();
-            Sys_Menu.ParentID = ParentID;
-            this.ViewBag.Sys_Menu = Sys_Menu;
-            //图标文件
-            string filename = this.Server.MapPath("/Icon.json");
-            string jsonstr = System.IO.File.ReadAllText(filename);
-            var ComboboxModelList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ComboboxModel>>(jsonstr);
-            var CustomIconListJson = Newtonsoft.Json.JsonConvert.SerializeObject(ComboboxModelList.OrderBy(o => o.group).ToList());
-            this.ViewBag.CustomIconListJson = CustomIconListJson;
+            var Sys_RoleList = this.Entity.Sys_Role.AsNoTracking().Where(o => o.State == State.Normal).OrderBy(o => o.Sort).ToList();
+            this.ViewBag.Sys_RoleList = Sys_RoleList;
             return View("Edit");
         }
 
         [HttpPost]
-        public ActionResult Add(Sys_Menu Sys_Menu)
+        public ActionResult Add(Sys_Manage Sys_Manage)
         {
-            Sys_Menu.AddTime = DateTime.Now;
-            switch(Sys_Menu.MenuType)
-            {
-                case MenuType.Directory:
-                    Sys_Menu.Control = string.Empty;
-                    Sys_Menu.Method = string.Empty;
-                    Sys_Menu.Url = string.Empty;
-                    break;
-                case MenuType.Powers:
-                    Sys_Menu.Url = string.Empty;
-                    Sys_Menu.Icon = string.Empty;
-                    break; 
-            }
-            this.Entity.Sys_Menu.Add(Sys_Menu);
+            Sys_Manage.AddTime = DateTime.Now;
+            this.Entity.Sys_Manage.Add(Sys_Manage);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }

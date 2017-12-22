@@ -88,7 +88,6 @@
     var treeMenus = utils.toTreeData(MenuTreeJson, "id", "pId", "children");
     var ParentID = @(Sys_Menu.ParentID);
     var CustomIconJson = JSON.parse('@(this.Html.Raw(CustomIconListJson))');
-    console.log(CustomIconJson);
 
     function FormRule(value)
     {
