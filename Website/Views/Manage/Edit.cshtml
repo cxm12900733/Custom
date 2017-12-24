@@ -12,7 +12,11 @@
             <input type="hidden" id="RoleIDs" name="RoleIDs" value="@(Sys_Manage.RoleIDs)" />
             <table cellpadding="5">
                 <tr>
-                    <td>名称</td>
+                    <td>姓名</td>
+                    <td style="width:200px;"><input name="TrueName" value="@(Sys_Manage.TrueName)" class="easyui-textbox" data-options="iconCls:'icon-vcard',validType:'maxLength[20]',required:true,width:'100%'" /></td>
+                </tr>
+                <tr>
+                    <td>用户名</td>
                     <td style="width:200px;"><input name="UserName" value="@(Sys_Manage.UserName)" class="easyui-textbox" data-options="iconCls:'icon-user_gray',validType:'maxLength[50]',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
@@ -20,16 +24,12 @@
                     <td><input name="Password" value="@(Sys_Manage.Password)" class="easyui-textbox" data-options="iconCls:'icon-key',validType:'maxLength[30]',type:'password',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
-                    <td>姓名</td>
-                    <td style="width:200px;"><input name="TrueName" value="@(Sys_Manage.TrueName)" class="easyui-textbox" data-options="iconCls:'icon-vcard',validType:'maxLength[20]',required:true,width:'100%'" /></td>
-                </tr>
-                <tr>
                     <td>移动电话</td>
-                    <td style="width:200px;"><input name="MobileNo" value="@(Sys_Manage.MobileNo)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',required:true,width:'100%'" /></td>
+                    <td style="width:200px;"><input name="MobileNo" value="@(Sys_Manage.MobileNo)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>电子邮箱</td>
-                    <td style="width:200px;"><input name="Email" value="@(Sys_Manage.Email)" class="easyui-textbox" data-options="iconCls:'icon-email',validType:'maxLength[50]',required:true,width:'100%'" /></td>
+                    <td style="width:200px;"><input name="Email" value="@(Sys_Manage.Email)" class="easyui-textbox" data-options="iconCls:'icon-email',validType:'maxLength[50]',width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>状态</td>
@@ -82,7 +82,7 @@
                 if(Selected.length>0)
                 {
                     var arrayObj = new Array();
-                    $.each( nodes, function(i, n){
+                    $.each( Selected, function(i, n){
                         arrayObj.push(n.ID);
                     });
                     RoleIDs = arrayObj.join(',');

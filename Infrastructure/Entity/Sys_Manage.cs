@@ -33,14 +33,12 @@ namespace Infrastructure.Entity
         /// <summary>
         /// 移动电话号码
         /// </summary>
-        [Required]
         [StringLength(30)]
         public string MobileNo { get; set; }
 
         /// <summary>
         /// 电子邮箱
         /// </summary>
-        [Required]
         [StringLength(50)]
         public string Email { get; set; }
 
@@ -64,7 +62,6 @@ namespace Infrastructure.Entity
         /// <summary>
         /// 角色ID字符串
         /// </summary>
-        [Required]
         [StringLength(200)]
         public string RoleIDs { get; set; }
     }
