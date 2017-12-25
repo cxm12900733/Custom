@@ -137,6 +137,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EasyUI\Combobox.cs" />
+    <Compile Include="Models\EasyUI\DataListModel.cs" />
     <Compile Include="Models\EasyUI\TreeModel.cs" />
     <Compile Include="Models\AjaxResult.cs" />
     <Compile Include="Models\Paging.cs" />

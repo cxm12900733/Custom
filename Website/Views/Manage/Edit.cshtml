@@ -1,7 +1,16 @@
 ﻿@{
     Sys_Manage Sys_Manage = ViewBag.Sys_Manage ?? new Sys_Manage();
     List<Sys_Role> Sys_RoleList = ViewBag.Sys_RoleList;
-    var RoleListJson = Newtonsoft.Json.JsonConvert.SerializeObject(Sys_RoleList);
+    string[] RoleIDs = Sys_Manage.RoleIDs.Split(',');
+    var RoleListJsonModelList = Sys_RoleList.Select(o => new DataListModel() { value = o.ID.ToString(), text = o.Name }).ToList();
+    RoleListJsonModelList.ForEach(o =>
+    {
+        if (RoleIDs.Contains(o.value))
+        {
+            o.@checked = true;
+        }
+    });
+    var RoleListJson = Newtonsoft.Json.JsonConvert.SerializeObject(RoleListJsonModelList);
     this.ViewBag.RoleListJson = RoleListJson;
     
 }
@@ -16,7 +25,7 @@
                     <td style="width:200px;"><input name="TrueName" value="@(Sys_Manage.TrueName)" class="easyui-textbox" data-options="iconCls:'icon-vcard',validType:'maxLength[20]',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
-                    <td>用户名</td>
+                    <td>账号</td>
                     <td style="width:200px;"><input name="UserName" value="@(Sys_Manage.UserName)" class="easyui-textbox" data-options="iconCls:'icon-user_gray',validType:'maxLength[50]',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
@@ -65,10 +74,16 @@
             $('#RoleList').datalist({ 
                 checkbox: true, 
                 lines: true,
-                valueField:'ID',
-                textField:'Name',
                 data:json
             });  
+            //勾选单选UI不能转换，要以下操作
+            var RoleData = $('#RoleList').datalist("getData");
+            $.each( RoleData.rows, function(i, n){
+                if(n.checked)
+                {
+                    $('#RoleList').datalist("checkRow",i);
+                }
+            });
         });
 
         $("#datafrom").submit(function () {
@@ -77,13 +92,13 @@
             }
             else
             {
-                var Selected = $('#RoleList').datagrid('getChecked');	
+                var Selected = $('#RoleList').datalist('getChecked');	
                 var RoleIDs = "";
                 if(Selected.length>0)
                 {
                     var arrayObj = new Array();
                     $.each( Selected, function(i, n){
-                        arrayObj.push(n.ID);
+                        arrayObj.push(n.value);
                     });
                     RoleIDs = arrayObj.join(',');
                 }
