@@ -12,7 +12,7 @@ namespace Infrastructure
         /// <summary>
         /// 扩展逻辑删除,实现了ILogicDelete的实体将被逻辑删除,否则将被物理删除
         /// </summary>
-        public override TEntity LogicRemove<TEntity>(this DbSet<TEntity> DbSet, TEntity entity) where TEntity : class
+        public static TEntity RemoveLogic<TEntity>(this DbSet<TEntity> DbSet, TEntity entity) where TEntity : class
         {
             if (entity != null)
             {
@@ -31,7 +31,7 @@ namespace Infrastructure
         /// <summary>
         /// 扩展逻辑删除,实现了ILogicDelete的实体将被逻辑删除,否则将被物理删除
         /// </summary>
-        public override IEnumerable<TEntity> LogicRemoveRange(this DbSet<TEntity> DbSet, IEnumerable<TEntity> entities)
+        public static IEnumerable<TEntity> RemoveRangeLogic<TEntity>(this DbSet<TEntity> DbSet, IEnumerable<TEntity> entities) where TEntity : class
         {
             if(entities != null)
             {

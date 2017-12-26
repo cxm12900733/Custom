@@ -76,11 +76,11 @@
     <Compile Include="Entity\Sys_SysLog.cs" />
     <Compile Include="Enum\MenuType.cs" />
     <Compile Include="Enum\State.cs" />
-    <Compile Include="Extend\BaseType.cs" />
-    <Compile Include="Extend\BaseEntity.cs" />
-    <Compile Include="Extend\ILogicDelete.cs" />
-    <Compile Include="ITool\ISysLog.cs" />
-    <Compile Include="PredicateBuilder.cs" />
+    <Compile Include="Extend\ExtType.cs" />
+    <Compile Include="Entity\BaseEntity.cs" />
+    <Compile Include="Entity\ILogicDelete.cs" />
+    <Compile Include="Tool\ISysLog.cs" />
+    <Compile Include="Extend\PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\Mapper.cs" />
     <Compile Include="Tool\SysLog.cs" />

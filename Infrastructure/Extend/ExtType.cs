@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Infrastructure
 {
-    public static class BaseType
+    /// <summary>
+    /// 基础类型扩展
+    /// </summary>
+    public static class ExtType
     {
         public static bool IsNullOrEmpty(this string val)
         {

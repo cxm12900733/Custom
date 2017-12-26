@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure
+namespace Infrastructure.Entity
 {
+    /// <summary>
+    /// 逻辑删除接口
+    /// </summary>
     public interface ILogicDelete
     {
         /// <summary>

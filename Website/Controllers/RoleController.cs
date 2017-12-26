@@ -87,7 +87,7 @@ namespace Website.Controllers
             var idsStrArr = ids.Split(',');
             int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));
             var baseSys_Role = this.Entity.Sys_Role.Where(o => idsArr.Contains(o.ID)).ToList();
-            this.Entity.Sys_Role.RemoveRange(baseSys_Role);
+            this.Entity.Sys_Role.RemoveRangeLogic(baseSys_Role);
             this.Entity.SaveChanges();
             Result.Message = "操作成功";
             return this.ToJson(Result);

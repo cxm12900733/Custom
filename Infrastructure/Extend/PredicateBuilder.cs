@@ -5,8 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure
+namespace Infrastructure.Tool
 {
+    /// <summary>
+    /// Linq OR操作
+    /// </summary>
     public static class PredicateBuilder
     {
 

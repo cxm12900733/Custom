@@ -120,7 +120,7 @@ namespace Website.Controllers
             var idsStrArr = ids.Split(',');
             int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));  
             var baseSys_Menu = this.Entity.Sys_Menu.Where(o => idsArr.Contains(o.ID)).ToList();
-            this.Entity.Sys_Menu.RemoveRange(baseSys_Menu);
+            this.Entity.Sys_Menu.RemoveRangeLogic(baseSys_Menu);
             this.Entity.SaveChanges();
             Result.Message = "操作成功";
             return this.ToJson(Result);

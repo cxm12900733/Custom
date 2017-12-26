@@ -1,4 +1,4 @@
-﻿using Infrastructure.ITool;
+﻿using Infrastructure.Tool;
 using log4net;
 using log4net.Config;
 using System;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.ITool
+namespace Infrastructure.Tool
 {
     public interface ISysLog
     {
