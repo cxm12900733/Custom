@@ -8,6 +8,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using EntityFramework.DynamicFilters;
 
 namespace Infrastructure
 {
@@ -38,6 +39,9 @@ namespace Infrastructure
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            //EntityFramework DynamicFilters Linq动态过滤器组件
+            modelBuilder.Filter("LogicDelete", (ILogicDelete o) => o.IsDel, false);
             // 禁用默认表名复数形式
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             // 禁用一对多级联删除
@@ -46,6 +50,23 @@ namespace Infrastructure
             //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             //base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<AC_Menu>().Property(o=>o.MenuCode).
+        }
+
+        /// <summary>
+        /// 关闭所有Linq过滤器
+        /// </summary>
+        public void CloseAllFilters()
+        {
+            this.DisableAllFilters();
+        }
+
+        /// <summary>
+        /// 关闭Linq过滤器
+        /// </summary>
+        /// <param name="filterName">过滤器名称</param>
+        public void CloseFilter(string filterName)
+        {
+            this.DisableFilter(filterName);
         }
 
         /// <summary>
@@ -66,7 +87,7 @@ namespace Infrastructure
         }
     }
 
-    
+    #region 输出sqllog到数据库
     ///// <summary>
     ///// 定义sqllog格式
     ///// </summary>
@@ -130,5 +151,5 @@ namespace Infrastructure
     //            (context, action) => new SingleLineFormatter(context, action));
     //    }
     //}
-
+    #endregion
 }

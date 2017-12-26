@@ -74,6 +74,7 @@ namespace Website.Controllers
             {
                 return this.Error("数据不存在");
             }
+            baseSys_Manage = this.Request.ConvertRequestToModel<Sys_Manage>(baseSys_Manage, Sys_Manage);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }

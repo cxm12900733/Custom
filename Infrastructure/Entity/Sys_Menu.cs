@@ -12,7 +12,7 @@ namespace Infrastructure.Entity
     /// 菜单
     /// 这里菜单和权限是混合的
     /// </summary>
-    public class Sys_Menu
+    public class Sys_Menu : BaseEntity, ILogicDelete
     {
         [Key]
         public int ID { get; set; }
@@ -118,5 +118,7 @@ namespace Infrastructure.Entity
         /// </summary>
         [Required]
         public int ParentID { get; set; }
+
+        
     }
 }

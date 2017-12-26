@@ -11,7 +11,7 @@ namespace Infrastructure.Entity
     /// <summary>
     /// 角色
     /// </summary>
-    public class Sys_Role
+    public class Sys_Role : BaseEntity, ILogicDelete
     {
         [Key]
         public int ID { get; set; }

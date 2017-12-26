@@ -1,6 +1,5 @@
 ﻿using Infrastructure;
 using Infrastructure.Entity;
-using Infrastructure.Factory;
 using Infrastructure.ITool;
 using Infrastructure.Tool;
 using System;

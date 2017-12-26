@@ -1,17 +1,20 @@
 ﻿@{
     Sys_Manage Sys_Manage = ViewBag.Sys_Manage ?? new Sys_Manage();
     List<Sys_Role> Sys_RoleList = ViewBag.Sys_RoleList;
-    string[] RoleIDs = Sys_Manage.RoleIDs.Split(',');
+
     var RoleListJsonModelList = Sys_RoleList.Select(o => new DataListModel() { value = o.ID.ToString(), text = o.Name }).ToList();
-    RoleListJsonModelList.ForEach(o =>
+    if (!Sys_Manage.RoleIDs.IsNullOrEmpty())
     {
-        if (RoleIDs.Contains(o.value))
+        string[] RoleIDs = Sys_Manage.RoleIDs.Split(',');
+        RoleListJsonModelList.ForEach(o =>
         {
-            o.@checked = true;
-        }
-    });
+            if (RoleIDs.Contains(o.value))
+            {
+                o.@checked = true;
+            }
+        });
+    }
     var RoleListJson = Newtonsoft.Json.JsonConvert.SerializeObject(RoleListJsonModelList);
-    this.ViewBag.RoleListJson = RoleListJson;
     
 }
 <form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?datagridid=tableList" class="panel-body panel-body-noborder window-body">
@@ -72,7 +75,7 @@
         var json = @(this.Html.Raw(RoleListJson));
         $(function () {
             $('#RoleList').datalist({ 
-                checkbox: true, 
+                checkbox: true,
                 lines: true,
                 data:json
             });  

@@ -11,7 +11,7 @@ namespace Infrastructure.Entity
     /// <summary>
     /// 管理员
     /// </summary>
-    public class Sys_Manage
+    public class Sys_Manage : BaseEntity, ILogicDelete
     {
         [Key]
         public int ID { get; set; }
@@ -64,5 +64,6 @@ namespace Infrastructure.Entity
         /// </summary>
         [StringLength(200)]
         public string RoleIDs { get; set; }
+
     }
 }
