@@ -1,6 +1,5 @@
 ﻿using Infrastructure;
 using Infrastructure.Entity;
-using Infrastructure.ITool;
 using Infrastructure.Tool;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace Website.Controllers
         /// <summary>
         /// 系统日志
         /// </summary>
-        protected ISysLog ISysLog = new Log4Net();
+        protected ISysLog SysLog = new Log4Net();
 
         /// <summary>
         /// 菜单树
@@ -31,7 +30,7 @@ namespace Website.Controllers
         {
             this.Entity = DBContextFactory.GetDBContext();
             MenuTree = Entity.Sys_Menu.ToList();
-            this.ViewBag.ISysLog = ISysLog;
+            this.ViewBag.SysLog = SysLog;
             this.ViewBag.Entity = Entity;
             this.ViewBag.MenuTree = MenuTree;
             
@@ -50,7 +49,7 @@ namespace Website.Controllers
         protected override void OnException(ExceptionContext filterContext)
         { 
             var ex = filterContext.Exception;
-            ISysLog.Error(ex.Message, ex);
+            SysLog.Error(ex.Message, ex);
             base.OnException(filterContext);
         }
 

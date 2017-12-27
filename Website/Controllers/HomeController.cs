@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace Website.Controllers
 {
     public class HomeController : BaseController
@@ -13,6 +13,12 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
+            //this.SysLog.Fatal("ffff");
+            //this.SysLog.Error("eeee");
+            //Environment.
+            log4net.ILog myLogger = log4net.LogManager.GetLogger("CommonLog");
+            //myLogger.Fatal("ffff");
+            myLogger.Error("eeee",new Exception("发生错误"));
             return View();
         }
 

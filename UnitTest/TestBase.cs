@@ -14,16 +14,17 @@ namespace UnitTest
         {
             
             log4net.ILog myLogger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            myLogger.Info("发生");
             myLogger.Fatal("测试");
-            try 
-	        {	        
-		        throw new ArgumentNullException("我借了");
-	        }
-	        catch (Exception e)
-	        {
-                myLogger.Warn("发生",e);
-		        throw;
-	        }
+            //try 
+            //{	        
+            //    throw new ArgumentNullException("我借了");
+            //}
+            //catch (Exception e)
+            //{
+            //    myLogger.Info("发生",e);
+            //    throw;
+            //}
             
         }
 

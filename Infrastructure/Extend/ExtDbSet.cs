@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
