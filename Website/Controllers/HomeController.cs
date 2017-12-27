@@ -16,9 +16,10 @@ namespace Website.Controllers
             //this.SysLog.Fatal("ffff");
             //this.SysLog.Error("eeee");
             //Environment.
-            log4net.ILog myLogger = log4net.LogManager.GetLogger("CommonLog");
+            log4net.ILog myLogger = log4net.LogManager.GetLogger("FileLog");
             //myLogger.Fatal("ffff");
             myLogger.Error("eeee",new Exception("发生错误"));
+            myLogger.ErrorFormat("错误名称:{0},\n信息:{1}","这是一个测试","测试成功");
             return View();
         }
 
