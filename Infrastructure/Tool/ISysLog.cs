@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Tool
 {
-    public interface ISysLog
+    public interface IDebugLog : log4net.ILog
     {
         /// <summary>
         /// 至命错误

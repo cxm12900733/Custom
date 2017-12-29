@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
-    /// 系统日志
+    /// 调试日志
     /// </summary>
-    public partial class Sys_SysLog
+    public partial class Sys_DebugLog
     {
 
         [Key]
@@ -27,24 +27,23 @@ using System.ComponentModel.DataAnnotations.Schema;
         public string LogLevel { get; set; }
 
         /// <summary>
-        /// 记录器/来源
+        /// 来源
         /// </summary>
         [Required]
-        [StringLength(100)]
-        public string Logger { get; set; }
+        [StringLength(500)]
+        public string Location { get; set; }
 
         /// <summary>
         /// 信息
         /// </summary>
         [Required]
-        [StringLength(1000)]
+        [StringLength(500)]
         public string Message { get; set; }
 
         /// <summary>
         /// 异常
         /// </summary>
         [Required]
-        [StringLength(2000)]
         public string Exception { get; set; }
 
         /// <summary>

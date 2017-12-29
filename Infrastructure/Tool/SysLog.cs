@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
+//[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace Infrastructure.Tool
 {
     public class Log4Net: ISysLog
     {
-        ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        ILog Log = LogManager.GetLogger("FileLog");
         public void Fatal(string message)
         {
             Log.Fatal(message);

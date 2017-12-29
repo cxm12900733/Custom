@@ -17,9 +17,14 @@ namespace Website.Controllers
         protected EntityContext Entity;
 
         /// <summary>
-        /// 系统日志
+        /// 文件日志
         /// </summary>
-        protected ISysLog SysLog = new Log4Net();
+        protected log4net.ILog DebugFileLog = Log4NetExt.DebugFileLog();
+
+        /// <summary>
+        /// SQL日志
+        /// </summary>
+        protected log4net.ILog DebugSQLLog = Log4NetExt.DebugSQLLog();
 
         /// <summary>
         /// 菜单树
@@ -30,7 +35,6 @@ namespace Website.Controllers
         {
             this.Entity = DBContextFactory.GetDBContext();
             MenuTree = Entity.Sys_Menu.ToList();
-            this.ViewBag.SysLog = SysLog;
             this.ViewBag.Entity = Entity;
             this.ViewBag.MenuTree = MenuTree;
             
@@ -49,7 +53,7 @@ namespace Website.Controllers
         protected override void OnException(ExceptionContext filterContext)
         { 
             var ex = filterContext.Exception;
-            SysLog.Error(ex.Message, ex);
+            DebugSQLLog.Error("异常",ex);
             base.OnException(filterContext);
         }
 

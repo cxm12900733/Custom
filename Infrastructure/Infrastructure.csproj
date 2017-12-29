@@ -73,17 +73,16 @@
     <Compile Include="Entity\Sys_BizLog.cs" />
     <Compile Include="Entity\Sys_Menu.cs" />
     <Compile Include="Entity\Sys_Role.cs" />
-    <Compile Include="Entity\Sys_SysLog.cs" />
+    <Compile Include="Entity\Sys_DebugLog.cs" />
     <Compile Include="Enum\MenuType.cs" />
     <Compile Include="Enum\State.cs" />
     <Compile Include="Extend\ExtType.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\ILogicDelete.cs" />
-    <Compile Include="Tool\ISysLog.cs" />
     <Compile Include="Extend\PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\Log4NetExt.cs" />
     <Compile Include="Tool\Mapper.cs" />
-    <Compile Include="Tool\SysLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

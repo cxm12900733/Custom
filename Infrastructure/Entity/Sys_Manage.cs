@@ -11,7 +11,7 @@ namespace Infrastructure.Entity
     /// <summary>
     /// 管理员
     /// </summary>
-    public class Sys_Manage : BaseEntity, ILogicDelete
+    public class M_Manage : BaseEntity, ILogicDelete
     {
         [Key]
         public int ID { get; set; }

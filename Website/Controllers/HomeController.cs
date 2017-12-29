@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace Website.Controllers
 {
     public class HomeController : BaseController
@@ -13,13 +12,19 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
+            //log4net.ILog myLogger = Infrastructure.Tool.Log4NetExt.FileLog();
+            //myLogger.Error("abcd");
             //this.SysLog.Fatal("ffff");
             //this.SysLog.Error("eeee");
             //Environment.
-            log4net.ILog myLogger = log4net.LogManager.GetLogger("FileLog");
+            //log4net.ILog myLogger = log4net.LogManager.GetLogger("FileLog");
+            //this.SysLog.Debug("eeee");
             //myLogger.Fatal("ffff");
-            myLogger.Error("eeee",new Exception("发生错误"));
-            myLogger.ErrorFormat("错误名称:{0},\n信息:{1}","这是一个测试","测试成功");
+            //myLogger.Error("eeee",new Exception("发生错误"));
+            //myLogger.ErrorFormat("错误名称:{0},\n信息:{1}","这是一个测试","测试成功");
+            //throw new Exception("发生错误");
+            //this.DebugSQLLog.Debug("测试", new Exception("发生错误"));
+            this.DebugFileLog.Debug("测试", new Exception("发生错误"));
             return View();
         }
 

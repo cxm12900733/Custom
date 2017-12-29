@@ -22,7 +22,7 @@ namespace Infrastructure
         }
 
         #region 数据集
-        public DbSet<Sys_SysLog> Sys_SysLog { get; set; }
+        public DbSet<Sys_DebugLog> Sys_DebugLog { get; set; }
         public DbSet<Sys_BizLog> Sys_BizLog { get; set; }
         public DbSet<Sys_Account> Sys_Account { get; set; }
         public DbSet<Sys_Menu> Sys_Menu { get; set; }
