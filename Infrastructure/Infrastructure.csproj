@@ -62,20 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Sys_Dept.cs" />
     <Compile Include="Extend\ExtDbSet.cs" />
     <Compile Include="Extend\HttpRequestExtensions.cs" />
-    <Compile Include="DBContextFactory.cs" />
-    <Compile Include="EntityContext.cs" />
-    <Compile Include="Entity\Sys_ManagePower.cs" />
-    <Compile Include="Entity\M_Manage.cs" />
-    <Compile Include="Entity\Sys_Account.cs" />
-    <Compile Include="Entity\Sys_BizLog.cs" />
-    <Compile Include="Entity\M_Menu.cs" />
-    <Compile Include="Entity\M_Role.cs" />
-    <Compile Include="Entity\Sys_DebugLog.cs" />
-    <Compile Include="Enum\MenuType.cs" />
-    <Compile Include="Enum\State.cs" />
+    <Compile Include="BaseEntityContext.cs" />
     <Compile Include="Extend\ExtType.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\ILogicDelete.cs" />

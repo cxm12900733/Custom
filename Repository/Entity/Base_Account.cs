@@ -1,5 +1,4 @@
-﻿using Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,12 +8,12 @@ using System.Threading.Tasks;
 namespace Infrastructure.Entity
 {
     /// <summary>
-    /// 管理员
+    /// 账户
     /// </summary>
-    public class M_Manage : BaseEntity, ILogicDelete
+    public class Base_Account
     {
         [Key]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         /// <summary>
         /// 用户名
@@ -33,37 +32,15 @@ namespace Infrastructure.Entity
         /// <summary>
         /// 移动电话号码
         /// </summary>
+        [Required]
         [StringLength(30)]
         public string MobileNo { get; set; }
 
         /// <summary>
         /// 电子邮箱
         /// </summary>
+        [Required]
         [StringLength(50)]
         public string Email { get; set; }
-
-        /// <summary>
-        /// 真实姓名
-        /// </summary>
-        [Required]
-        [StringLength(20)]
-        public string TrueName { get; set; }
-
-        /// <summary>
-        /// 状态
-        /// </summary>
-        public State State { get; set; }
-
-        /// <summary>
-        /// 添加时间
-        /// </summary>
-        public DateTime AddTime { get; set; }
-
-        /// <summary>
-        /// 角色ID字符串
-        /// </summary>
-        [StringLength(200)]
-        public string RoleIDs { get; set; }
-
     }
 }

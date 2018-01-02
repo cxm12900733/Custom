@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Tool
+namespace Infrastructure
 {
     /// <summary>
     /// Mapper帮助类

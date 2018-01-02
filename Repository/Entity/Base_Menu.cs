@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Infrastructure.Entity
 {
     /// <summary>
-    /// 部门
+    /// 菜单
     /// </summary>
-    public class Sys_Dept
+    public class Base_Menu
     {
         [Key]
         public int ID { get; set; }
@@ -20,30 +20,35 @@ namespace Infrastructure.Entity
         /// 名称
         /// </summary>
         [Required]
-        [StringLength(50)]
-        public string Name
-        {
-            get { return name; }
-            set { name = value ?? string.Empty; }
-        }
-        private string name = string.Empty;
+        [StringLength(20)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 菜单类型
+        /// </summary>
+        [Required]
+        public MenuType MenuType { get; set; }
+
+        /// <summary>
+        /// Url
+        /// </summary>
+        [Required]
+        [StringLength(100)]
+        public string Url { get;set; }
 
         /// <summary>
         /// 描述
         /// </summary>
         [Required]
         [StringLength(200)]
-        public string Describe
-        {
-            get { return describe; }
-            set { describe = value ?? string.Empty; }
-        }
-        private string describe = string.Empty;
+        public string Describe { get; set; }
 
         /// <summary>
-        /// 状态
+        /// 样式
         /// </summary>
-        public State State { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string Css { get; set; }
 
         /// <summary>
         /// 排序
@@ -52,13 +57,26 @@ namespace Infrastructure.Entity
         public int Sort { get; set; }
 
         /// <summary>
+        /// 状态
+        /// </summary>
+        [Required]
+        public State State { get; set; }
+
+        /// <summary>
         /// 添加时间
         /// </summary>
+        [Required]
         public DateTime AddTime { get; set; }
+
+        /// <summary>
+        /// 权限ID
+        /// </summary>
+        public int PowerID { get; set; }
 
         /// <summary>
         /// 父ID
         /// </summary>
-        public int PID { get; set; }
+        [Required]
+        public int ParentID { get; set; }
     }
 }

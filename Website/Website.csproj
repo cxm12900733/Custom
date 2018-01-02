@@ -2224,6 +2224,10 @@
       <Project>{b641caa3-6693-48d0-8ab3-bc3777288e22}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{b2cb5553-2969-4cdc-985b-017e35f919a5}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="log4net.config">

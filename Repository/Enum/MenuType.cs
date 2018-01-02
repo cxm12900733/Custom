@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure
+namespace Repository.Entity
 {
     /// <summary>
     /// 菜单类型

@@ -1,10 +1,10 @@
-namespace Infrastructure.Entity
-{
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Repository.Entity
+{
     /// <summary>
     /// µ˜ ‘»’÷æ
     /// </summary>

@@ -7,27 +7,20 @@ using System.Threading.Tasks;
 namespace Infrastructure.Entity
 {
     /// <summary>
-    /// 角色&菜单
+    /// 管理员_角色
     /// </summary>
-    public class Sys_ManagePower
+    public class Middle_Manage_Role
     {
         public int ID { get; set; }
 
         /// <summary>
-        /// 菜单ID
-        /// </summary>
-        public int MenuID { get; set; }
-
-        /// <summary>
         /// 管理员ID
         /// </summary>
-        public int ManageID { get; set; }
+        public Guid ManageID { get; set; }
 
         /// <summary>
-        /// 授权
-        /// 1.
-        /// 2.
+        /// 角色ID
         /// </summary>
-        public int Authorize { get; set; }
+        public int RoleID { get; set; }
     }
 }
