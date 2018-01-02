@@ -28,16 +28,16 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult TableList(Paging Paging, Sys_Role Sys_Role)
+        public ActionResult TableList(Paging Paging, M_Role M_Role)
         {
-            var query = this.Entity.Sys_Role.AsNoTracking().AsQueryable();
-            if (!Sys_Role.Name.IsNullOrEmpty())
+            var query = this.Entity.M_Role.AsNoTracking().AsQueryable();
+            if (!M_Role.Name.IsNullOrEmpty())
             {
-                query = query.Where(o => o.Name.Contains(Sys_Role.Name));
+                query = query.Where(o => o.Name.Contains(M_Role.Name));
             }
-            List<Sys_Role> Sys_RoleList = query.OrderBy(o => o.AddTime).Skip(Paging.Skip).Take(Paging.Rows).ToList();
-            int Count = this.Entity.Sys_Role.Count();
-            return this.ToTableJson(Sys_RoleList,Count);
+            List<M_Role> M_RoleList = query.OrderBy(o => o.AddTime).Skip(Paging.Skip).Take(Paging.Rows).ToList();
+            int Count = this.Entity.M_Role.Count();
+            return this.ToTableJson(M_RoleList,Count);
         }
 
         [HttpGet]
@@ -47,10 +47,10 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Sys_Role Sys_Role)
+        public ActionResult Add(M_Role M_Role)
         {
-            Sys_Role.AddTime = DateTime.Now;
-            this.Entity.Sys_Role.Add(Sys_Role);
+            M_Role.AddTime = DateTime.Now;
+            this.Entity.M_Role.Add(M_Role);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }
@@ -58,24 +58,24 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            var Sys_Role = this.Entity.Sys_Role.FirstOrDefault(o => o.ID == Id);
-            if (Sys_Role == null)
+            var M_Role = this.Entity.M_Role.FirstOrDefault(o => o.ID == Id);
+            if (M_Role == null)
             {
                 return this.Error("数据不存在");
             }
-            this.ViewBag.Sys_Role = Sys_Role;
+            this.ViewBag.M_Role = M_Role;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Edit(Sys_Role Sys_Role)
+        public ActionResult Edit(M_Role M_Role)
         {
-            var baseSys_Role = this.Entity.Sys_Role.FirstOrDefault(o => o.ID == Sys_Role.ID);
-            if (baseSys_Role == null)
+            var baseM_Role = this.Entity.M_Role.FirstOrDefault(o => o.ID == M_Role.ID);
+            if (baseM_Role == null)
             {
                 return this.Error("数据不存在");
             }
-            baseSys_Role = this.Request.ConvertRequestToModel<Sys_Role>(baseSys_Role, Sys_Role);
+            baseM_Role = this.Request.ConvertRequestToModel<M_Role>(baseM_Role, M_Role);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }
@@ -86,8 +86,8 @@ namespace Website.Controllers
             var Result = new AjaxResult();
             var idsStrArr = ids.Split(',');
             int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));
-            var baseSys_Role = this.Entity.Sys_Role.Where(o => idsArr.Contains(o.ID)).ToList();
-            this.Entity.Sys_Role.RemoveRangeLogic(baseSys_Role);
+            var baseM_Role = this.Entity.M_Role.Where(o => idsArr.Contains(o.ID)).ToList();
+            this.Entity.M_Role.RemoveRangeLogic(baseM_Role);
             this.Entity.SaveChanges();
             Result.Message = "操作成功";
             return this.ToJson(Result);

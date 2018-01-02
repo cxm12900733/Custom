@@ -1,11 +1,11 @@
 ﻿@{
-    Sys_Manage Sys_Manage = ViewBag.Sys_Manage ?? new Sys_Manage();
-    List<Sys_Role> Sys_RoleList = ViewBag.Sys_RoleList;
+    M_Manage M_Manage = ViewBag.M_Manage ?? new M_Manage();
+    List<M_Role> M_RoleList = ViewBag.M_RoleList;
 
-    var RoleListJsonModelList = Sys_RoleList.Select(o => new DataListModel() { value = o.ID.ToString(), text = o.Name }).ToList();
-    if (!Sys_Manage.RoleIDs.IsNullOrEmpty())
+    var RoleListJsonModelList = M_RoleList.Select(o => new DataListModel() { value = o.ID.ToString(), text = o.Name }).ToList();
+    if (!M_Manage.RoleIDs.IsNullOrEmpty())
     {
-        string[] RoleIDs = Sys_Manage.RoleIDs.Split(',');
+        string[] RoleIDs = M_Manage.RoleIDs.Split(',');
         RoleListJsonModelList.ForEach(o =>
         {
             if (RoleIDs.Contains(o.value))
@@ -20,42 +20,42 @@
 <form id="datafrom" method="post" action="/@(this.ControllerName)/@(this.ActionName)?datagridid=tableList" class="panel-body panel-body-noborder window-body">
     <div id="cc" class="easyui-layout" data-options="height:$(window).height()-10">
         <div data-options="region:'west',split:true,collapsible:false,title:'基础资料'" style="width:300px;">
-            <input type="hidden" name="id" value="@(Sys_Manage.ID)" />
-            <input type="hidden" id="RoleIDs" name="RoleIDs" value="@(Sys_Manage.RoleIDs)" />
+            <input type="hidden" name="id" value="@(M_Manage.ID)" />
+            <input type="hidden" id="RoleIDs" name="RoleIDs" value="@(M_Manage.RoleIDs)" />
             <table cellpadding="5">
                 <tr>
                     <td>姓名</td>
-                    <td style="width:200px;"><input name="TrueName" value="@(Sys_Manage.TrueName)" class="easyui-textbox" data-options="iconCls:'icon-vcard',validType:'maxLength[20]',required:true,width:'100%'" /></td>
+                    <td style="width:200px;"><input name="TrueName" value="@(M_Manage.TrueName)" class="easyui-textbox" data-options="iconCls:'icon-vcard',validType:'maxLength[20]',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>账号</td>
-                    <td style="width:200px;"><input name="UserName" value="@(Sys_Manage.UserName)" class="easyui-textbox" data-options="iconCls:'icon-user_gray',validType:'maxLength[50]',required:true,width:'100%'" /></td>
+                    <td style="width:200px;"><input name="UserName" value="@(M_Manage.UserName)" class="easyui-textbox" data-options="iconCls:'icon-user_gray',validType:'maxLength[50]',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>密码</td>
-                    <td><input name="Password" value="@(Sys_Manage.Password)" class="easyui-textbox" data-options="iconCls:'icon-key',validType:'maxLength[30]',type:'password',required:true,width:'100%'" /></td>
+                    <td><input name="Password" value="@(M_Manage.Password)" class="easyui-textbox" data-options="iconCls:'icon-key',validType:'maxLength[30]',type:'password',required:true,width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>移动电话</td>
-                    <td style="width:200px;"><input name="MobileNo" value="@(Sys_Manage.MobileNo)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',width:'100%'" /></td>
+                    <td style="width:200px;"><input name="MobileNo" value="@(M_Manage.MobileNo)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>电子邮箱</td>
-                    <td style="width:200px;"><input name="Email" value="@(Sys_Manage.Email)" class="easyui-textbox" data-options="iconCls:'icon-email',validType:'maxLength[50]',width:'100%'" /></td>
+                    <td style="width:200px;"><input name="Email" value="@(M_Manage.Email)" class="easyui-textbox" data-options="iconCls:'icon-email',validType:'maxLength[50]',width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>状态</td>
                     <td>
                         <select name="State" class="easyui-combobox" data-options="panelHeight:'auto',editable:false,width:'100%'">
-                            <option value="@(State.Normal)" @(Sys_Manage.State == State.Normal ? "selected" : "")>正常</option>
-                            <option value="@(State.Lock)" @(Sys_Manage.State == State.Lock ? "selected" : "")>停用</option>
+                            <option value="@(State.Normal)" @(M_Manage.State == State.Normal ? "selected" : "")>正常</option>
+                            <option value="@(State.Lock)" @(M_Manage.State == State.Lock ? "selected" : "")>停用</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>添加时间</td>
                     <td>
-                        @(Sys_Manage.AddTime != DateTime.MinValue ? Sys_Manage.AddTime.ToString("yyyy-MM-dd HH:mm") : "--")
+                        @(M_Manage.AddTime != DateTime.MinValue ? M_Manage.AddTime.ToString("yyyy-MM-dd HH:mm") : "--")
                     </td>
                 </tr>
 

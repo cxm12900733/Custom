@@ -28,25 +28,25 @@ namespace Website.Controllers
         /// 列表
         /// </summary>
         [HttpPost]
-        public ActionResult TableList(Sys_Manage Sys_Manage)
+        public ActionResult TableList(M_Manage M_Manage)
         {
-            List<Sys_Manage> Sys_ManageList = this.Entity.Sys_Manage.AsNoTracking().OrderByDescending(o => o.ID).ToList();
-            return this.ToTableJson(Sys_ManageList);
+            List<M_Manage> M_ManageList = this.Entity.M_Manage.AsNoTracking().OrderByDescending(o => o.ID).ToList();
+            return this.ToTableJson(M_ManageList);
         }
 
         [HttpGet]
         public ActionResult Add()
         {
-            var Sys_RoleList = this.Entity.Sys_Role.AsNoTracking().Where(o => o.State == State.Normal).OrderBy(o => o.Sort).ToList();
-            this.ViewBag.Sys_RoleList = Sys_RoleList;
+            var M_RoleList = this.Entity.M_Role.AsNoTracking().Where(o => o.State == State.Normal).OrderBy(o => o.Sort).ToList();
+            this.ViewBag.M_RoleList = M_RoleList;
             return View("Edit");
         }
 
         [HttpPost]
-        public ActionResult Add(Sys_Manage Sys_Manage)
+        public ActionResult Add(M_Manage M_Manage)
         {
-            Sys_Manage.AddTime = DateTime.Now;
-            this.Entity.Sys_Manage.Add(Sys_Manage);
+            M_Manage.AddTime = DateTime.Now;
+            this.Entity.M_Manage.Add(M_Manage);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }
@@ -54,27 +54,27 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            var Sys_Manage = this.Entity.Sys_Manage.FirstOrDefault(o => o.ID == Id);
-            if (Sys_Manage == null)
+            var M_Manage = this.Entity.M_Manage.FirstOrDefault(o => o.ID == Id);
+            if (M_Manage == null)
             {
                 return this.Error("数据不存在");
             }
-            this.ViewBag.Sys_Manage = Sys_Manage;
+            this.ViewBag.M_Manage = M_Manage;
 
-            var Sys_RoleList = this.Entity.Sys_Role.AsNoTracking().Where(o => o.State == State.Normal).OrderBy(o => o.Sort).ToList();
-            this.ViewBag.Sys_RoleList = Sys_RoleList;
+            var M_RoleList = this.Entity.M_Role.AsNoTracking().Where(o => o.State == State.Normal).OrderBy(o => o.Sort).ToList();
+            this.ViewBag.M_RoleList = M_RoleList;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Edit(Sys_Manage Sys_Manage)
+        public ActionResult Edit(M_Manage M_Manage)
         {
-            var baseSys_Manage = this.Entity.Sys_Manage.FirstOrDefault(o => o.ID == Sys_Manage.ID);
-            if (baseSys_Manage == null)
+            var baseM_Manage = this.Entity.M_Manage.FirstOrDefault(o => o.ID == M_Manage.ID);
+            if (baseM_Manage == null)
             {
                 return this.Error("数据不存在");
             }
-            baseSys_Manage = this.Request.ConvertRequestToModel<Sys_Manage>(baseSys_Manage, Sys_Manage);
+            baseM_Manage = this.Request.ConvertRequestToModel<M_Manage>(baseM_Manage, M_Manage);
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }
@@ -85,8 +85,8 @@ namespace Website.Controllers
             var Result = new AjaxResult();
             var idsStrArr = ids.Split(',');
             int[] idsArr = Array.ConvertAll<string, int>(idsStrArr, s => int.Parse(s));
-            var baseSys_Manage = this.Entity.Sys_Manage.Where(o => idsArr.Contains(o.ID)).ToList();
-            this.Entity.Sys_Manage.RemoveRangeLogic(baseSys_Manage);
+            var baseM_Manage = this.Entity.M_Manage.Where(o => idsArr.Contains(o.ID)).ToList();
+            this.Entity.M_Manage.RemoveRangeLogic(baseM_Manage);
             this.Entity.SaveChanges();
             Result.Message = "操作成功";
             return this.ToJson(Result);

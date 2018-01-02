@@ -26,11 +26,11 @@ namespace Website.Common
         /// <summary>
         /// 菜单列表
         /// </summary>
-        public List<Sys_Menu> MenuTree
+        public List<M_Menu> MenuTree
         {
             get
             {
-                return (List<Sys_Menu>)this.ViewBag.MenuTree;
+                return (List<M_Menu>)this.ViewBag.MenuTree;
             }
         }
 

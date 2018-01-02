@@ -68,11 +68,11 @@
     <Compile Include="DBContextFactory.cs" />
     <Compile Include="EntityContext.cs" />
     <Compile Include="Entity\Sys_ManagePower.cs" />
-    <Compile Include="Entity\Sys_Manage.cs" />
+    <Compile Include="Entity\M_Manage.cs" />
     <Compile Include="Entity\Sys_Account.cs" />
     <Compile Include="Entity\Sys_BizLog.cs" />
-    <Compile Include="Entity\Sys_Menu.cs" />
-    <Compile Include="Entity\Sys_Role.cs" />
+    <Compile Include="Entity\M_Menu.cs" />
+    <Compile Include="Entity\M_Role.cs" />
     <Compile Include="Entity\Sys_DebugLog.cs" />
     <Compile Include="Enum\MenuType.cs" />
     <Compile Include="Enum\State.cs" />
@@ -87,10 +87,6 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="log4net.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

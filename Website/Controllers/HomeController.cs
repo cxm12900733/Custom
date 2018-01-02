@@ -12,41 +12,28 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            //log4net.ILog myLogger = Infrastructure.Tool.Log4NetExt.FileLog();
-            //myLogger.Error("abcd");
-            //this.SysLog.Fatal("ffff");
-            //this.SysLog.Error("eeee");
-            //Environment.
-            //log4net.ILog myLogger = log4net.LogManager.GetLogger("FileLog");
-            //this.SysLog.Debug("eeee");
-            //myLogger.Fatal("ffff");
-            //myLogger.Error("eeee",new Exception("发生错误"));
-            //myLogger.ErrorFormat("错误名称:{0},\n信息:{1}","这是一个测试","测试成功");
-            //throw new Exception("发生错误");
-            //this.DebugSQLLog.Debug("测试", new Exception("发生错误"));
-            this.DebugFileLog.Debug("测试", new Exception("发生错误"));
             return View();
         }
 
-        public void test()
-        {
-            string IconsRelativePath = "/Content/css/Custom/customIcons/";
-            var IconsPath = HttpContext.Server.MapPath(IconsRelativePath);
-            var icons = System.IO.Directory.GetFiles(IconsPath);
-            var Directories = System.IO.Directory.GetDirectories(IconsPath);
-            foreach (var item in Directories)
-            {
-                var a = System.IO.Path.GetFileName(item);
-            }
+        //public void test()
+        //{
+        //    string IconsRelativePath = "/Content/css/Custom/customIcons/";
+        //    var IconsPath = HttpContext.Server.MapPath(IconsRelativePath);
+        //    var icons = System.IO.Directory.GetFiles(IconsPath);
+        //    var Directories = System.IO.Directory.GetDirectories(IconsPath);
+        //    foreach (var item in Directories)
+        //    {
+        //        var a = System.IO.Path.GetFileName(item);
+        //    }
             
-            //System.IO.Directory.GetDirectories(IconsPath);
+        //    //System.IO.Directory.GetDirectories(IconsPath);
             
-            foreach (var item in icons)
-            {
-                string fileName = System.IO.Path.GetFileName(item);
-                string pureFileName = fileName.Remove(fileName.LastIndexOf('.'));
-            }
-        }
+        //    foreach (var item in icons)
+        //    {
+        //        string fileName = System.IO.Path.GetFileName(item);
+        //        string pureFileName = fileName.Remove(fileName.LastIndexOf('.'));
+        //    }
+        //}
 
         /// <summary>
         /// 按文件生成自定义图标样式、Json文件

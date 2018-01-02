@@ -29,17 +29,21 @@ namespace Website.Controllers
         /// <summary>
         /// 菜单树
         /// </summary>
-        protected List<Sys_Menu> MenuTree = new List<Sys_Menu>();
+        protected List<M_Menu> MenuTree = new List<M_Menu>();
 
         public BaseController()
         {
             this.Entity = DBContextFactory.GetDBContext();
-            MenuTree = Entity.Sys_Menu.ToList();
+            MenuTree = Entity.M_Menu.ToList();
             this.ViewBag.Entity = Entity;
             this.ViewBag.MenuTree = MenuTree;
             
         }
 
+        /// <summary>
+        /// 在调用操作方法前调用。
+        /// </summary>
+        /// <param name="filterContext"></param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             this.ViewBag.ActionName = filterContext.RouteData.Values.ContainsKey("action") ? this.RouteData.Values["action"] : string.Empty;
@@ -51,10 +55,11 @@ namespace Website.Controllers
         /// </summary>
         /// <param name="filterContext"></param>
         protected override void OnException(ExceptionContext filterContext)
-        { 
+        {
             var ex = filterContext.Exception;
-            DebugSQLLog.Error("异常",ex);
-            base.OnException(filterContext);
+            DebugSQLLog.Error("异常", ex);
+            //filterContext.ExceptionHandled = true;
+            //base.OnException(filterContext);
         }
 
 
