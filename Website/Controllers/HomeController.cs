@@ -42,23 +42,23 @@ namespace Website.Controllers
             //}
             //string str = Encoding.Default.GetString(encrypted);
 
-            var newEncrypted = Convert.FromBase64String(str);
-            string neworiginal = string.Empty;
-            ICryptoTransform decryptor = myAes.CreateDecryptor();
-            // Create the streams used for decryption.
-            using (MemoryStream msDecrypt = new MemoryStream(newEncrypted))
-            {
-                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                {
-                    using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                    {
+            //var newEncrypted = Convert.FromBase64String(str);
+            //string neworiginal = string.Empty;
+            //ICryptoTransform decryptor = myAes.CreateDecryptor();
+            //// Create the streams used for decryption.
+            //using (MemoryStream msDecrypt = new MemoryStream(newEncrypted))
+            //{
+            //    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+            //    {
+            //        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+            //        {
 
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        neworiginal = srDecrypt.ReadToEnd();
-                    }
-                }
-            }
+            //            // Read the decrypted bytes from the decrypting stream
+            //            // and place them in a string.
+            //            neworiginal = srDecrypt.ReadToEnd();
+            //        }
+            //    }
+            //}
 
             return View();
         }
