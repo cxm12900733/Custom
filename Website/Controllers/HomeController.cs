@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Infrastructure.Tool.Cryptography;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -15,17 +14,44 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
+            List<string> originals = new List<string>()
+            {
+                "Here is some data to encrypt!",
+                "中文测试一下",
+                "特设字符测试&*(!@)#($&^%$%?",
+                "中文测试一下SDFWFFDFDSFDSFDSWFF255611516262622122162212FFEWFEFDSFAFEFGWFWQFQFQA",
+            };
             string original = "Here is some data to encrypt!";
-            string key = "AES.Custom.Web.Manage.Login.ABCD";
-            var keyarr = Encoding.ASCII.GetBytes(key);
-            AesManaged myAes = new AesManaged();
-            //myAes.Key = keyarr;
+            string key = "r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY";
+            string IV = "p52kkXLyco6oHOwP";
+            var AES = new AESHelper(key, IV);
+            List<string> a = new List<string>();
+            foreach (var item in originals)
+            {
+                var encryptedText = AES.Encrypt(item);
+                var clearText = AES.Decrypt(encryptedText);
+                a.Add(clearText);
+            }
+            
+            ////string original = "Here is some data to encrypt!";
+            ////string key = "r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY";
+            ////string IV = "p52kkXLyco6oHOwP";
+            ////var KeyArr = Encoding.UTF8.GetBytes(key);
+            ////var IVArr = Encoding.UTF8.GetBytes(IV);
+            ////AesManaged EncryptorAes = new AesManaged();
+            ////EncryptorAes.Key = KeyArr;
+            ////EncryptorAes.IV = IVArr;
             //myAes.GenerateIV();
             //var Istrue = myAes.ValidKeySize(myAes.Key.Length);
 
-            ICryptoTransform encryptor = myAes.CreateEncryptor();
-            byte[] encrypted;
-            string str = Encrypt(original, encryptor);
+            ////ICryptoTransform encryptor = EncryptorAes.CreateEncryptor();
+            ////string str = Encrypt(original, encryptor);
+
+            ////AesManaged DecryptorAes = new AesManaged();
+            ////DecryptorAes.Key = KeyArr;
+            ////DecryptorAes.IV = IVArr;
+            ////ICryptoTransform decryptor = DecryptorAes.CreateDecryptor();
+            ////string neworiginal = Decrypt(str, decryptor);
             //using (MemoryStream msEncrypt = new MemoryStream())
             //{
             //    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
@@ -63,83 +89,6 @@ namespace Website.Controllers
             return View();
         }
 
-        // 加密算法
-        private string Encrypt(string clearText,ICryptoTransform encryptor)
-        {
-            // 创建明文流
-            byte[] clearBuffer = Encoding.UTF8.GetBytes(clearText);
-            MemoryStream clearStream = new MemoryStream(clearBuffer);
-
-            // 创建空的密文流
-            MemoryStream encryptedStream = new MemoryStream();
-
-            CryptoStream cryptoStream =
-                new CryptoStream(encryptedStream, encryptor, CryptoStreamMode.Write);
-
-            // 将明文流写入到buffer中
-            // 将buffer中的数据写入到cryptoStream中
-            int bytesRead = 0;
-            byte[] buffer = new byte[1024];
-            do
-            {
-                bytesRead = clearStream.Read(buffer, 0, 1024);
-                cryptoStream.Write(buffer, 0, bytesRead);
-            } while (bytesRead > 0);
-
-            cryptoStream.FlushFinalBlock();
-
-            // 获取加密后的文本
-            buffer = encryptedStream.ToArray();
-            string encryptedText = Convert.ToBase64String(buffer);
-            return encryptedText;
-        }
-
-        // 解密算法
-        //private string Decrypt(string encryptedText)
-        //{
-        //    byte[] encryptedBuffer = Convert.FromBase64String(encryptedText);
-        //    Stream encryptedStream = new MemoryStream(encryptedBuffer);
-
-        //    MemoryStream clearStream = new MemoryStream();
-        //    CryptoStream cryptoStream =
-        //        new CryptoStream(encryptedStream, decryptor, CryptoStreamMode.Read);
-
-        //    int bytesRead = 0;
-        //    byte[] buffer = new byte[BufferSize];
-
-        //    do
-        //    {
-        //        bytesRead = cryptoStream.Read(buffer, 0, BufferSize);
-        //        clearStream.Write(buffer, 0, bytesRead);
-        //    } while (bytesRead > 0);
-
-        //    buffer = clearStream.GetBuffer();
-        //    string clearText =
-        //        Encoding.UTF8.GetString(buffer, 0, (int)clearStream.Length);
-
-        //    return clearText;
-        //}
-
-        //public void test()
-        //{
-        //    string IconsRelativePath = "/Content/css/Custom/customIcons/";
-        //    var IconsPath = HttpContext.Server.MapPath(IconsRelativePath);
-        //    var icons = System.IO.Directory.GetFiles(IconsPath);
-        //    var Directories = System.IO.Directory.GetDirectories(IconsPath);
-        //    foreach (var item in Directories)
-        //    {
-        //        var a = System.IO.Path.GetFileName(item);
-        //    }
-            
-        //    //System.IO.Directory.GetDirectories(IconsPath);
-            
-        //    foreach (var item in icons)
-        //    {
-        //        string fileName = System.IO.Path.GetFileName(item);
-        //        string pureFileName = fileName.Remove(fileName.LastIndexOf('.'));
-        //    }
-        //}
-
         /// <summary>
         /// 按文件生成自定义图标样式、Json文件
         /// </summary>
@@ -156,7 +105,6 @@ namespace Website.Controllers
             /* 流程
              * 1.查询确认保存路径,并清空内容
              * 2.查询图标路径下的所有图标
-             * 3.
              */
             //创建文件，取得通道
             var CssPathStrema = System.IO.File.Create(CssPath);

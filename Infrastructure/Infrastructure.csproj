@@ -70,6 +70,8 @@
     <Compile Include="Entity\ILogicDelete.cs" />
     <Compile Include="Extend\PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\Cryptography\AESHelper.cs" />
+    <Compile Include="Tool\Cryptography\ICryptoTransformExtensions.cs" />
     <Compile Include="Tool\Log4NetExt.cs" />
     <Compile Include="Tool\Mapper.cs" />
   </ItemGroup>
