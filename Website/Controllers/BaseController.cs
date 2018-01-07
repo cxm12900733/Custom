@@ -62,7 +62,9 @@ namespace Website.Controllers
             //base.OnException(filterContext);
         }
 
+        #region UI相关
 
+        #region easyUI
         /// <summary>
         /// 输出easyUI的表格Json数据
         /// </summary>
@@ -90,7 +92,9 @@ namespace Website.Controllers
             JsonResult.Data = new { data = Data };
             return JsonResult;
         }
+        #endregion
 
+        #region 通用介面
         /// <summary>
         /// 错误信息介面
         /// </summary>
@@ -121,7 +125,9 @@ namespace Website.Controllers
             ViewBag.isCloseWindow = isCloseWindow;
             return View("Succeed");
         }
+        #endregion
 
+        #endregion
     }
 
     

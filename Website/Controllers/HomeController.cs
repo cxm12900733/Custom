@@ -1,4 +1,5 @@
-﻿using Infrastructure.Tool.Cryptography;
+﻿using Infrastructure.Tool;
+using Infrastructure.Tool.Cryptography;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,77 +15,16 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            List<string> originals = new List<string>()
-            {
-                "Here is some data to encrypt!",
-                "中文测试一下",
-                "特设字符测试&*(!@)#($&^%$%?",
-                "中文测试一下SDFWFFDFDSFDSFDSWFF255611516262622122162212FFEWFEFDSFAFEFGWFWQFQFQA",
-            };
-            string original = "Here is some data to encrypt!";
-            string key = "r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY";
-            string IV = "p52kkXLyco6oHOwP";
-            var AES = new AESHelper(key, IV);
-            List<string> a = new List<string>();
-            foreach (var item in originals)
-            {
-                var encryptedText = AES.Encrypt(item);
-                var clearText = AES.Decrypt(encryptedText);
-                a.Add(clearText);
-            }
-            
-            ////string original = "Here is some data to encrypt!";
-            ////string key = "r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY";
-            ////string IV = "p52kkXLyco6oHOwP";
-            ////var KeyArr = Encoding.UTF8.GetBytes(key);
-            ////var IVArr = Encoding.UTF8.GetBytes(IV);
-            ////AesManaged EncryptorAes = new AesManaged();
-            ////EncryptorAes.Key = KeyArr;
-            ////EncryptorAes.IV = IVArr;
-            //myAes.GenerateIV();
-            //var Istrue = myAes.ValidKeySize(myAes.Key.Length);
-
-            ////ICryptoTransform encryptor = EncryptorAes.CreateEncryptor();
-            ////string str = Encrypt(original, encryptor);
-
-            ////AesManaged DecryptorAes = new AesManaged();
-            ////DecryptorAes.Key = KeyArr;
-            ////DecryptorAes.IV = IVArr;
-            ////ICryptoTransform decryptor = DecryptorAes.CreateDecryptor();
-            ////string neworiginal = Decrypt(str, decryptor);
-            //using (MemoryStream msEncrypt = new MemoryStream())
+            //string key = "r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY";
+            //string IV = "p52kkXLyco6oHOwP";
+            //var CookieModelContext = new CookieModelContext<Infrastructure.Tool.CookieModel>(key, IV, "text");
+            //var CookieModel = new CookieModel()
             //{
-            //    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-            //    {
-            //        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-            //        {
+            //    ID = "57689",
+            //};
+            //CookieModelContext.SetCookieModel(CookieModel, DateTime.Now.AddDays(1));
 
-            //            //Write all data to the stream.
-            //            swEncrypt.Write(original);
-            //        }
-
-            //        encrypted = msEncrypt.ToArray();
-            //    }
-            //}
-            //string str = Encoding.Default.GetString(encrypted);
-
-            //var newEncrypted = Convert.FromBase64String(str);
-            //string neworiginal = string.Empty;
-            //ICryptoTransform decryptor = myAes.CreateDecryptor();
-            //// Create the streams used for decryption.
-            //using (MemoryStream msDecrypt = new MemoryStream(newEncrypted))
-            //{
-            //    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-            //    {
-            //        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-            //        {
-
-            //            // Read the decrypted bytes from the decrypting stream
-            //            // and place them in a string.
-            //            neworiginal = srDecrypt.ReadToEnd();
-            //        }
-            //    }
-            //}
+            //var GetCookieModel = CookieModelContext.GetCookieModel();
 
             return View();
         }
