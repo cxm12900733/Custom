@@ -50,13 +50,18 @@ namespace Website.Controllers
                 int ManageID = int.Parse(ManageCookieModel.ID);
                 this.CurrentManage = this.Entity.M_Manage.Where(o => o.ID == ManageID).FirstOrDefault();
             }
+
             //授权
             if (this.CurrentManage != null)
             {
-                CurrentManage.RoleIDs;
-                MenuTree = Entity.M_Menu.Where(o => o.ParentID == ).ToList();
+                if (!CurrentManage.RoleIDs.IsNullOrEmpty())
+                {
+                    var RoleIDsStr = CurrentManage.RoleIDs.Split(',');
+                    int[] RoleIDs = Array.ConvertAll<string, int>(RoleIDsStr, delegate(string s) { return int.Parse(s); });
+                    MenuTree = Entity.M_Menu.Where(o => RoleIDs.Contains(o.ParentID)).ToList();
+                }
             }
-            
+            MenuTree = Entity.M_Menu.ToList();
             this.ViewBag.Entity = Entity;
             this.ViewBag.MenuTree = MenuTree;
             
