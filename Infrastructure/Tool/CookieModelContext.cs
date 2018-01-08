@@ -11,7 +11,7 @@ namespace Infrastructure.Tool
     /// <summary>
     /// CookieModel上下文
     /// </summary>
-    public class CookieModelContext<T> where T : CookieModel, new()
+    public class CookieModelContext<T> where T : ICookieModel, new()
     {
         protected string Key = string.Empty;
         protected string IV = string.Empty;
@@ -38,18 +38,22 @@ namespace Infrastructure.Tool
         {
             if (CookieModel == null)
             {
-                
-                var AES = new AESHelper(Key, IV);
                 var cookie = HttpContext.Current.Request.Cookies[CookieName];
-                string DecryptText = AES.Decrypt(cookie.Value);
-                var Values = HttpUtility.ParseQueryString(DecryptText);
                 var GetCookieModel = new T();
-                System.Reflection.PropertyInfo[] properties = GetCookieModel.GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
-                foreach (System.Reflection.PropertyInfo item in properties)
+                if (cookie != null)
                 {
-                    var itemValue = Values[item.Name];
-                    item.SetValue(GetCookieModel, itemValue == null ? "" : itemValue.ToString());
+                    var AES = new AESHelper(Key, IV);
+                    string DecryptText = AES.Decrypt(cookie.Value);
+                    var Values = HttpUtility.ParseQueryString(DecryptText);
+                
+                    System.Reflection.PropertyInfo[] properties = GetCookieModel.GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+                    foreach (System.Reflection.PropertyInfo item in properties)
+                    {
+                        var itemValue = Values[item.Name];
+                        item.SetValue(GetCookieModel, itemValue == null ? "" : itemValue.ToString());
+                    }
                 }
+                
                 return GetCookieModel;
             }
             else
@@ -94,10 +98,10 @@ namespace Infrastructure.Tool
     }
 
     /// <summary>
-    /// Cookie的基础数据模型，扩展请继承
+    /// Cookie数据模型接口
     /// </summary>
-    public class CookieModel
+    public interface ICookieModel
     {
-        public string ID { get; set; }
+        string ID { get; set; }
     }
 }

@@ -1,0 +1,57 @@
+﻿@{
+    
+}
+<div id="login" class="easyui-window" title="登录" style="width:300px;height:200px;">
+    <form id="datafrom" method="post" action="Login" style="margin:10px;">
+        <table cellpadding="5">
+            <tr>
+                <td style="width:100px;">账号：</td>
+                <td style="width:200px;"><input name="UserName" value="" class="easyui-textbox" style="width:170px;" data-options="iconCls:'icon-user_gray',validType:'maxLength[20]',validateOnCreate:false,required:true" /></td>
+            </tr>
+            <tr>
+                <td style="width:100px;">密码：</td>
+                <td style="width:200px;"><input name="Password" value="" class="easyui-textbox" style="width:170px;" data-options="iconCls:'icon-key',type:'password',validType:'maxLength[20]',validateOnCreate:false,required:true" /></td>
+            </tr>
+            <tr style="text-align:center;">
+                <td colspan="2">
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="javascript:$('#datafrom').submit()">登录</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>  
+
+@section Scripts{
+<script>
+    $(function () {
+        $("#login").window({
+            collapsible: false,
+            minimizable: false,
+            maximizable: false,
+            closable: false,
+            closed:false,
+            draggable: false,
+            resizable:false,
+            iconCls: "icon-user_gray"
+        });
+
+        $('#datafrom').form({
+            onSubmit: function () {
+                var isValid = $(this).form('validate');
+                return isValid;
+            },
+            success: function (data) {
+                console.log(data);
+                //var data = eval('(' + data + ')');  // change the JSON string to javascript object    
+                //if (data.success){    
+                //    alert(data.message)    
+                //}    
+            }
+        });
+    });
+
+    
+
+
+</script>
+}

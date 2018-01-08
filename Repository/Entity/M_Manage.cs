@@ -20,14 +20,14 @@ namespace Repository.Entity
         /// 用户名
         /// </summary>
         [Required]
-        [StringLength(30)]
+        [StringLength(20)]
         public string UserName { get; set; }
 
         /// <summary>
         /// 密码
         /// </summary>
         [Required]
-        [StringLength(30)]
+        [StringLength(64)]
         public string Password { get; set; }
 
         /// <summary>

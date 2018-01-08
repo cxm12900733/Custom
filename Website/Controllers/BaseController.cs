@@ -1,4 +1,5 @@
 ﻿using Infrastructure;
+using Infrastructure.Tool;
 using Repository;
 using Repository.Entity;
 using System;
@@ -31,10 +32,31 @@ namespace Website.Controllers
         /// </summary>
         protected List<M_Menu> MenuTree = new List<M_Menu>();
 
+        /// <summary>
+        /// 当前管理员
+        /// </summary>
+        protected M_Manage CurrentManage;
+
+        protected CookieModelContext<ManageCookieModel> CookieModelContext = new CookieModelContext<ManageCookieModel>("r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY", "p52kkXLyco6oHOwP", "Web.Manage.Login");
+
         public BaseController()
         {
             this.Entity = DBContextFactory.GetDBContext();
-            MenuTree = Entity.M_Menu.ToList();
+
+            //取得当前管理员
+            var ManageCookieModel = CookieModelContext.GetCookieModel();
+            if (!ManageCookieModel.ID.IsNullOrEmpty())
+            {
+                int ManageID = int.Parse(ManageCookieModel.ID);
+                this.CurrentManage = this.Entity.M_Manage.Where(o => o.ID == ManageID).FirstOrDefault();
+            }
+            //授权
+            if (this.CurrentManage != null)
+            {
+                CurrentManage.RoleIDs;
+                MenuTree = Entity.M_Menu.Where(o => o.ParentID == ).ToList();
+            }
+            
             this.ViewBag.Entity = Entity;
             this.ViewBag.MenuTree = MenuTree;
             
@@ -130,5 +152,16 @@ namespace Website.Controllers
         #endregion
     }
 
-    
+    public class ManageCookieModel : ICookieModel
+    {
+        /// <summary>
+        /// 登录状态ID
+        /// </summary>
+        public string ID { get; set; }
+
+        /// <summary>
+        /// 记住账号
+        /// </summary>
+        public string UserName { get; set; }
+    }
 }
