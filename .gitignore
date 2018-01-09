@@ -8,3 +8,5 @@
 /UnitTest/obj
 /Website/obj
 /Website/bin
+/.nuget
+/packages
