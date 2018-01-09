@@ -76,6 +76,7 @@
     <Compile Include="Tool\CookieModelContext.cs" />
     <Compile Include="Tool\Cryptography\AESHelper.cs" />
     <Compile Include="Tool\Cryptography\ICryptoTransformExtensions.cs" />
+    <Compile Include="Tool\Cryptography\OneWayEncryption.cs" />
     <Compile Include="Tool\Log4NetExt.cs" />
     <Compile Include="Tool\Mapper.cs" />
   </ItemGroup>

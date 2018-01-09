@@ -6,8 +6,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Infrastructure;
-using System.Security.Cryptography;
 using Website.Models;
+using Infrastructure.Tool.Cryptography;
 
 namespace Website.Controllers
 {
@@ -31,13 +31,7 @@ namespace Website.Controllers
             }
 
             #region 认证
-            //加密密码
-            var SHA256Managed = new SHA256Managed();
-            byte[] clearBuffer = System.Text.Encoding.UTF8.GetBytes(M_Manage.Password);
-            var EncryptTextHash = SHA256Managed.ComputeHash(clearBuffer);
-            var EncryptText = EncryptTextHash.ToHexString();
-
-            //查询
+            string EncryptText = OneWayEncryption.SHA256(M_Manage.Password);
             var baseM_Manage = this.Entity.M_Manage.Where(o => o.UserName == M_Manage.UserName && o.Password == EncryptText).FirstOrDefault();
             if (baseM_Manage == null)
             {

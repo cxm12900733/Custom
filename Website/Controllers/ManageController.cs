@@ -1,4 +1,5 @@
 ﻿using Infrastructure;
+using Infrastructure.Tool.Cryptography;
 using Newtonsoft.Json;
 using Repository.Entity;
 using System;
@@ -44,6 +45,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Add(M_Manage M_Manage)
         {
+            M_Manage.Password = OneWayEncryption.SHA256(M_Manage.Password);
             M_Manage.AddTime = DateTime.Now;
             this.Entity.M_Manage.Add(M_Manage);
             this.Entity.SaveChanges();
@@ -73,7 +75,17 @@ namespace Website.Controllers
             {
                 return this.Error("数据不存在");
             }
+            if (!M_Manage.Password.IsNullOrEmpty())
+            {
+                M_Manage.Password = OneWayEncryption.SHA256(M_Manage.Password);
+            }
+            else
+            {
+                M_Manage.Password = baseM_Manage.Password;
+            }
+
             baseM_Manage = this.Request.ConvertRequestToModel<M_Manage>(baseM_Manage, M_Manage);
+            
             this.Entity.SaveChanges();
             return this.Succeed("操作成功");
         }

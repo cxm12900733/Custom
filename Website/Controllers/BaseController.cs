@@ -58,7 +58,20 @@ namespace Website.Controllers
                 {
                     var RoleIDsStr = CurrentManage.RoleIDs.Split(',');
                     int[] RoleIDs = Array.ConvertAll<string, int>(RoleIDsStr, delegate(string s) { return int.Parse(s); });
-                    MenuTree = Entity.M_Menu.Where(o => RoleIDs.Contains(o.ParentID)).ToList();
+                    if (RoleIDs.Length > 0)
+                    {
+                        var M_RoleList = Entity.M_Role.Where(o => RoleIDs.Contains(o.ID)).ToList();
+                        if (M_RoleList.Count > 0)
+                        {
+                            var MenuIDsList = M_RoleList.Select(o => o.MenuIDs).ToList();
+                            var MenuIDsListStr = string.Join(",", MenuIDsList);
+                            var MenuIDsStr = MenuIDsListStr.Split(',');
+                            int[] MenuIDs = Array.ConvertAll<string, int>(MenuIDsStr, delegate(string s) { return int.Parse(s); });
+                            MenuTree = Entity.M_Menu.Where(o => MenuIDs.Contains(o.ID)).ToList();
+                        }
+                        
+                    }
+                   
                 }
             }
             MenuTree = Entity.M_Menu.ToList();

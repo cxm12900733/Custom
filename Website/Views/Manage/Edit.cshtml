@@ -33,11 +33,11 @@
                 </tr>
                 <tr>
                     <td>密码</td>
-                    <td><input name="Password" value="@(M_Manage.Password)" class="easyui-textbox" data-options="iconCls:'icon-key',validType:'maxLength[20]',required:true,width:'100%'" /></td>
+                    <td><input name="Password" value="" class="easyui-textbox" data-options="iconCls:'icon-key',validType:'maxLength[20]',@(M_Manage.ID == 0 ? "required:true," : "")width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>移动电话</td>
-                    <td style="width:200px;"><input name="MobileNo" value="@(M_Manage.MobileNo)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',width:'100%'" /></td>
+                    <td style="width:200px;"><input name="Mobile" value="@(M_Manage.Mobile)" class="easyui-textbox" data-options="iconCls:'icon-mobile_phone',validType:'maxLength[30]',width:'100%'" /></td>
                 </tr>
                 <tr>
                     <td>电子邮箱</td>

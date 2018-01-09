@@ -1,16 +1,16 @@
 ﻿@{
     
 }
-<div id="login" class="easyui-window" title="登录" style="width:300px;height:200px;">
-    <form id="datafrom" method="post" action="Login" style="margin:10px;">
+<div id="login" class="easyui-window" title="管理后台登录" style="width:380px;height:200px;">
+    <form id="datafrom" method="post" action="Login" style="margin:20px;">
         <table cellpadding="5">
-            <tr>
-                <td style="width:100px;">账号：</td>
-                <td style="width:200px;"><input name="UserName" value="" class="easyui-textbox" style="width:170px;" data-options="iconCls:'icon-user_gray',validType:'maxLength[20]',validateOnCreate:false,required:true" /></td>
+            <tr style="text-align:center;">
+                <td style="width:80px;">账号：</td>
+                <td style="width:260px;"><input name="UserName" value="" class="easyui-textbox" data-options="iconCls:'icon-user_gray',validType:'maxLength[20]',validateOnCreate:false,required:true,width:'100%'" /></td>
             </tr>
-            <tr>
-                <td style="width:100px;">密码：</td>
-                <td style="width:200px;"><input name="Password" value="" class="easyui-textbox" style="width:170px;" data-options="iconCls:'icon-key',type:'password',validType:'maxLength[20]',validateOnCreate:false,required:true" /></td>
+            <tr style="text-align:center;">
+                <td style="width:80px;">密码：</td>
+                <td style="width:260px;"><input name="Password" value="" class="easyui-textbox" data-options="iconCls:'icon-key',type:'password',validType:'maxLength[20]',validateOnCreate:false,required:true,width:'100%'" /></td>
             </tr>
             <tr style="text-align:center;">
                 <td colspan="2">
@@ -40,12 +40,14 @@
                 var isValid = $(this).form('validate');
                 return isValid;
             },
-            success: function (data) {
-                console.log(data);
-                //var data = eval('(' + data + ')');  // change the JSON string to javascript object    
-                //if (data.success){    
-                //    alert(data.message)    
-                //}    
+            success: function (ajaxText) {
+                var ajaxResult = jQuery.parseJSON(ajaxText).data;
+                if (ajaxResult.IsSuccess) {
+                    window.location.href = "/Home/Index";
+                }
+                else {
+                    $.messager.alert('提示', ajaxResult.Message, "info");
+                }
             }
         });
     });

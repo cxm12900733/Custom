@@ -34,7 +34,7 @@ namespace Repository.Entity
         /// 移动电话号码
         /// </summary>
         [StringLength(30)]
-        public string MobileNo { get; set; }
+        public string Mobile { get; set; }
 
         /// <summary>
         /// 电子邮箱
