@@ -37,15 +37,15 @@ namespace Website.Controllers
         /// </summary>
         protected M_Manage CurrentManage;
 
-        protected CookieModelContext<ManageCookieModel> CookieModelContext = new CookieModelContext<ManageCookieModel>("r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY", "p52kkXLyco6oHOwP", "Web.Manage.Login");
+        protected OperatorContext<ManageOperatorModel> OperatorContext = new OperatorContext<ManageOperatorModel>("r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY", "p52kkXLyco6oHOwP", "Web.Manage.Login");
 
         public BaseController()
         {
             this.Entity = DBContextFactory.GetDBContext();
 
             //取得当前管理员
-            var ManageCookieModel = CookieModelContext.GetCookieModel();
-            if (!ManageCookieModel.ID.IsNullOrEmpty())
+            var ManageCookieModel = OperatorContext.GetOperatorModel();
+            if (ManageCookieModel != null)
             {
                 int ManageID = int.Parse(ManageCookieModel.ID);
                 this.CurrentManage = this.Entity.M_Manage.Where(o => o.ID == ManageID).FirstOrDefault();
@@ -170,7 +170,7 @@ namespace Website.Controllers
         #endregion
     }
 
-    public class ManageCookieModel : ICookieModel
+    public class ManageOperatorModel : IOperatorModel
     {
         /// <summary>
         /// 登录状态ID

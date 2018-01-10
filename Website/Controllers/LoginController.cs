@@ -30,7 +30,7 @@ namespace Website.Controllers
                 return ToJson(AjaxResult);
             }
 
-            #region 认证
+            #region 登录认证
             string EncryptText = OneWayEncryption.SHA256(M_Manage.Password);
             var baseM_Manage = this.Entity.M_Manage.Where(o => o.UserName == M_Manage.UserName && o.Password == EncryptText).FirstOrDefault();
             if (baseM_Manage == null)
@@ -47,12 +47,12 @@ namespace Website.Controllers
             }
             #endregion
 
-            #region 保存认证
-            var ManageCookieModel = new ManageCookieModel()
+            #region 保存登录认证
+            var ManageOperatorModel = new ManageOperatorModel()
             {
                 ID = baseM_Manage.ID.ToString(),
             };
-            this.CookieModelContext.SetCookieModel(ManageCookieModel,DateTime.Now.AddDays(1));
+            this.OperatorContext.SetOperatorModel(ManageOperatorModel, DateTime.Now.AddDays(1));
             #endregion
 
             return ToJson(AjaxResult);
