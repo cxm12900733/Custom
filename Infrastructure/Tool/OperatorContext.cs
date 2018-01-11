@@ -39,7 +39,7 @@ namespace Infrastructure.Tool
             var cookie = HttpContext.Current.Request.Cookies[CookieName];
             if (cookie != null)
             {
-                var CookieValue = cookie.Values[CookieName];
+                var CookieValue = cookie.Values[CookieName];    
 
                 var AES = new AESHelper(Key, IV);
                 string DecryptText = AES.Decrypt(CookieValue);
