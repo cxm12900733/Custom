@@ -37,17 +37,16 @@ namespace Website.Controllers
         /// </summary>
         protected M_Manage CurrentManage;
 
-        protected OperatorContext<ManageOperatorModel> OperatorContext = new OperatorContext<ManageOperatorModel>("r3oDgh2id9FMDjKgWC6eB5A9OmQBmrLY", "p52kkXLyco6oHOwP", "Web.Manage.Login");
+        protected ClientHook<ManageClientDataModel> ClientHook = new ClientHook<ManageClientDataModel>();
 
         public BaseController()
         {
             this.Entity = DBContextFactory.GetDBContext();
-
             //取得当前管理员
-            var ManageCookieModel = OperatorContext.GetOperatorModel();
-            if (ManageCookieModel != null)
+            var ManageClientDataModel = ClientHook.GetModel();
+            if (ManageClientDataModel != null)
             {
-                int ManageID = int.Parse(ManageCookieModel.ID);
+                int ManageID = int.Parse(ManageClientDataModel.ID);
                 this.CurrentManage = this.Entity.M_Manage.Where(o => o.ID == ManageID).FirstOrDefault();
             }
 
@@ -75,19 +74,10 @@ namespace Website.Controllers
                 }
             }
             MenuTree = Entity.M_Menu.ToList();
+
             this.ViewBag.Entity = Entity;
             this.ViewBag.MenuTree = MenuTree;
             
-        }
-
-        /// <summary>
-        /// 在调用操作方法前调用。
-        /// </summary>
-        /// <param name="filterContext"></param>
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            this.ViewBag.ActionName = filterContext.RouteData.Values.ContainsKey("action") ? this.RouteData.Values["action"] : string.Empty;
-            this.ViewBag.ControllerName = filterContext.RouteData.Values.ContainsKey("controller") ? this.RouteData.Values["controller"] : string.Empty;
         }
 
         /// <summary>
@@ -97,7 +87,7 @@ namespace Website.Controllers
         protected override void OnException(ExceptionContext filterContext)
         {
             var ex = filterContext.Exception;
-            DebugSQLLog.Error("异常", ex);
+            //DebugSQLLog.Error("异常", ex);
             //filterContext.ExceptionHandled = true;
             //base.OnException(filterContext);
         }
@@ -170,7 +160,7 @@ namespace Website.Controllers
         #endregion
     }
 
-    public class ManageOperatorModel : IOperatorModel
+    public class ManageClientDataModel : IClientDataModel
     {
         /// <summary>
         /// 登录状态ID

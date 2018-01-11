@@ -48,11 +48,11 @@ namespace Website.Controllers
             #endregion
 
             #region 保存登录认证
-            var ManageOperatorModel = new ManageOperatorModel()
+            var ManageClientDataModel = new ManageClientDataModel()
             {
                 ID = baseM_Manage.ID.ToString(),
             };
-            this.OperatorContext.SetOperatorModel(ManageOperatorModel, DateTime.Now.AddDays(1));
+            this.ClientHook.SetModel(ManageClientDataModel, DateTime.Now.AddDays(1));
             #endregion
 
             return ToJson(AjaxResult);
